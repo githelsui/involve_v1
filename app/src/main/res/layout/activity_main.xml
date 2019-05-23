@@ -15,7 +15,7 @@
        android:padding="10dp"
        android:textSize="35sp"
        android:fontFamily="@font/myriadpro_light"
-       android:text="Total Hours"/>
+       android:text="@string/hoursLabel"/>
 
    <TextView
        android:id="@+id/numhrs_lbl"
@@ -25,9 +25,9 @@
        android:layout_below="@id/totalhrs_lbl"
        android:textSize="30sp"
        android:fontFamily="@font/myriadpro_light"
-       android:padding="4dp"
+       android:padding="1dp"
        android:textStyle="italic"
-       android:text="0.00" />
+       android:text="@string/initialHrs" />
 
    <android.support.v7.widget.RecyclerView
        android:id="@+id/recycler_view"
@@ -35,14 +35,15 @@
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
        android:padding="9dp"
+       android:layout_above="@id/add_btn"
        android:scrollbars="vertical" />
 
    <Button
        android:id="@+id/add_btn"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:padding="10dp"
-       android:textSize="40dp"
+       android:padding="20dp"
+       android:textSize="40sp"
        android:fontFamily="@font/myriadpro_light"
        android:text="@string/addbtn_name"
        android:layout_alignParentBottom="true"

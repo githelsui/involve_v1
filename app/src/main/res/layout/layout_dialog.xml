@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/servlbl_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:textSize="35sp"
+        android:padding="4dp"
+        android:fontFamily="@font/myriadpro_light"
+        android:text="@string/addservice_dialog"/>
+
+    <EditText
+        android:id="@+id/program_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:paddingTop="4dp"
+        android:textSize="20sp"
+        android:fontFamily="@font/myriadpro_light"
+        android:hint="Name of Program/Organization"
+        android:layout_below="@id/servlbl_dialog"/>
+
+    <EditText
+        android:id="@+id/current_hours"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:textSize="20sp"
+        android:fontFamily="@font/myriadpro_light"
+        android:hint="Current Number of Hours Served"
+        android:layout_below="@id/program_name"/>
+
+    <EditText
+        android:id="@+id/position_lbl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:textSize="20sp"
+        android:fontFamily="@font/myriadpro_light"
+        android:hint="Position/Role"
+        android:layout_below="@id/current_hours"/>
+
+
+</RelativeLayout>
