@@ -2,5 +2,6 @@
     <string name="app_name">RecyclerView Project</string>
     <string name="test_text_1">TEST TEXT 1</string>
     <string name="todo">TODO</string>
+    <string name="addbtn_name">Add New Service</string>
     <string name="test_text_2">TEST TEXT 2</string>
 </resources>

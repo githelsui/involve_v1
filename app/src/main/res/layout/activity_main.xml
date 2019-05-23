@@ -4,14 +4,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     tools:context=".MainActivity">
+
+   <TextView
+       android:id="@+id/totalhrs_lbl"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_centerHorizontal="true"
+       android:padding="10dp"
+       android:textSize="35sp"
+       android:fontFamily="@font/myriadpro_light"
+       android:text="Total Hours"/>
+
+   <TextView
+       android:id="@+id/numhrs_lbl"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_centerHorizontal="true"
+       android:layout_below="@id/totalhrs_lbl"
+       android:textSize="30sp"
+       android:fontFamily="@font/myriadpro_light"
+       android:padding="4dp"
+       android:textStyle="italic"
+       android:text="0.00" />
 
    <android.support.v7.widget.RecyclerView
        android:id="@+id/recycler_view"
+       android:layout_alignBaseline="@id/numhrs_lbl"
        android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:padding="4dp"
-       android:scrollbars="vertical"
-       android:background="@android:color/darker_gray"/>
+       android:layout_height="wrap_content"
+       android:padding="9dp"
+       android:scrollbars="vertical" />
+
+   <Button
+       android:id="@+id/add_btn"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:padding="10dp"
+       android:textSize="40dp"
+       android:fontFamily="@font/myriadpro_light"
+       android:text="@string/addbtn_name"
+       android:layout_alignParentBottom="true"
+       android:textAllCaps="false" />
 
 </RelativeLayout>
