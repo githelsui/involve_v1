@@ -2,7 +2,7 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="65dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="4dp">
 
@@ -15,7 +15,7 @@
 
         <ImageView
             android:id="@+id/image_view"
-            android:layout_width="100dp"
+            android:layout_width="60dp"
             android:layout_height="match_parent"
             android:padding="2dp"
             android:contentDescription="@string/todo" />
@@ -24,21 +24,24 @@
             android:id="@+id/text_view1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/image_view"
+            android:layout_marginTop="5dp"
             android:text="@string/test_text_1"
             android:textColor="@android:color/black"
-            android:textSize="25sp"
-            android:textStyle="bold" />
+            android:padding="2dp"
+            android:textSize="20sp"
+            android:fontFamily="@font/myriadpro_light" />
 
         <TextView
             android:id="@+id/text_view2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
+            android:layout_toRightOf="@id/image_view"
+            android:padding="7dp"
+            android:fontFamily="@font/myriadpro_light"
             android:textColor="@android:color/darker_gray"
-            android:layout_marginTop="50dp"
-            android:textSize="20sp"
+            android:layout_marginTop="30dp"
+            android:textSize="15sp"
             android:text="@string/test_text_2"/>
     </RelativeLayout>
 
