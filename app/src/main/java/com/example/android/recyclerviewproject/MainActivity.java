@@ -2,6 +2,7 @@ package com.example.android.recyclerviewproject;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -57,9 +58,14 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
         myAdapter.setOnItemClickListener(new ExampleAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int pos) {
-                System.out.println("ITWORKED!");
+                openProgActivity();
             }
         });
+    }
+
+    private void openProgActivity(){
+        Intent myInt = new Intent(this, ProgramActivity.class);
+        startActivity(myInt);
     }
 
 
