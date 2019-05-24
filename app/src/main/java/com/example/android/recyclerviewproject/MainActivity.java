@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements AddServDialog.AddServeDialogListener {
 
     private RecyclerView myRecycler;
-    private RecyclerView.Adapter myAdapter;
+    private ExampleAdapter myAdapter;
     private RecyclerView.LayoutManager myLayout;
     private ArrayList<ExampleItem> myList;
     private TextView myTotalHrs;
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
     }
 
 
-    //RECYCLER VIEWS AND PRESENTING LIST OF PROGRAMS
+    //unit tests: RECYCLER VIEWS AND PRESENTING LIST OF PROGRAMS
     private void addItemToList() {
         ExampleItem temp = new ExampleItem("name", 12, "temp2");
         for (int i = 0; i < 2; i++) {
@@ -48,9 +48,18 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
         myRecycler.setHasFixedSize(true);
         myLayout = new LinearLayoutManager(this);
         myAdapter = new ExampleAdapter(myList);
+
         //configure objects to the recyclerview
         myRecycler.setLayoutManager(myLayout);
         myRecycler.setAdapter(myAdapter);
+
+        //configures button on the cardview by accessing this custom function from ExampleAdapter
+        myAdapter.setOnItemClickListener(new ExampleAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int pos) {
+                System.out.println("ITWORKED!");
+            }
+        });
     }
 
 

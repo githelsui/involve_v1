@@ -9,8 +9,7 @@
     android:layout_marginBottom=".5dp"
     android:layout_marginTop="1dp">
 
-    <!--TODO #5 Change card background to white, STOP IT FROM TURNING GREY EACH TIME NEW CARD IS INSERTED-->
-    <RelativeLayout
+     <RelativeLayout
         android:id="@+id/relative_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -53,9 +52,6 @@
             android:textSize="25sp"
             android:layout_toLeftOf="@id/arrow_img"
             android:fontFamily="@font/myriadpro_light" />
-
-        <!--TODO #7 Create a button (vector drawable arrow)
-                that opens into another View (ServiceActivity) SVG graphic at https://www.flaticon.com/categories/arrows-->
 
         <ImageView
             android:id="@+id/arrow_img"

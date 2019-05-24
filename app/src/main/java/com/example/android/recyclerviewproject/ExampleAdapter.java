@@ -1,10 +1,12 @@
 package com.example.android.recyclerviewproject;
 
+import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -12,18 +14,7 @@ import java.util.ArrayList;
 public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleViewHolder> {
 
     private ArrayList<ExampleItem> myListAdapt;
-
-            //creates the contents of a card at initialization and connects them to respected xml contents
-    public static class ExampleViewHolder extends RecyclerView.ViewHolder   {
-                    public TextView mTextView1;
-                    public TextView mTextView2;
-                    public ExampleViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            mTextView1 = itemView.findViewById(R.id.text_view1);
-            mTextView2 = itemView.findViewById(R.id.text_view2);
-        }
-    }
+    private OnItemClickListener mListener;
 
     //Adapter Constructor: configures the info from private arraylist into the contents of the card
     public ExampleAdapter(ArrayList<ExampleItem> list){
@@ -35,8 +26,7 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
     public ExampleViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater obj = LayoutInflater.from(viewGroup.getContext());
         View newView = obj.inflate(R.layout.example_item, viewGroup, false);
-        ExampleViewHolder mySelf = new ExampleViewHolder(newView);
-
+        ExampleViewHolder mySelf = new ExampleViewHolder(newView, mListener);
         return mySelf;
     }
 
@@ -50,5 +40,49 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
     @Override
     public int getItemCount() {
         return myListAdapt.size();
+    }
+
+
+    //using a button INSIDE a cardview requires an interface class
+    public interface OnItemClickListener{
+        void onItemClick(int pos);
+    }
+
+    //custom function of ExampleAdapter
+    public void setOnItemClickListener(OnItemClickListener listener){
+        mListener = listener;
+    }
+
+            //creates the contents of a card at initialization and connects them to respected xml contents
+    public static class ExampleViewHolder extends RecyclerView.ViewHolder   {
+                    public TextView mTextView1;
+                    public TextView mTextView2;
+                    public ImageView mArrow;
+                    private OnItemClickListener mListener;
+
+                    public ExampleViewHolder(@NonNull View itemView, OnItemClickListener listener) {
+            super(itemView);
+            //constructor for cardviewholder java class
+            mTextView1 = itemView.findViewById(R.id.text_view1);
+            mTextView2 = itemView.findViewById(R.id.text_view2);
+            mArrow = itemView.findViewById(R.id.arrow_img);
+            mListener = listener;
+            arrowClicked();
+        }
+
+        private void arrowClicked(){
+                        mArrow.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                               //TODO #1 use OnitemClicklistener listener object to openServiceView()
+                                if(mListener != null){
+                                    int pos = getAdapterPosition();
+                                    if(pos != RecyclerView.NO_POSITION){
+                                        mListener.onItemClick(pos); //calls the interface method from OnItemClickListener
+                                    }
+                                }
+                            }
+                        });
+        }
     }
 }
