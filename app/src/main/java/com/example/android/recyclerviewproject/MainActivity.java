@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
 
     @Override //implements interface AddServeDialogListener
     //TODO #4 change int hrs to double hrs
-    public void applyText(String name, int hrs, String myRole) {
+    public void applyText(String name, double hrs, String myRole) {
         ExampleItem myItem = new ExampleItem(name, hrs, myRole);
         myList.add(myItem);
         initRecyclerView(); //refresh list on layout.xml

@@ -2,7 +2,6 @@ package com.example.android.recyclerviewproject;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +44,7 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
         ExampleItem obj =  myListAdapt.get(i);
 
         //TODO #1 change int->string into DOUBLE->string using Double.toString(double)
-        (exampleViewHolder.mTextView2).setText(Integer.toString(obj.getHours()) + " ");
+        (exampleViewHolder.mTextView2).setText(Double.toString(obj.getHours()) + " ");
         (exampleViewHolder.mTextView1).setText(obj.getProgram());
     }
 

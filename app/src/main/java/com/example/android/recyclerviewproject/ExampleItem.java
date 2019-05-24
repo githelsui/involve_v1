@@ -2,11 +2,11 @@ package com.example.android.recyclerviewproject;
 
 public class ExampleItem {
     //TODO #5 change int myhrs into double
-    private int myHrs;
+    private double myHrs;
     private String myProg;
     private String myRole;
 
-    public ExampleItem(String program, int hours, String role){
+    public ExampleItem(String program, double hours, String role){
         myHrs = hours;
         myProg = program;
         myRole = role;
@@ -16,7 +16,7 @@ public class ExampleItem {
         return myProg;
     }
 
-    public int getHours(){
+    public double getHours(){
         return myHrs;
     }
 

@@ -41,7 +41,7 @@ public class AddServDialog extends AppCompatDialogFragment {
 
                         String name = prgrmName.getText().toString();
                         //TODO #2 Change int hrs into double hrs
-                        int hrs = Integer.parseInt(currHrs.getText().toString());
+                        double hrs = Double.parseDouble(currHrs.getText().toString());
                         String myRole = role.getText().toString();
 
                         listener.applyText(name, hrs, myRole); //creates Exampleitem then appends it to list
@@ -68,6 +68,6 @@ public class AddServDialog extends AppCompatDialogFragment {
 
     public interface AddServeDialogListener{
         //TODO #3 change parameter int hrs into double hrs
-        void applyText(String name, int hrs, String myRole);
+        void applyText(String name, double hrs, String myRole);
     }
 }

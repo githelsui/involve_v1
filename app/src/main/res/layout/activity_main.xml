@@ -33,8 +33,9 @@
        android:id="@+id/recycler_view"
        android:layout_alignBaseline="@id/numhrs_lbl"
        android:layout_width="match_parent"
-       android:layout_height="wrap_content"
+       android:layout_height="match_parent"
        android:padding="9dp"
+       android:layout_marginBottom="60dp"
        android:scrollbars="vertical" />
 
    <!--TODO #6 Set button below recycler view AND recycler view ABOVE button
@@ -44,7 +45,7 @@
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
        android:padding="12dp"
-       android:textSize="35sp"
+       android:textSize="30sp"
        android:fontFamily="@font/myriadpro_light"
        android:text="@string/addbtn_name"
        android:background="@color/greyhex"
