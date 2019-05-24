@@ -40,6 +40,7 @@ public class AddServDialog extends AppCompatDialogFragment {
                     public void onClick(DialogInterface dialog, int i) {
 
                         String name = prgrmName.getText().toString();
+                        //TODO #2 Change int hrs into double hrs
                         int hrs = Integer.parseInt(currHrs.getText().toString());
                         String myRole = role.getText().toString();
 
@@ -66,6 +67,7 @@ public class AddServDialog extends AppCompatDialogFragment {
     }
 
     public interface AddServeDialogListener{
+        //TODO #3 change parameter int hrs into double hrs
         void applyText(String name, int hrs, String myRole);
     }
 }

@@ -1,6 +1,7 @@
 package com.example.android.recyclerviewproject;
 
 public class ExampleItem {
+    //TODO #5 change int myhrs into double
     private int myHrs;
     private String myProg;
     private String myRole;

@@ -27,12 +27,19 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
         //init private widgets and values
         myList = new ArrayList<ExampleItem>();
         myTotalHrs = findViewById(R.id.numhrs_lbl);
+        addItemToList();
         initRecyclerView();
         initAddButton();
     }
 
 
     //RECYCLER VIEWS AND PRESENTING LIST OF PROGRAMS
+    private void addItemToList() {
+        ExampleItem temp = new ExampleItem("name", 12, "temp2");
+        for (int i = 0; i < 10; i++) {
+            myList.add(temp);
+        }
+    }
 
     private void initRecyclerView() {
         //initialize all objects
@@ -64,6 +71,7 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
     }
 
     @Override //implements interface AddServeDialogListener
+    //TODO #4 change int hrs to double hrs
     public void applyText(String name, int hrs, String myRole) {
         ExampleItem myItem = new ExampleItem(name, hrs, myRole);
         myList.add(myItem);
