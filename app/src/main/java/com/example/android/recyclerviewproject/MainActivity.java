@@ -62,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openDialog(){
+        AddServDialog myDialog = new AddServDialog();
+        myDialog.show(getSupportFragmentManager(), "Add New Service Dialog");
 
     }
 }

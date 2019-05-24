@@ -16,17 +16,19 @@
         android:text="@string/addservice_dialog"/>
 
     <EditText
+        android:importantForAutofill="no"
         android:id="@+id/program_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/servlbl_dialog"
         android:padding="15dp"
         android:paddingTop="4dp"
         android:textSize="20sp"
         android:fontFamily="@font/myriadpro_light"
-        android:hint="Name of Program/Organization"
-        android:layout_below="@id/servlbl_dialog"/>
+        android:hint="Name of Program/Organization"/>
 
     <EditText
+        android:importantForAutofill="no"
         android:id="@+id/current_hours"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -37,6 +39,7 @@
         android:layout_below="@id/program_name"/>
 
     <EditText
+        android:importantForAutofill="no"
         android:id="@+id/position_lbl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

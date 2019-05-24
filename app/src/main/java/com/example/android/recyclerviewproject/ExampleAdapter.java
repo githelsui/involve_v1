@@ -15,12 +15,12 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
 
     private ArrayList<ExampleItem> myListAdapt;
 
-            //configures the contents of a card at initialization
+            //creates the contents of a card at initialization and connects them to respected xml contents
     public static class ExampleViewHolder extends RecyclerView.ViewHolder   {
                     public ImageView mImageView;
                     public TextView mTextView1;
                     public TextView mTextView2;
-                public ExampleViewHolder(@NonNull View itemView) {
+                    public ExampleViewHolder(@NonNull View itemView) {
             super(itemView);
             mImageView = itemView.findViewById(R.id.image_view);
             mTextView1 = itemView.findViewById(R.id.text_view1);
@@ -28,7 +28,7 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
         }
     }
 
-    //Adapter Constructor: configures the info from arraylist into the contents of the card
+    //Adapter Constructor: configures the info from private arraylist into the contents of the card
     public ExampleAdapter(ArrayList<ExampleItem> list){
         myListAdapt = list;
     }
