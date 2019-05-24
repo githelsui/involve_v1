@@ -8,6 +8,7 @@
     android:background="@android:color/white"
     tools:context=".MainActivity">
 
+    <!--TODO #5 Change all ID's to avoid confusion with activity_main.xml-->
     <TextView
         android:id="@+id/totalhrs_lbl"
         android:layout_width="wrap_content"

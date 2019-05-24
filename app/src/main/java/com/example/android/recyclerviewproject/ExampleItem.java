@@ -1,6 +1,7 @@
 package com.example.android.recyclerviewproject;
 
 public class ExampleItem {
+    //TODO #1 make a private arraylist with each service performed under a program's name
     private double myHrs;
     private String myProg;
     private String myRole;

@@ -74,11 +74,11 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
                         mArrow.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                               //TODO #1 use OnitemClicklistener listener object to openServiceView()
                                 if(mListener != null){
                                     int pos = getAdapterPosition();
                                     if(pos != RecyclerView.NO_POSITION){
-                                        mListener.onItemClick(pos); //calls the interface method from OnItemClickListener
+                                        mListener.onItemClick(pos); //calls the interface method from OnItemClickListener only IF
+                                                                    //it is the position of the mArrow object
                                     }
                                 }
                             }
