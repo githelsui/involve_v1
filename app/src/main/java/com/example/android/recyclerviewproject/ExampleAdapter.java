@@ -36,14 +36,13 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
         LayoutInflater obj = LayoutInflater.from(viewGroup.getContext());
         View newView = obj.inflate(R.layout.example_item, viewGroup, false);
         ExampleViewHolder mySelf = new ExampleViewHolder(newView);
+
         return mySelf;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ExampleViewHolder exampleViewHolder, int i) {
         ExampleItem obj =  myListAdapt.get(i);
-
-        //TODO #1 change int->string into DOUBLE->string using Double.toString(double)
         (exampleViewHolder.mTextView2).setText(Double.toString(obj.getHours()) + " ");
         (exampleViewHolder.mTextView1).setText(obj.getProgram());
     }

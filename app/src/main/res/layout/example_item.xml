@@ -5,16 +5,16 @@
     android:layout_height="60dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="2dp"
-    android:layout_marginBottom="1dp"
-    android:background="@color/white">
+    app:cardBackgroundColor="@android:color/white"
+    android:layout_marginBottom=".5dp"
+    android:layout_marginTop="1dp">
 
-    <!--TODO #5 Change card background to white OR add a border-->
+    <!--TODO #5 Change card background to white, STOP IT FROM TURNING GREY EACH TIME NEW CARD IS INSERTED-->
     <RelativeLayout
         android:id="@+id/relative_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="1dp"
-        android:background="@android:color/white"
+        android:layout_margin="5dp"
         tools:ignore="InvalidId">
 
         <TextView
@@ -48,14 +48,22 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="hours"
-            android:textColor="@android:color/darker_gray"
             android:padding="4dp"
+            android:textColor="@android:color/darker_gray"
             android:textSize="25sp"
-            android:layout_alignParentEnd="true"
+            android:layout_toLeftOf="@id/arrow_img"
             android:fontFamily="@font/myriadpro_light" />
 
         <!--TODO #7 Create a button (vector drawable arrow)
                 that opens into another View (ServiceActivity) SVG graphic at https://www.flaticon.com/categories/arrows-->
+
+        <ImageView
+            android:id="@+id/arrow_img"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_arrow"
+            android:layout_alignParentEnd="true"/>
+
     </RelativeLayout>
 
 </android.support.v7.widget.CardView>

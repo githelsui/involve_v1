@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:background="@color/white"
     android:background="@android:color/white"
     tools:context=".MainActivity">
 
@@ -13,7 +14,8 @@
        android:layout_height="wrap_content"
        android:layout_centerHorizontal="true"
        android:padding="10dp"
-       android:textSize="35sp"
+       android:textSize="30sp"
+       android:layout_marginTop="10dp"
        android:fontFamily="@font/myriadpro_light"
        android:text="@string/hoursLabel"/>
 
@@ -34,13 +36,11 @@
        android:layout_below="@id/numhrs_lbl"
        android:layout_width="match_parent"
        android:layout_height="match_parent"
-       android:background="@color/greyhex"
-       android:layout_marginTop="3dp"
+       android:background="@android:color/white"
+       android:layout_marginTop="6dp"
        android:layout_marginBottom="60dp"
        android:scrollbars="vertical" />
 
-   <!--TODO #6 Set button below recycler view AND recycler view ABOVE button
-         fix recyclerview from going BEHIND button widget-->
    <Button
        android:id="@+id/add_btn"
        android:layout_width="match_parent"
