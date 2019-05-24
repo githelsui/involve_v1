@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="60dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="4dp"
+    app:cardCornerRadius="2dp"
+    android:layout_marginBottom="1dp"
     android:background="@color/white">
 
     <!--TODO #5 Change card background to white OR add a border-->
@@ -12,7 +13,7 @@
         android:id="@+id/relative_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="4dp"
+        android:layout_margin="1dp"
         android:background="@android:color/white"
         tools:ignore="InvalidId">
 

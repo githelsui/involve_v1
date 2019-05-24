@@ -31,10 +31,11 @@
 
    <android.support.v7.widget.RecyclerView
        android:id="@+id/recycler_view"
-       android:layout_alignBaseline="@id/numhrs_lbl"
+       android:layout_below="@id/numhrs_lbl"
        android:layout_width="match_parent"
        android:layout_height="match_parent"
-       android:padding="9dp"
+       android:background="@color/greyhex"
+       android:layout_marginTop="3dp"
        android:layout_marginBottom="60dp"
        android:scrollbars="vertical" />
 
