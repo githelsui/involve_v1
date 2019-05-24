@@ -10,7 +10,7 @@
 
     <!--TODO #5 Change all ID's to avoid confusion with activity_main.xml-->
     <TextView
-        android:id="@+id/totalhrs_lbl"
+        android:id="@+id/serveprog_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -18,14 +18,21 @@
         android:textSize="30sp"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/myriadpro_light"
-        android:text="OCGMC"/>
+        android:text="Program Name"/>
+
+    <TextView
+        android:id="@+id/totalhours"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total Hours: "
+        android:textSize="15sp"
+        android:layout_below="@id/serveprog_name"/>
 
     <TextView
         android:id="@+id/numhrs_lbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/totalhrs_lbl"
+        android:layout_below="@id/serveprog_name"
         android:textSize="30sp"
         android:fontFamily="@font/myriadpro_light"
         android:padding="1dp"
