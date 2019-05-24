@@ -6,7 +6,6 @@ import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -44,8 +43,8 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
     @Override
     public void onBindViewHolder(@NonNull ExampleViewHolder exampleViewHolder, int i) {
         ExampleItem obj =  myListAdapt.get(i);
-        (exampleViewHolder.mTextView2).setText(obj.getProgram());
-        (exampleViewHolder.mTextView1).setText(obj.getHours());
+        (exampleViewHolder.mTextView2).setText(Integer.toString(obj.getHours()));
+        (exampleViewHolder.mTextView1).setText(obj.getProgram());
     }
 
     @Override

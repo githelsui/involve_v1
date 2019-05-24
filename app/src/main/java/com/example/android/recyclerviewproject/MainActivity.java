@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
         setContentView(R.layout.activity_main);
 
         //init private widgets and values
-        myList = new ArrayList<>();
+        myList = new ArrayList<ExampleItem>();
         myTotalHrs = findViewById(R.id.numhrs_lbl);
         addItemToList();
         initRecyclerView();
