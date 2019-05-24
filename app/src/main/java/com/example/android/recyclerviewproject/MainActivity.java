@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
 
     //RECYCLER VIEWS AND PRESENTING LIST OF PROGRAMS
     private void addItemToList(){
-        ExampleItem temp = new ExampleItem(R.drawable.ic_imageview, "temp1", "temp2");
+        ExampleItem temp = new ExampleItem("name", 12, "temp2");
                 for(int i = 0; i < 10; i++){
                     myList.add(temp);
                 }
@@ -70,8 +70,8 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
         myDialog.show(getSupportFragmentManager(), "Add New Service Dialog");
     }
 
-    @Override
+    @Override //implements interface AddServeDialogListener
     public void applyText(String name, int hrs, String myRole) {
-
+       // ExampleItem myItem = new ExampleItem()
     }
 }

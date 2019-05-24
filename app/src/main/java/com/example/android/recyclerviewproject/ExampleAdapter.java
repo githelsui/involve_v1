@@ -17,12 +17,11 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
 
             //creates the contents of a card at initialization and connects them to respected xml contents
     public static class ExampleViewHolder extends RecyclerView.ViewHolder   {
-                    public ImageView mImageView;
                     public TextView mTextView1;
                     public TextView mTextView2;
                     public ExampleViewHolder(@NonNull View itemView) {
             super(itemView);
-            mImageView = itemView.findViewById(R.id.image_view);
+
             mTextView1 = itemView.findViewById(R.id.text_view1);
             mTextView2 = itemView.findViewById(R.id.text_view2);
         }
@@ -45,9 +44,8 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
     @Override
     public void onBindViewHolder(@NonNull ExampleViewHolder exampleViewHolder, int i) {
         ExampleItem obj =  myListAdapt.get(i);
-        (exampleViewHolder.mImageView).setImageResource(obj.getImageValue());
-        (exampleViewHolder.mTextView2).setText(obj.getText2());
-        (exampleViewHolder.mTextView1).setText(obj.getText1());
+        (exampleViewHolder.mTextView2).setText(obj.getProgram());
+        (exampleViewHolder.mTextView1).setText(obj.getHours());
     }
 
     @Override

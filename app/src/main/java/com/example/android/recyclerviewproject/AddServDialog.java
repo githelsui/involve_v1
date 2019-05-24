@@ -38,9 +38,12 @@ public class AddServDialog extends AppCompatDialogFragment {
                 .setPositiveButton("Save", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int i) {
+
                         String name = prgrmName.getText().toString();
                         int hrs = Integer.parseInt(currHrs.getText().toString());
                         String myRole = role.getText().toString();
+
+                        listener.applyText(name, hrs, myRole);
                     }
                 });
         prgrmName = myView.findViewById(R.id.program_name);

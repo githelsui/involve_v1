@@ -1,25 +1,25 @@
 package com.example.android.recyclerviewproject;
 
 public class ExampleItem {
-    private int imageValue;
-    private String text1;
-    private String text2;
+    private int myHrs;
+    private String myProg;
+    private String myRole;
 
-    public ExampleItem(int img, String txt1, String txt2){
-        imageValue = img;
-        text1 = txt1;
-        text2 = txt2;
+    public ExampleItem(String program, int hours, String role){
+        myHrs = hours;
+        myProg = program;
+        myRole = role;
     }
 
-    public int getImageValue(){
-        return imageValue;
+    public String getProgram(){
+        return myProg;
     }
 
-    public String getText1(){
-        return text1;
+    public int getHours(){
+        return myHrs;
     }
 
-    public String getText2(){
-        return text2;
+    public String getRole(){
+        return myRole;
     }
 }
