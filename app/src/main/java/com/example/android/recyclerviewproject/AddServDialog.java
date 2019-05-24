@@ -43,7 +43,7 @@ public class AddServDialog extends AppCompatDialogFragment {
                         int hrs = Integer.parseInt(currHrs.getText().toString());
                         String myRole = role.getText().toString();
 
-                        listener.applyText(name, hrs, myRole);
+                        listener.applyText(name, hrs, myRole); //creates Exampleitem then appends it to list
                     }
                 });
         prgrmName = myView.findViewById(R.id.program_name);

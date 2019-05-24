@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="80dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="4dp">
+    app:cardCornerRadius="4dp"
+    android:background="@color/white">
 
     <RelativeLayout
         android:id="@+id/relative_layout"

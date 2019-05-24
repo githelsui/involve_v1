@@ -27,21 +27,14 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
         //init private widgets and values
         myList = new ArrayList<ExampleItem>();
         myTotalHrs = findViewById(R.id.numhrs_lbl);
-        addItemToList();
         initRecyclerView();
         initAddButton();
     }
 
 
     //RECYCLER VIEWS AND PRESENTING LIST OF PROGRAMS
-    private void addItemToList(){
-        ExampleItem temp = new ExampleItem("name", 12, "temp2");
-                for(int i = 0; i < 10; i++){
-                    myList.add(temp);
-                }
-    }
 
-    private void initRecyclerView(){
+    private void initRecyclerView() {
         //initialize all objects
         myRecycler = findViewById(R.id.recycler_view);
         myRecycler.setHasFixedSize(true);
@@ -55,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
 
 
     //ADD NEW PROGRAM BUTTON
-    private void initAddButton(){
+    private void initAddButton() {
         addServBtn = findViewById(R.id.add_btn);
         addServBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,13 +58,15 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
         });
     }
 
-    public void openDialog(){
+    public void openDialog() {
         AddServDialog myDialog = new AddServDialog();
         myDialog.show(getSupportFragmentManager(), "Add New Service Dialog");
     }
 
     @Override //implements interface AddServeDialogListener
     public void applyText(String name, int hrs, String myRole) {
-       // ExampleItem myItem = new ExampleItem()
+        ExampleItem myItem = new ExampleItem(name, hrs, myRole);
+        myList.add(myItem);
+        initRecyclerView(); //refresh list on layout.xml
     }
 }
