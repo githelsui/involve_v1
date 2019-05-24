@@ -1,6 +1,7 @@
 package com.example.android.recyclerviewproject;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -14,6 +15,7 @@ public class AddServDialog extends AppCompatDialogFragment {
     private EditText prgrmName;
     private EditText currHrs;
     private EditText role;
+    private AddServeDialogListener listener;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -29,24 +31,38 @@ public class AddServDialog extends AppCompatDialogFragment {
 
         //Attaches java dialog onto its XML layout file (GUI)
         builder.setView(myView)
-                .setTitle("Add New Service")
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int i) {
-
-                    }
-                })
+                    public void onClick(DialogInterface dialog, int i) { }
+                }) //when "Cancelled" do nothing
                 .setPositiveButton("Save", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int i) {
-
+                        String name = prgrmName.getText().toString();
+                        int hrs = Integer.parseInt(currHrs.getText().toString());
+                        String myRole = role.getText().toString();
                     }
                 });
         prgrmName = myView.findViewById(R.id.program_name);
         currHrs = myView.findViewById(R.id.current_hours);
         role = myView.findViewById(R.id.position_lbl);
 
-        //returns a Dialog View
+        //returns the Dialog View
         return builder.create();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try{
+            listener = (AddServeDialogListener) context;
+        }catch(ClassCastException e){
+            throw new ClassCastException(context.toString() +
+                    "  //  IMPLEMENT ADDSERVEDIALOGLISTENER");
+        }
+    }
+
+    public interface AddServeDialogListener{
+        void applyText(String name, int hrs, String myRole);
     }
 }

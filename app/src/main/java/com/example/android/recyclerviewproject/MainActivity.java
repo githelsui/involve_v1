@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AddServDialog.AddServeDialogListener {
 
     private RecyclerView myRecycler;
     private RecyclerView.Adapter myAdapter;
@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
         initAddButton();
     }
 
+
+    //RECYCLER VIEWS AND PRESENTING LIST OF PROGRAMS
     private void addItemToList(){
         ExampleItem temp = new ExampleItem(R.drawable.ic_imageview, "temp1", "temp2");
                 for(int i = 0; i < 10; i++){
@@ -51,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
         myRecycler.setAdapter(myAdapter);
     }
 
+
+    //ADD NEW PROGRAM BUTTON
     private void initAddButton(){
         addServBtn = findViewById(R.id.add_btn);
         addServBtn.setOnClickListener(new View.OnClickListener() {
@@ -64,6 +68,10 @@ public class MainActivity extends AppCompatActivity {
     public void openDialog(){
         AddServDialog myDialog = new AddServDialog();
         myDialog.show(getSupportFragmentManager(), "Add New Service Dialog");
+    }
+
+    @Override
+    public void applyText(String name, int hrs, String myRole) {
 
     }
 }
