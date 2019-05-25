@@ -8,20 +8,16 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.EditText;
 
-public class AddServDialog extends AppCompatDialogFragment {
+public class ServeInfoDialog extends AppCompatDialogFragment {
 
-    private EditText prgrmName;
-    private EditText currHrs;
-    private EditText role;
-    private AddServeDialogListener listener;
+    //TODO #2 Define all private vars of widgets and views from serviceinfo_dialog.xml
+    private ServeInfoDialog listener;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-
         //creates Dialog java class by taking info from getActivity()
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        android.support.v7.app.AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         //creates an object that helps configure Dialog java class to its correct xml file
         LayoutInflater inflater = getActivity().getLayoutInflater();
@@ -38,18 +34,9 @@ public class AddServDialog extends AppCompatDialogFragment {
                 .setPositiveButton("Save", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int i) {
-
-                        String name = prgrmName.getText().toString();
-                        double hrs = Double.parseDouble(currHrs.getText().toString());
-                        String myRole = role.getText().toString();
-
-                        listener.applyText(name, hrs, myRole); //creates Exampleitem then appends it to list
-                        listener.saveData(); //saves data for long term
+                            //TODO #3 call interface functions and store the dialog's data in primitive types
                     }
                 });
-        prgrmName = myView.findViewById(R.id.program_name);
-        currHrs = myView.findViewById(R.id.current_hours);
-        role = myView.findViewById(R.id.position_lbl);
 
         //returns the Dialog View
         return builder.create();
@@ -59,15 +46,16 @@ public class AddServDialog extends AppCompatDialogFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         try{
-            listener = (AddServeDialogListener) context;
+            //TODO #4 listener = (ServeInfoDialogListener) context;
         }catch(ClassCastException e){
             throw new ClassCastException(context.toString() +
                     "  //  IMPLEMENT ADDSERVEDIALOGLISTENER");
         }
     }
 
-    public interface AddServeDialogListener{
-        void applyText(String name, double hrs, String myRole);
-        void saveData();
+    public interface ServeInfoDialogListener{
+        //TODO #5 Override these functions (change parameters) in ProgramActivity.java after this entire class is complete
+        void applyServiceText(String name, double hrs, String myRole); //sets views to the appropriate values/data passed by the parameters
+        void saveServiceData(); //uses SharedPreferences to store Data permanently
     }
 }

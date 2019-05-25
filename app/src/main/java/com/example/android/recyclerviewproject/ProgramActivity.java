@@ -13,8 +13,7 @@ import java.util.ArrayList;
 
 public class ProgramActivity extends AppCompatActivity {
 
-    //TODO #4 Define private widgets (recyclerviews + helpers) and the private arraylist to be presented
-    private ArrayList<ServiceItem> serviceList;
+     private ArrayList<ServiceItem> serviceList;
     private TextView myName;
     private Button addServBtn;
     private RecyclerView myRecycler;
@@ -54,9 +53,10 @@ public class ProgramActivity extends AppCompatActivity {
     }
 
     private void openDialog() {
-        AddServDialog myDialog = new AddServDialog();
+        ServeInfoDialog myDialog = new ServeInfoDialog();
         myDialog.show(getSupportFragmentManager(), "Add New Service Dialog");
     }
+
 
     private void initRecyclerView() {
         //initialize all objects
@@ -73,7 +73,7 @@ public class ProgramActivity extends AppCompatActivity {
         myAdapter.setOnItemClickListener(new ServiceAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int pos) {
-                //TODO create a dialog for a service item (fill with info)
+                //TODO #7 create a dialog for a service item when arrow button is clicked(fill with info)
             }
         });
     }

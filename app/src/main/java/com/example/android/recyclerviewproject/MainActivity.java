@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
         initRecyclerView();
         initAddButton();
 
-        //TODO update myTotalHrs in loadData and applyTexts functions
+        //TODO #8 create java class to store apps myTotal hours and update it using SharedPreferences
         myTotalHrs = findViewById(R.id.numhrs_lbl);
     }
 
