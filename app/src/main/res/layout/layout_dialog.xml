@@ -50,13 +50,5 @@
         android:hint="Position/Role"
         android:layout_below="@id/current_hours"/>
 
-   <DatePicker
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:layout_centerHorizontal="true"
-       android:layout_below="@id/position_lbl"
-       android:calendarViewShown="false"
-       android:datePickerMode="spinner"></DatePicker>
-
 
 </RelativeLayout>
