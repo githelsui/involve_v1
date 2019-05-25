@@ -44,7 +44,7 @@ public class ProgramActivity extends AppCompatActivity {
     }
 
     private void initAddButton() {
-        addServBtn = findViewById(R.id.add_btn);
+        addServBtn = findViewById(R.id.addserve_btn);
         addServBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
