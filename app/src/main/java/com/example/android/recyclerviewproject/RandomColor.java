@@ -7,7 +7,6 @@ import android.view.View;
 
 public class RandomColor {
 
-    private Drawable myColor;
     private TypedArray allColors;
     private Resources myRes;
     private View myView;
@@ -21,6 +20,7 @@ public class RandomColor {
     }
 
     public Drawable getRandomGradient(){
-        return myRes.getDrawable(0, myRes.newTheme());
+        int num = (int)(Math.random() * totalColors); //includes index at 0
+        return myRes.getDrawable(num, myRes.newTheme());
     }
 }

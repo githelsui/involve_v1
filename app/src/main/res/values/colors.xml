@@ -10,4 +10,23 @@
     <color name="redStart">#990716</color>
     <color name="redEnd">#e87884</color>
     <color name="redMid">#edb39e</color>
+
+    <!--orange_grad.xml-->
+    <color name="orEnd">#e86214</color>
+    <color name="orMid">#f2935c</color>
+    <color name="orStart">#ffe2b2</color>
+
+    <!--yellow_grad.xml-->
+    <color name="yellEnd">#ffc700</color>
+    <color name="yellStart">#ffc5af</color>
+    <color name="yellMid">#ffdd66</color>
+
+    <!--blue_grad.xml-->
+
+    <!--green_grad.xml-->
+
+    <!--purp_grad.xml-->
+
+    <!--pink_grad.xml-->
+
 </resources>
