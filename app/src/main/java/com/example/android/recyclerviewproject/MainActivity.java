@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import java.lang.reflect.Type;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import java.util.Iterator;
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +17,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
+import java.util.ListIterator;
 
 public class MainActivity extends AppCompatActivity implements AddServDialog.AddServeDialogListener {
 
@@ -53,13 +55,15 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
         myAdapter.setOnItemClickListener(new ExampleAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int pos) {
-                openProgActivity();
+                openProgActivity(pos);
             }
         });
     }
 
-    private void openProgActivity(){
+    private void openProgActivity(int pos){
+        //opens up ProgramActivity layout
         Intent myInt = new Intent(this, ProgramActivity.class);
+        myInt.putExtra("Item", myList.get(pos));
         startActivity(myInt);
     }
 
