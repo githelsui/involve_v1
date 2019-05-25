@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
+import java.util.Random;
+
 public class AddServDialog extends AppCompatDialogFragment {
 
     private EditText prgrmName;
@@ -43,7 +45,9 @@ public class AddServDialog extends AppCompatDialogFragment {
                         double hrs = Double.parseDouble(currHrs.getText().toString());
                         String myRole = role.getText().toString();
 
-                        listener.applyText(name, hrs, myRole); //creates Exampleitem then appends it to list
+                        RandomColor rand = new RandomColor();
+
+                        listener.applyText(name, hrs, myRole, rand); //creates Exampleitem then appends it to list
                         listener.saveData(); //saves data for long term
                     }
                 });
@@ -67,7 +71,7 @@ public class AddServDialog extends AppCompatDialogFragment {
     }
 
     public interface AddServeDialogListener{
-        void applyText(String name, double hrs, String myRole);
+        void applyText(String name, double hrs, String myRole, RandomColor picker);
         void saveData();
     }
 }

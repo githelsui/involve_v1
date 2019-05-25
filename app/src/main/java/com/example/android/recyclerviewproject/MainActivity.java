@@ -104,8 +104,8 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
     }
 
     @Override //implements interface AddServeDialogListener; function is executed AFTER 'save' is clicked on dialog layout
-    public void applyText(String name, double hrs, String myRole) {
-        ExampleItem myItem = new ExampleItem(name, hrs, myRole);
+    public void applyText(String name, double hrs, String myRole, RandomColor picker) {
+        ExampleItem myItem = new ExampleItem(name, hrs, myRole, picker);
         myList.add(myItem); //adds new service into private arraylist
         initRecyclerView(); //refresh list on layout.xml
     }

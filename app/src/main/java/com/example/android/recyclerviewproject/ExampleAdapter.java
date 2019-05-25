@@ -40,9 +40,9 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
         ExampleItem obj =  myListAdapt.get(i);
         (exampleViewHolder.mTextView2).setText(Double.toString(obj.getHours()) + " ");
         (exampleViewHolder.mTextView1).setText(obj.getProgram());
-        RandomColor rand = new RandomColor(exampleViewHolder.mCardView);
-        System.out.println("RANDOM INT = " + rand.getRandomGradient());
-        rand.setRandomColor();
+
+        int[] choices = obj.getMyPick().getMyArray();
+        (exampleViewHolder.mCardView).setBackgroundResource(choices[obj.getMyColor()]);
     }
 
 

@@ -12,12 +12,15 @@ public class RandomColor {
     private View myView;
     private int totalColors;
 
-    public RandomColor(View layout){
-        myView = layout;
+    public RandomColor(){
         int[] arrColor = { R.drawable.red_grad, R.drawable.orange_grad, R.drawable.yellow_grad};
         myArray = new int[arrColor.length];
         copyArr(arrColor);
 
+    }
+
+    public int[] getMyArray(){
+        return myArray;
     }
 
     private void copyArr(int[] temp){
@@ -25,10 +28,10 @@ public class RandomColor {
             myArray[i] = temp[i];
         }
         totalColors = myArray.length;
-        System.out.println("TOTAL ITEMS = " + totalColors);
     }
 
-    public void setRandomColor(){
+    public void setRandomColor(View layout){
+        myView = layout;
         myView.setBackgroundResource(myArray[getRandomGradient()]);
     }
 

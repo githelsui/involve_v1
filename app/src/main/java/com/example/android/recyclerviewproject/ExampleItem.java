@@ -10,17 +10,26 @@ public class ExampleItem implements Parcelable{
     private ArrayList<ServiceItem> serviceList;
     private String myProg;
     private String myRole;
+    private RandomColor myPick;
+    private int myColor;
 
-    public ExampleItem(String program, double hours, String role){
+    public ExampleItem(String program, double hours, String role, RandomColor picker){
         myHrs = hours;
         myProg = program;
         myRole = role;
+        myPick = picker;
+        myColor = myPick.getRandomGradient();
+    }
+
+    public RandomColor getMyPick(){
+        return myPick;
     }
 
     protected ExampleItem(Parcel in) {
         myHrs = in.readDouble();
         myProg = in.readString();
         myRole = in.readString();
+        myColor = in.readInt();
     }
 
     public static final Creator<ExampleItem> CREATOR = new Creator<ExampleItem>() {
@@ -45,6 +54,7 @@ public class ExampleItem implements Parcelable{
         dest.writeDouble(myHrs);
         dest.writeString(myProg);
         dest.writeString(myRole);
+        dest.writeInt(myColor);
     }
 
     public String getProgram(){
@@ -58,4 +68,9 @@ public class ExampleItem implements Parcelable{
     public String getRole(){
         return myRole;
     }
+
+    public int getMyColor(){
+        System.out.println("INDEX = " + myColor);
+        return myColor;}
+
 }
