@@ -3,16 +3,20 @@
 
 
     <!--ACTIVITY_MAIN.XML-->
-    <string name="addbtn_name">Add New Service</string>
-    <string name="initialHrs">0.00\u0020</string>
-    <string name="hoursLabel">Total Community Service Hours</string>
+    <string name="addbtn_name">Add New Program</string>
+    <string name="initialHrs">0.00 hours\u0020</string>
+    <string name="hoursLabel">Total Community Service:</string>
     <!--EXAMPLE_ITEM.XML-->
     <string name="test_text_1">TEST TEXT 1</string>
     <string name="test_text_2">TEST TEXT 2</string>
     <string name="todo">TODO</string>
 
     <!--LAYOUT_DIALOG.XML-->
-    <string name="addservice_dialog">Add New Service</string>
+    <string name="addservice_dialog">Add New Program</string>
+
+    <!--ACTIVITY_PROGRAM.XML-->
+    <string name="serv_hourslbl">hours\u0020</string>
+    <string name="addservelbl">Add New Service</string>
 
     <!--MainActivity.java-->
     <string name="shared_pref">SHARED PREF</string>

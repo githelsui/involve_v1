@@ -21,19 +21,12 @@
         android:text="Program Name"/>
 
     <TextView
-        android:id="@+id/totalhours"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Total Hours: "
-        android:textSize="15sp"
-        android:layout_below="@id/serveprog_name"/>
-
-    <TextView
         android:id="@+id/numhrs_lbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/serveprog_name"
-        android:textSize="30sp"
+        android:textSize="25sp"
+        android:layout_centerHorizontal="true"
         android:fontFamily="@font/myriadpro_light"
         android:padding="1dp"
         android:textStyle="italic"
@@ -56,7 +49,7 @@
         android:padding="12dp"
         android:textSize="30sp"
         android:fontFamily="@font/myriadpro_light"
-        android:text="@string/addbtn_name"
+        android:text="@string/addservelbl"
         android:background="@color/greyhex"
         android:layout_alignParentBottom="true"
         android:layout_alignBaseline="@id/recycler_view"

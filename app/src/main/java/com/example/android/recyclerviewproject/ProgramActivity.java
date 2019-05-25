@@ -3,9 +3,13 @@ package com.example.android.recyclerviewproject;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import java.util.ArrayList;
+
 public class ProgramActivity extends AppCompatActivity {
 
     //TODO #4 Define private widgets (recyclerviews + helpers) and the private arraylist to be presented
+    private ArrayList<ServiceItem> serviceList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

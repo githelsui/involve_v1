@@ -32,12 +32,10 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
         setContentView(R.layout.activity_main);
 
         loadData();
-
-        //TODO update myTotalHrs in loadData and applyTexts functions
-        myTotalHrs = findViewById(R.id.numhrs_lbl);
-
         initRecyclerView();
         initAddButton();
+        //TODO update myTotalHrs in loadData and applyTexts functions
+        myTotalHrs = findViewById(R.id.numhrs_lbl);
     }
 
     private void initRecyclerView() {
@@ -51,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
         myRecycler.setLayoutManager(myLayout);
         myRecycler.setAdapter(myAdapter);
 
-        //configures button on the cardview by accessing this custom function from ExampleAdapter
+        //configures button on each cardview by accessing this custom function from ExampleAdapter
         myAdapter.setOnItemClickListener(new ExampleAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int pos) {
@@ -82,30 +80,31 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
         myDialog.show(getSupportFragmentManager(), "Add New Service Dialog");
     }
 
+    //refreshes layout with new saved data
     private void loadData(){
-        SharedPreferences sharedPreferences = getSharedPreferences("SHARED PREF", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.shared_pref), MODE_PRIVATE);
         Gson myGson = new Gson();
-        String json = sharedPreferences.getString("SERVICE LIST", null);
+        String json = sharedPreferences.getString(getString(R.string.service_list), null);
         Type myType = new TypeToken<ArrayList <ExampleItem> >(){}.getType();
         myList = myGson.fromJson(json, myType);
 
         if(myList == null) myList = new ArrayList<>();
     }
 
-    @Override //implements interface AddServeDialogListener
+    @Override //implements interface AddServeDialogListener; function is executed AFTER 'save' is clicked on dialog layout
     public void applyText(String name, double hrs, String myRole) {
         ExampleItem myItem = new ExampleItem(name, hrs, myRole);
         myList.add(myItem); //adds new service into private arraylist
         initRecyclerView(); //refresh list on layout.xml
     }
 
-    @Override
+    @Override //implements interface AddServeDialogListener; function is executed AFTER 'save' is clicked on dialog layout
     public void saveData() {
-        SharedPreferences sharedPreferences = getSharedPreferences("SHARED PREF", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.shared_pref), Context.MODE_PRIVATE);
         SharedPreferences.Editor myEdit = sharedPreferences.edit();
         Gson myGson = new Gson();
         String json = myGson.toJson(myList);
-        myEdit.putString("SERVICE LIST", json);
+        myEdit.putString(getString(R.string.service_list), json);
         myEdit.apply();
     }
 }
