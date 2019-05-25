@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -14,6 +16,7 @@ public class ProgramActivity extends AppCompatActivity {
     //TODO #4 Define private widgets (recyclerviews + helpers) and the private arraylist to be presented
     private ArrayList<ServiceItem> serviceList;
     private TextView myName;
+    private Button addServBtn;
     private RecyclerView myRecycler;
     private ServiceAdapter myAdapter;
     private ExampleItem myItem;
@@ -29,6 +32,7 @@ public class ProgramActivity extends AppCompatActivity {
 
         getParceables();
         initRecyclerView();
+        initAddButton();
 
         myName = findViewById(R.id.serveprog_name);
         myName.setText(myItem.getProgram());
@@ -39,7 +43,21 @@ public class ProgramActivity extends AppCompatActivity {
         myItem = myInt.getParcelableExtra("Item");
     }
 
-    //TODO #2 Create a recycler view that presents a program's individual services & hours
+    private void initAddButton() {
+        addServBtn = findViewById(R.id.add_btn);
+        addServBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDialog();
+            }
+        });
+    }
+
+    private void openDialog() {
+        AddServDialog myDialog = new AddServDialog();
+        myDialog.show(getSupportFragmentManager(), "Add New Service Dialog");
+    }
+
     private void initRecyclerView() {
         //initialize all objects
         myRecycler = findViewById(R.id.serverecycler_view);
@@ -51,15 +69,13 @@ public class ProgramActivity extends AppCompatActivity {
         myRecycler.setLayoutManager(myLayout);
         myRecycler.setAdapter(myAdapter);
 
-        //configures button on each cardview by accessing this custom function from ExampleAdapter
+        //configures button on each cardview by accessing this custom function from ServiceAdapter
         myAdapter.setOnItemClickListener(new ServiceAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int pos) {
-
+                //TODO create a dialog for a service item (fill with info)
             }
         });
     }
 
-    //TODO #3 Create another Adapter class that connects a recyclerview to programactivity
-                //must be a different adapter class than the one used for mainactivity
 }

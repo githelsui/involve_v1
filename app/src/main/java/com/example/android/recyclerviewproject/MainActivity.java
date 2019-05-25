@@ -38,6 +38,8 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
         SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.shared_pref), MODE_PRIVATE);
         sharedPreferences.edit().clear().commit();
 
+
+        //perform these three main functions: load saved data, present on listview, initialize button instantaneously
         loadData();
         initRecyclerView();
         initAddButton();
@@ -85,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
         });
     }
 
-    public void openDialog() {
+    private void openDialog() {
         AddServDialog myDialog = new AddServDialog();
         myDialog.show(getSupportFragmentManager(), "Add New Service Dialog");
     }
