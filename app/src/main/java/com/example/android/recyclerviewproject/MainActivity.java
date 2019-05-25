@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
         myRecycler = findViewById(R.id.recycler_view);
         myRecycler.setHasFixedSize(true);
         myLayout = new LinearLayoutManager(this);
-        myAdapter = new ExampleAdapter(myList);
+        myAdapter = new ExampleAdapter(myList, this);
 
         //configure objects to the recyclerview
         myRecycler.setLayoutManager(myLayout);

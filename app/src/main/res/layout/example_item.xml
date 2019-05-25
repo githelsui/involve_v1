@@ -15,7 +15,6 @@
         android:id="@+id/relative_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-         android:background="@drawable/red_grad"
         tools:ignore="InvalidId">
 
         <TextView

@@ -1,11 +1,15 @@
 package com.example.android.recyclerviewproject;
 
+import android.content.Context;
+import android.content.res.TypedArray;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -14,10 +18,12 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
 
     private ArrayList<ExampleItem> myListAdapt;
     private OnItemClickListener mListener;
+    private Context myCont;
 
     //Adapter Constructor: configures the info from private arraylist into the contents of the card
-    public ExampleAdapter(ArrayList<ExampleItem> list){
+    public ExampleAdapter(ArrayList<ExampleItem> list, Context cont){
         myListAdapt = list;
+        myCont = cont;
     }
 
     @NonNull
@@ -34,7 +40,12 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
         ExampleItem obj =  myListAdapt.get(i);
         (exampleViewHolder.mTextView2).setText(Double.toString(obj.getHours()) + " ");
         (exampleViewHolder.mTextView1).setText(obj.getProgram());
+        RandomColor rand = new RandomColor(exampleViewHolder.mCardView);
+        System.out.println("RANDOM INT = " + rand.getRandomGradient());
+        rand.setRandomColor();
     }
+
+
 
     @Override
     public int getItemCount() {
@@ -54,6 +65,7 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
 
             //creates the contents of a card at initialization and connects them to respected xml contents
     public static class ExampleViewHolder extends RecyclerView.ViewHolder   {
+                    public RelativeLayout mCardView;
                     public TextView mTextView1; //TextView shows program name
                     public TextView mTextView2; //TextView shows hours done for that specific program
                     public ImageView mArrow;
@@ -62,6 +74,7 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
                     public ExampleViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
             //constructor for cardviewholder java class
+            mCardView = itemView.findViewById(R.id.relative_layout);
             mTextView1 = itemView.findViewById(R.id.text_view1);
             mTextView2 = itemView.findViewById(R.id.text_view2);
             mArrow = itemView.findViewById(R.id.arrow_img);
