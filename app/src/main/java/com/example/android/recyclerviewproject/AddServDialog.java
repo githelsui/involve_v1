@@ -3,12 +3,15 @@ package com.example.android.recyclerviewproject;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+
+import com.google.gson.Gson;
 
 public class AddServDialog extends AppCompatDialogFragment {
 
@@ -27,7 +30,7 @@ public class AddServDialog extends AppCompatDialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
         //creates the View in which we can access the Dialog xml file's contents
-        View myView = inflater.inflate(R.layout.layout_dialog, null);
+        final View myView = inflater.inflate(R.layout.layout_dialog, null);
 
         //Attaches java dialog onto its XML layout file (GUI)
         builder.setView(myView)
@@ -44,6 +47,7 @@ public class AddServDialog extends AppCompatDialogFragment {
                         String myRole = role.getText().toString();
 
                         listener.applyText(name, hrs, myRole); //creates Exampleitem then appends it to list
+                        listener.saveData(); //saves data for long term
                     }
                 });
         prgrmName = myView.findViewById(R.id.program_name);
@@ -67,5 +71,6 @@ public class AddServDialog extends AppCompatDialogFragment {
 
     public interface AddServeDialogListener{
         void applyText(String name, double hrs, String myRole);
+        void saveData();
     }
 }

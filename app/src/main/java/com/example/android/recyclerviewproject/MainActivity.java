@@ -1,5 +1,8 @@
 package com.example.android.recyclerviewproject;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import java.lang.reflect.Type;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
@@ -8,6 +11,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 
@@ -25,22 +31,13 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //init private widgets and values
-        myList = new ArrayList<ExampleItem>();
+        loadData();
+
+        //TODO update myTotalHrs in loadData and applyTexts functions
         myTotalHrs = findViewById(R.id.numhrs_lbl);
 
-        addItemToList();
         initRecyclerView();
         initAddButton();
-    }
-
-
-    //unit tests: RECYCLER VIEWS AND PRESENTING LIST OF PROGRAMS
-    private void addItemToList() {
-        ExampleItem temp = new ExampleItem("name", 12, "temp2");
-        for (int i = 0; i < 2; i++) {
-            myList.add(temp);
-        }
     }
 
     private void initRecyclerView() {
@@ -85,10 +82,30 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
         myDialog.show(getSupportFragmentManager(), "Add New Service Dialog");
     }
 
+    private void loadData(){
+        SharedPreferences sharedPreferences = getSharedPreferences("SHARED PREF", MODE_PRIVATE);
+        Gson myGson = new Gson();
+        String json = sharedPreferences.getString("SERVICE LIST", null);
+        Type myType = new TypeToken<ArrayList <ExampleItem> >(){}.getType();
+        myList = myGson.fromJson(json, myType);
+
+        if(myList == null) myList = new ArrayList<>();
+    }
+
     @Override //implements interface AddServeDialogListener
     public void applyText(String name, double hrs, String myRole) {
         ExampleItem myItem = new ExampleItem(name, hrs, myRole);
-        myList.add(myItem);
+        myList.add(myItem); //adds new service into private arraylist
         initRecyclerView(); //refresh list on layout.xml
+    }
+
+    @Override
+    public void saveData() {
+        SharedPreferences sharedPreferences = getSharedPreferences("SHARED PREF", Context.MODE_PRIVATE);
+        SharedPreferences.Editor myEdit = sharedPreferences.edit();
+        Gson myGson = new Gson();
+        String json = myGson.toJson(myList);
+        myEdit.putString("SERVICE LIST", json);
+        myEdit.apply();
     }
 }

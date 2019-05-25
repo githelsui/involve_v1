@@ -13,4 +13,8 @@
 
     <!--LAYOUT_DIALOG.XML-->
     <string name="addservice_dialog">Add New Service</string>
+
+    <!--MainActivity.java-->
+    <string name="shared_pref">SHARED PREF</string>
+    <string name="service_list">SERVICE LIST</string>
 </resources>
