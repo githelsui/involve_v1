@@ -3,6 +3,7 @@ package com.example.android.recyclerviewproject;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
@@ -14,7 +15,7 @@ public class ProgramActivity extends AppCompatActivity {
     private ArrayList<ServiceItem> serviceList;
     private TextView myName;
     private RecyclerView myRecycler;
-    private ExampleAdapter myAdapter;
+    private ServiceAdapter myAdapter;
     private ExampleItem myItem;
     private RecyclerView.LayoutManager myLayout;
 
@@ -23,7 +24,11 @@ public class ProgramActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_program);
 
+        serviceList = new ArrayList<>();
+        serviceList.add(new ServiceItem(0.0, "some", "thing"));
+
         getParceables();
+        initRecyclerView();
 
         myName = findViewById(R.id.serveprog_name);
         myName.setText(myItem.getProgram());
@@ -35,6 +40,26 @@ public class ProgramActivity extends AppCompatActivity {
     }
 
     //TODO #2 Create a recycler view that presents a program's individual services & hours
+    private void initRecyclerView() {
+        //initialize all objects
+        myRecycler = findViewById(R.id.serverecycler_view);
+        myRecycler.setHasFixedSize(true);
+        myLayout = new LinearLayoutManager(this);
+        myAdapter = new ServiceAdapter(serviceList);
+
+        //configure objects to the recyclerview
+        myRecycler.setLayoutManager(myLayout);
+        myRecycler.setAdapter(myAdapter);
+
+        //configures button on each cardview by accessing this custom function from ExampleAdapter
+        myAdapter.setOnItemClickListener(new ServiceAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int pos) {
+
+            }
+        });
+    }
+
     //TODO #3 Create another Adapter class that connects a recyclerview to programactivity
                 //must be a different adapter class than the one used for mainactivity
 }

@@ -8,7 +8,6 @@
     android:background="@android:color/white"
     tools:context=".MainActivity">
 
-    <!--TODO #5 Change all ID's to avoid confusion with activity_main.xml-->
     <TextView
         android:id="@+id/serveprog_name"
         android:layout_width="wrap_content"
@@ -21,7 +20,7 @@
         android:text="Program Name"/>
 
     <TextView
-        android:id="@+id/numhrs_lbl"
+        android:id="@+id/servehrs_lbl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/serveprog_name"
@@ -33,8 +32,8 @@
         android:text="@string/initialHrs" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:layout_below="@id/numhrs_lbl"
+        android:id="@+id/serverecycler_view"
+        android:layout_below="@id/servehrs_lbl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/white"
@@ -43,7 +42,7 @@
         android:scrollbars="vertical" />
 
     <Button
-        android:id="@+id/add_btn"
+        android:id="@+id/addserve_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="12dp"
@@ -52,7 +51,7 @@
         android:text="@string/addservelbl"
         android:background="@color/greyhex"
         android:layout_alignParentBottom="true"
-        android:layout_alignBaseline="@id/recycler_view"
+        android:layout_alignBaseline="@id/serverecycler_view"
         android:textAllCaps="false" />
 
 </RelativeLayout>

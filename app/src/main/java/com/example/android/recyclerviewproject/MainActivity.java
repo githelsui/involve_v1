@@ -33,9 +33,15 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        //TEMPORARY FIELD (RESETS ALL SAVED ITEMS)
+        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.shared_pref), MODE_PRIVATE);
+        sharedPreferences.edit().clear().commit();
+
         loadData();
         initRecyclerView();
         initAddButton();
+
         //TODO update myTotalHrs in loadData and applyTexts functions
         myTotalHrs = findViewById(R.id.numhrs_lbl);
     }

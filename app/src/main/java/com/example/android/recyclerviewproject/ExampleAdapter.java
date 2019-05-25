@@ -1,6 +1,5 @@
 package com.example.android.recyclerviewproject;
 
-import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -55,8 +54,8 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
 
             //creates the contents of a card at initialization and connects them to respected xml contents
     public static class ExampleViewHolder extends RecyclerView.ViewHolder   {
-                    public TextView mTextView1;
-                    public TextView mTextView2;
+                    public TextView mTextView1; //TextView shows program name
+                    public TextView mTextView2; //TextView shows hours done for that specific program
                     public ImageView mArrow;
                     private OnItemClickListener mListener;
 
