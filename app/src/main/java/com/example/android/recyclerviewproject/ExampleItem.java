@@ -13,6 +13,7 @@ public class ExampleItem implements Parcelable{
     private RandomColor myPick;
     private int myColor;
 
+
     public ExampleItem(String program, double hours, String role, RandomColor picker){
         myHrs = hours;
         myProg = program;
@@ -42,6 +43,7 @@ public class ExampleItem implements Parcelable{
         public ExampleItem[] newArray(int size) {
             return new ExampleItem[size];
         }
+
     };
 
     @Override
@@ -56,6 +58,7 @@ public class ExampleItem implements Parcelable{
         dest.writeString(myRole);
         dest.writeInt(myColor);
     }
+
 
     public String getProgram(){
         return myProg;

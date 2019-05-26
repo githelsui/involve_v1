@@ -3,6 +3,8 @@ package com.example.android.recyclerviewproject;
 import android.content.Context;
 import android.content.SharedPreferences;
 import java.lang.reflect.Type;
+
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import java.util.Iterator;
@@ -71,7 +73,11 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
     private void openProgActivity(int pos){
         //opens up ProgramActivity layout
         Intent myInt = new Intent(this, ProgramActivity.class);
-        myInt.putExtra("Item", myList.get(pos));
+
+        ExampleItem temp = myList.get(pos);
+        int[] choices = temp.getMyPick().getMyArray();
+        myInt.putExtra("Item", temp);
+        myInt.putExtra("Colors", choices);
         startActivity(myInt);
 
         //slide animation for second activityview

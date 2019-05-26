@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -19,6 +20,8 @@ public class ProgramActivity extends AppCompatActivity {
     private RecyclerView myRecycler;
     private ServiceAdapter myAdapter;
     private ExampleItem myItem;
+    private RelativeLayout cardLayout;
+    private int[] colorChoices;
     private RecyclerView.LayoutManager myLayout;
 
     @Override
@@ -27,17 +30,34 @@ public class ProgramActivity extends AppCompatActivity {
         setContentView(R.layout.activity_program);
 
         serviceList = new ArrayList<>();
+
+        //example of service
         serviceList.add(new ServiceItem(0.0, "some", "thing"));
 
         getParceables();
+        setColorChoices();
+        setLayouts();
         initRecyclerView();
         initAddButton();
-
-        myName = findViewById(R.id.serveprog_name);
-        myName.setText(myItem.getProgram());
     }
 
-    private void getParceables(){ //gains access to item's values (name, hours, role, etc)
+    private void setLayouts(){
+        myName = findViewById(R.id.serveprog_name);
+        myName.setText(myItem.getProgram());
+
+        cardLayout = findViewById(R.id.program_layout);
+        cardLayout.setBackgroundResource(colorChoices[myItem.getMyColor()]);
+    }
+
+    private void setColorChoices(){
+        int[] arr = {R.drawable.red_grad, R.drawable.orange_grad, R.drawable.yellow_grad};
+        colorChoices = new int[arr.length];
+        for(int i = 0; i < arr.length; i++){
+            colorChoices[i] = arr[i];
+        }
+    }
+
+    private void getParceables(){ //gains access to item's intrinsic values (name, hours, role, etc)
         Intent myInt = getIntent();
         myItem = myInt.getParcelableExtra("Item");
     }
