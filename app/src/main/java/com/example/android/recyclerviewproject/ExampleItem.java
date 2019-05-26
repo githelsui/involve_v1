@@ -70,7 +70,6 @@ public class ExampleItem implements Parcelable{
     }
 
     public int getMyColor(){
-        System.out.println("INDEX = " + myColor);
         return myColor;}
 
 }

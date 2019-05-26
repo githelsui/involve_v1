@@ -73,6 +73,9 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
         Intent myInt = new Intent(this, ProgramActivity.class);
         myInt.putExtra("Item", myList.get(pos));
         startActivity(myInt);
+
+        //slide animation for second activityview
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
 

@@ -57,6 +57,11 @@ public class ProgramActivity extends AppCompatActivity {
         myDialog.show(getSupportFragmentManager(), "Add New Service Dialog");
     }
 
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+    }
 
     private void initRecyclerView() {
         //initialize all objects
