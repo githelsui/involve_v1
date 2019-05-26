@@ -45,8 +45,6 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
         (exampleViewHolder.mCardView).setBackgroundResource(choices[obj.getMyColor()]);
     }
 
-
-
     @Override
     public int getItemCount() {
         return myListAdapt.size();

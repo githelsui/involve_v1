@@ -28,12 +28,14 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceV
 
     @Override
     public void onBindViewHolder(@NonNull ServiceViewHolder serviceViewHolder, int i) {
-
+        ServiceItem temp = myServiceList.get(i);
+        serviceViewHolder.mTextView1.setText("date");
+        serviceViewHolder.mTextView2.setText(Double.toString(temp.getHours()) + " ");
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+         return myServiceList.size();
     }
 
     public interface OnItemClickListener{

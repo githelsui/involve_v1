@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class ProgramActivity extends AppCompatActivity {
 
-     private ArrayList<ServiceItem> serviceList;
+    private ArrayList<ServiceItem> serviceList;
     private TextView myName;
     private Button addServBtn;
     private RecyclerView myRecycler;
