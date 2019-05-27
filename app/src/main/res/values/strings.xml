@@ -21,4 +21,7 @@
     <!--MainActivity.java-->
     <string name="shared_pref">SHARED PREF</string>
     <string name="service_list">SERVICE LIST</string>
+
+    <!--serviceinfo_dialog.xml-->
+    <string name="adddateservice">Add New Service</string>
 </resources>

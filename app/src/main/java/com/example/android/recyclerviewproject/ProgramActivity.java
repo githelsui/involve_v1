@@ -1,6 +1,7 @@
 package com.example.android.recyclerviewproject;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,6 +11,10 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class ProgramActivity extends AppCompatActivity {
@@ -29,16 +34,24 @@ public class ProgramActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_program);
 
-        serviceList = new ArrayList<>();
+      //  serviceList.add(new ServiceItem(0.0, "some", "thing", "date"));
 
-        //example of service
-        serviceList.add(new ServiceItem(0.0, "some", "thing"));
-
+        loadData();
         getParceables();
         setColorChoices();
         setLayouts();
         initRecyclerView();
         initAddButton();
+    }
+
+    private void loadData(){
+        SharedPreferences sharedPreferences = getSharedPreferences("service_prefs", MODE_PRIVATE);
+        Gson myGson = new Gson();
+        String json = sharedPreferences.getString("dates_list", null);
+        Type myType = new TypeToken<ArrayList <ExampleItem> >(){}.getType();
+        serviceList = myGson.fromJson(json, myType);
+
+        if(serviceList == null) serviceList = new ArrayList<>();
     }
 
     private void setLayouts(){

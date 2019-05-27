@@ -13,17 +13,18 @@ public class ServeInfoDialog extends AppCompatDialogFragment {
 
     //TODO #2 Define all private vars of widgets and views from serviceinfo_dialog.xml
     private ServeInfoDialog listener;
+    //private View viewUsedtoReceiveUserInput
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         //creates Dialog java class by taking info from getActivity()
-        android.support.v7.app.AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         //creates an object that helps configure Dialog java class to its correct xml file
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
         //creates the View in which we can access the Dialog xml file's contents
-        final View myView = inflater.inflate(R.layout.layout_dialog, null);
+        final View myView = inflater.inflate(R.layout.serviceinfo_dialog, null);
 
         //Attaches java dialog onto its XML layout file (GUI)
         builder.setView(myView)
@@ -34,11 +35,13 @@ public class ServeInfoDialog extends AppCompatDialogFragment {
                 .setPositiveButton("Save", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int i) {
-                            //TODO #3 call interface functions and store the dialog's data in primitive types
+                        //collects data from the views and inputs them as a ServiceItem's intrinsic values
+                       // String date = private variable.getText().toString()
                     }
                 });
 
-        //returns the Dialog View
+        //Initialize private view = findViewById(R.id.name_of_view)
+
         return builder.create();
     }
 
