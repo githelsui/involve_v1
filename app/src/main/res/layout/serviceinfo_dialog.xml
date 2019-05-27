@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:layout_constraintCircleRadius="20dp"
+    android:padding="16dp">
 
        <TextView
-        android:id="@+id/servlbl_dialog"
+        android:id="@+id/servicename"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -17,38 +19,47 @@
 
     <EditText
         android:importantForAutofill="no"
-        android:id="@+id/program_name"
+        android:id="@+id/date_started"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/servlbl_dialog"
+        android:layout_below="@id/servicename"
+        android:inputType="date"
         android:padding="15dp"
         android:paddingTop="4dp"
         android:textSize="20sp"
         android:fontFamily="@font/myriadpro_light"
-        android:hint="Name of Program/Organization"/>
+        android:hint="Date Started               (Month / Day / Year)"/>
 
     <EditText
         android:importantForAutofill="no"
-        android:id="@+id/current_hours"
+        android:id="@+id/date_end"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="15dp"
-        android:inputType="numberDecimal"
+        android:inputType="date"
         android:textSize="20sp"
         android:fontFamily="@font/myriadpro_light"
-        android:hint="Current Number of Hours Served"
-        android:layout_below="@id/program_name"/>
+        android:hint="Date of Completion   (Month / Day / Year)"
+        android:layout_below="@id/date_started"/>
 
     <EditText
         android:importantForAutofill="no"
-        android:id="@+id/position_lbl"
+        android:id="@+id/duties_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="15dp"
         android:inputType="textMultiLine"
         android:textSize="20sp"
         android:fontFamily="@font/myriadpro_light"
-        android:hint="Additional Information"
-        android:layout_below="@id/current_hours"/>
+        android:hint="Duties and Additional Information"
+        android:layout_below="@id/date_end"/>
+
+    <EditText
+        android:id="@+id/ind_hours"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:hint="Total Hours"
+        android:layout_below="@id/duties_info"/>
 
     </RelativeLayout>
