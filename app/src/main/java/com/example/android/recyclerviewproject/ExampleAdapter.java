@@ -39,7 +39,16 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
     public void onBindViewHolder(@NonNull ExampleViewHolder exampleViewHolder, int i) {
         ExampleItem obj =  myListAdapt.get(i);
         (exampleViewHolder.mTextView2).setText(Double.toString(obj.getHours()) + " ");
-        (exampleViewHolder.mTextView1).setText(obj.getProgram());
+
+        if(obj.getProgram().length() > 13){
+            int indexEnd = 13;
+            for(int j = indexEnd; j < obj.getProgram().length(); j++){
+                if(obj.getProgram().substring(i, i+1) == " ") indexEnd = j-1;
+            }
+            String temp = obj.getProgram().substring(0, indexEnd);
+            exampleViewHolder.mTextView1.setText(temp + "...");
+        }
+        else (exampleViewHolder.mTextView1).setText(obj.getProgram());
 
         int[] choices = obj.getMyPick().getMyArray();
         (exampleViewHolder.mCardView).setBackgroundResource(choices[obj.getMyColor()]);
