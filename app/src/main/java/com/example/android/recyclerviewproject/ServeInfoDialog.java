@@ -8,12 +8,15 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 
 public class ServeInfoDialog extends AppCompatDialogFragment {
 
-    //TODO #2 Define all private vars of widgets and views from serviceinfo_dialog.xml
-    private ServeInfoDialog listener;
-    //private View viewUsedtoReceiveUserInput
+     private ServeInfoDialogListener listener;
+    private EditText mStartDate;
+    private EditText mEndDate;
+    private EditText mHours;
+    private EditText mInfo;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -35,13 +38,19 @@ public class ServeInfoDialog extends AppCompatDialogFragment {
                 .setPositiveButton("Save", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int i) {
-                        //collects data from the views and inputs them as a ServiceItem's intrinsic values
-                       // String date = private variable.getText().toString()
+                        String startDate = mStartDate.getText().toString();
+                        String endDate = mEndDate.getText().toString();
+                        double hrs = Double.parseDouble(mHours.getText().toString());
+                        String info = mInfo.getText().toString();
+
+                        listener.applyServiceText(hrs, startDate, endDate, info);
+                        //listener.saveServiceData();
                     }
                 });
-
-        //Initialize private view = findViewById(R.id.name_of_view)
-
+        mStartDate = myView.findViewById(R.id.date_started);
+        mEndDate = myView.findViewById(R.id.date_end);
+        mHours = myView.findViewById(R.id.ind_hours);
+        mInfo = myView.findViewById(R.id.duties_info);
         return builder.create();
     }
 
@@ -49,16 +58,15 @@ public class ServeInfoDialog extends AppCompatDialogFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         try{
-            //TODO #4 listener = (ServeInfoDialogListener) context;
+           listener = (ServeInfoDialogListener) context;
         }catch(ClassCastException e){
-            throw new ClassCastException(context.toString() +
-                    "  //  IMPLEMENT ADDSERVEDIALOGLISTENER");
+            throw new ClassCastException(context.toString() + "  IMPLEMENT ADDSERVEDIALOGLISTENER");
         }
     }
 
     public interface ServeInfoDialogListener{
         //TODO #5 Override these functions (change parameters) in ProgramActivity.java after this entire class is complete
-        void applyServiceText(String name, double hrs, String myRole); //sets views to the appropriate values/data passed by the parameters
+        void applyServiceText(double hours, String startDate, String endDate, String duties); //CREATE A SERVICEITEM OBJECT -> ADDS TO PROGRAM'S LIST OF SERVICES
         void saveServiceData(); //uses SharedPreferences to store Data permanently
     }
 }

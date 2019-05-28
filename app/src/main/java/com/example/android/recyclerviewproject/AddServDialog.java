@@ -65,8 +65,7 @@ public class AddServDialog extends AppCompatDialogFragment {
         try{
             listener = (AddServeDialogListener) context;
         }catch(ClassCastException e){
-            throw new ClassCastException(context.toString() +
-                    "  //  IMPLEMENT ADDSERVEDIALOGLISTENER");
+            throw new ClassCastException(context.toString() + " IMPLEMENT ADDSERVEDIALOGLISTENER");
         }
     }
 

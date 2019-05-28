@@ -17,7 +17,7 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-public class ProgramActivity extends AppCompatActivity {
+public class ProgramActivity extends AppCompatActivity implements ServeInfoDialog.ServeInfoDialogListener {
 
     private ArrayList<ServiceItem> serviceList;
     private TextView myName;
@@ -90,7 +90,7 @@ public class ProgramActivity extends AppCompatActivity {
         myDialog.show(getSupportFragmentManager(), "Add New Service Dialog");
     }
 
-    @Override
+    @Override //for animation
     public void finish() {
         super.finish();
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
@@ -116,4 +116,15 @@ public class ProgramActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void applyServiceText(double hours, String startDate, String endDate, String duties) {
+        ServiceItem temp = new ServiceItem(hours, startDate, endDate, duties);
+        serviceList.add(temp);
+        initRecyclerView();
+    }
+
+    @Override
+    public void saveServiceData() {
+
+    }
 }
