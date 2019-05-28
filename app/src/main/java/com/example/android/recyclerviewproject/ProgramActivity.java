@@ -1,5 +1,6 @@
 package com.example.android.recyclerviewproject;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -48,7 +49,7 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
         SharedPreferences sharedPreferences = getSharedPreferences("service_prefs", MODE_PRIVATE);
         Gson myGson = new Gson();
         String json = sharedPreferences.getString("dates_list", null);
-        Type myType = new TypeToken<ArrayList <ExampleItem> >(){}.getType();
+        Type myType = new TypeToken<ArrayList <ServiceItem> >(){}.getType();
         serviceList = myGson.fromJson(json, myType);
 
         if(serviceList == null) serviceList = new ArrayList<>();
@@ -125,6 +126,11 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
 
     @Override
     public void saveServiceData() {
-
+        SharedPreferences sharedPreferences = getSharedPreferences("service_prefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor myEdit = sharedPreferences.edit();
+        Gson myGson = new Gson();
+        String json = myGson.toJson(serviceList);
+        myEdit.putString("dates_list", json);
+        myEdit.apply();
     }
 }

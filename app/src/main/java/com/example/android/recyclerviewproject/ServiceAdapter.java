@@ -15,7 +15,9 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceV
     private ArrayList<ServiceItem> myServiceList;
     private OnItemClickListener mListener;
 
-    public ServiceAdapter(ArrayList<ServiceItem> list){ myServiceList = list; }
+    public ServiceAdapter(ArrayList<ServiceItem> list) {
+        myServiceList = list;
+    }
 
     @NonNull
     @Override
