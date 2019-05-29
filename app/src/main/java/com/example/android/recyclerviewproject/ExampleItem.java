@@ -10,7 +10,7 @@ public class ExampleItem implements Parcelable{
     private ArrayList<ServiceItem> serviceList;
     private String myProg;
     private String myRole;
-    private RandomColor myPick;
+    private transient RandomColor myPick;
     private int myColor;
 
 
@@ -20,6 +20,7 @@ public class ExampleItem implements Parcelable{
         myRole = role;
         myPick = picker;
         myColor = myPick.getRandomGradient();
+        serviceList = new ArrayList<>();
     }
 
     public RandomColor getMyPick(){
@@ -31,6 +32,7 @@ public class ExampleItem implements Parcelable{
         myProg = in.readString();
         myRole = in.readString();
         myColor = in.readInt();
+        serviceList = in.readArrayList(ServiceItem.class.getClassLoader());
     }
 
     public static final Creator<ExampleItem> CREATOR = new Creator<ExampleItem>() {
@@ -57,8 +59,21 @@ public class ExampleItem implements Parcelable{
         dest.writeString(myProg);
         dest.writeString(myRole);
         dest.writeInt(myColor);
+        dest.writeList(serviceList);
     }
 
+    public void addItem(ServiceItem temp){
+        if(serviceList != null){
+            serviceList.add(temp);
+        }else {
+            serviceList = new ArrayList<>();
+            serviceList.add(temp);
+        }
+    }
+
+    public ArrayList<ServiceItem> getServiceList(){
+        return serviceList;
+    }
 
     public String getProgram(){
         return myProg;

@@ -50,7 +50,8 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
         }
         else (exampleViewHolder.mTextView1).setText(obj.getProgram());
 
-        int[] choices = obj.getMyPick().getMyArray();
+        RandomColor colors = new RandomColor();
+        int[] choices = colors.getMyArray();
         (exampleViewHolder.mCardView).setBackgroundResource(choices[obj.getMyColor()]);
     }
 

@@ -3,7 +3,6 @@ package com.example.android.recyclerviewproject;
 import android.content.Context;
 import android.content.SharedPreferences;
 import java.lang.reflect.Type;
-
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,7 +13,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -37,8 +35,8 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
 
 
         //TEMPORARY FIELD (RESETS ALL SAVED ITEMS)
-        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.shared_pref), MODE_PRIVATE);
-        sharedPreferences.edit().clear().commit();
+//        SharedPreferences sharedPreferences = getSharedPreferences("SHARED PREF", MODE_PRIVATE);
+//        sharedPreferences.edit().clear().commit();
 
 
         //perform these three main functions: load saved data, present on listview, initialize button instantaneously
@@ -75,7 +73,8 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
         Intent myInt = new Intent(this, ProgramActivity.class);
 
         ExampleItem temp = myList.get(pos);
-        int[] choices = temp.getMyPick().getMyArray();
+        RandomColor randomColor = new RandomColor();
+        int[] choices = randomColor.getMyArray();
         myInt.putExtra("Item", temp);
         myInt.putExtra("Colors", choices);
         startActivity(myInt);
@@ -103,9 +102,9 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
 
     //refreshes layout with new saved data
     private void loadData(){
-        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.shared_pref), MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("SHARED PREF", MODE_PRIVATE);
         Gson myGson = new Gson();
-        String json = sharedPreferences.getString(getString(R.string.service_list), null);
+        String json = sharedPreferences.getString("service_list", null);
         Type myType = new TypeToken<ArrayList <ExampleItem> >(){}.getType();
         myList = myGson.fromJson(json, myType);
 
@@ -121,11 +120,11 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
 
     @Override //implements interface AddServeDialogListener; function is executed AFTER 'save' is clicked on dialog layout
     public void saveData() {
-        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.shared_pref), Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("SHARED PREF", Context.MODE_PRIVATE);
         SharedPreferences.Editor myEdit = sharedPreferences.edit();
         Gson myGson = new Gson();
-        String json = myGson.toJson(myList);
-        myEdit.putString(getString(R.string.service_list), json);
+         String json = myGson.toJson(myList);
+        myEdit.putString("service_list", json);
         myEdit.apply();
     }
 }

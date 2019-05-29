@@ -35,7 +35,9 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_program);
 
-      //  serviceList.add(new ServiceItem(0.0, "some", "thing", "date"));
+        //TESharedPreferences sharedPreferences = getSharedPreferences("service_prefs", MODE_PRIVATE);
+        ////        sharedPreferences.edit().clear().commit();MPORARY FIELD (RESETS ALL SAVED ITEMS)
+//
 
         loadData();
         getParceables();
@@ -120,8 +122,19 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
     @Override
     public void applyServiceText(double hours, String startDate, String endDate, String duties) {
         ServiceItem temp = new ServiceItem(hours, startDate, endDate, duties);
-        serviceList.add(temp);
+        myItem.addItem(temp);
+        serviceList = myItem.getServiceList();
+        //copyList(myItem.getServiceList());
         initRecyclerView();
+    }
+
+    private void copyList(ArrayList<ServiceItem> list){
+        ArrayList<ServiceItem> temp = new ArrayList<>();
+        for(int i = 0; i < list.size(); i++){
+            ServiceItem tempIt = list.get(i);
+            temp.add(tempIt);
+        }
+        serviceList = temp;
     }
 
     @Override
@@ -130,6 +143,7 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
         SharedPreferences.Editor myEdit = sharedPreferences.edit();
         Gson myGson = new Gson();
         String json = myGson.toJson(serviceList);
+        System.out.println("SIZE: " + myItem.getServiceList().size());
         myEdit.putString("dates_list", json);
         myEdit.apply();
     }

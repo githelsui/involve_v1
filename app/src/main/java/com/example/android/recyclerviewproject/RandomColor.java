@@ -4,13 +4,15 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.view.View;
 
-public class RandomColor {
+public class RandomColor implements Parcelable {
 
     private int[] myArray;
     private View myView;
-    private int totalColors;
+    private transient int totalColors;
 
     public RandomColor(){
         int[] arrColor = { R.drawable.red_grad, R.drawable.orange_grad, R.drawable.yellow_grad};
@@ -18,6 +20,32 @@ public class RandomColor {
         copyArr(arrColor);
 
     }
+
+    protected RandomColor(Parcel in){
+        myArray = in.createIntArray();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeIntArray(myArray);
+    }
+
+    public static final Creator<RandomColor> CREATOR = new Creator<RandomColor>() {
+        @Override
+        public RandomColor createFromParcel(Parcel source) {
+            return new RandomColor(source);
+        }
+
+        @Override
+        public RandomColor[] newArray(int size) {
+            return new RandomColor[size];
+        }
+    };
 
     public int[] getMyArray(){
         return myArray;
