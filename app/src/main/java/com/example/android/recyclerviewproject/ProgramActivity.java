@@ -35,9 +35,9 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_program);
 
-        //TESharedPreferences sharedPreferences = getSharedPreferences("service_prefs", MODE_PRIVATE);
-        ////        sharedPreferences.edit().clear().commit();MPORARY FIELD (RESETS ALL SAVED ITEMS)
-//
+//        SharedPreferences sharedPreferences = getSharedPreferences("service_prefs", MODE_PRIVATE);
+//       sharedPreferences.edit().clear().commit();
+
 
         loadData();
         getParceables();
@@ -63,6 +63,8 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
 
         cardLayout = findViewById(R.id.program_layout);
         cardLayout.setBackgroundResource(colorChoices[myItem.getMyColor()]);
+
+       // serviceList = myItem.getServiceList();
     }
 
     private void setColorChoices(){
@@ -122,8 +124,9 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
     @Override
     public void applyServiceText(double hours, String startDate, String endDate, String duties) {
         ServiceItem temp = new ServiceItem(hours, startDate, endDate, duties);
-        myItem.addItem(temp);
-        serviceList = myItem.getServiceList();
+        serviceList.add(temp);
+        //myItem.addItem(temp);
+        //serviceList = myItem.getServiceList();
         //copyList(myItem.getServiceList());
         initRecyclerView();
     }
@@ -143,7 +146,7 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
         SharedPreferences.Editor myEdit = sharedPreferences.edit();
         Gson myGson = new Gson();
         String json = myGson.toJson(serviceList);
-        System.out.println("SIZE: " + myItem.getServiceList().size());
+       // System.out.println("SIZE: " + myItem.getServiceList().size());
         myEdit.putString("dates_list", json);
         myEdit.apply();
     }
