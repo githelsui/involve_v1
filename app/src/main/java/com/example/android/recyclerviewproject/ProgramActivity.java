@@ -3,6 +3,7 @@ package com.example.android.recyclerviewproject;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -34,13 +35,12 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_program);
-
-//        SharedPreferences sharedPreferences = getSharedPreferences("service_prefs", MODE_PRIVATE);
+//
+//        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
 //       sharedPreferences.edit().clear().commit();
 
 
         loadData();
-        getParceables();
         setColorChoices();
         setLayouts();
         initRecyclerView();
@@ -48,13 +48,12 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
     }
 
     private void loadData(){
-        SharedPreferences sharedPreferences = getSharedPreferences("service_prefs", MODE_PRIVATE);
-        Gson myGson = new Gson();
-        String json = sharedPreferences.getString("dates_list", null);
-        Type myType = new TypeToken<ArrayList <ServiceItem> >(){}.getType();
-        serviceList = myGson.fromJson(json, myType);
-
-        if(serviceList == null) serviceList = new ArrayList<>();
+        SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
+        Gson gson = new Gson();
+        String json = appSharedPrefs.getString("MyItem", "");
+        myItem = gson.fromJson(json, ExampleItem.class);
+        if (myItem != null) serviceList = myItem.getServiceList();
+        else getParceables();
     }
 
     private void setLayouts(){
@@ -106,7 +105,7 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
         myRecycler = findViewById(R.id.serverecycler_view);
         myRecycler.setHasFixedSize(true);
         myLayout = new LinearLayoutManager(this);
-        myAdapter = new ServiceAdapter(serviceList);
+        myAdapter = new ServiceAdapter(myItem.getServiceList());
 
         //configure objects to the recyclerview
         myRecycler.setLayoutManager(myLayout);
@@ -121,33 +120,27 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
         });
     }
 
+    private void saveAdapter(){
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
+    }
+
     @Override
     public void applyServiceText(double hours, String startDate, String endDate, String duties) {
         ServiceItem temp = new ServiceItem(hours, startDate, endDate, duties);
-        serviceList.add(temp);
-        //myItem.addItem(temp);
-        //serviceList = myItem.getServiceList();
-        //copyList(myItem.getServiceList());
+        myItem.addItem(temp);
         initRecyclerView();
     }
 
-    private void copyList(ArrayList<ServiceItem> list){
-        ArrayList<ServiceItem> temp = new ArrayList<>();
-        for(int i = 0; i < list.size(); i++){
-            ServiceItem tempIt = list.get(i);
-            temp.add(tempIt);
-        }
-        serviceList = temp;
-    }
 
     @Override
     public void saveServiceData() {
-        SharedPreferences sharedPreferences = getSharedPreferences("service_prefs", Context.MODE_PRIVATE);
-        SharedPreferences.Editor myEdit = sharedPreferences.edit();
-        Gson myGson = new Gson();
-        String json = myGson.toJson(serviceList);
-       // System.out.println("SIZE: " + myItem.getServiceList().size());
-        myEdit.putString("dates_list", json);
-        myEdit.apply();
+        SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
+        SharedPreferences.Editor prefsEditor = appSharedPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(myItem);
+        prefsEditor.putString("MyItem", json);
+        prefsEditor.commit();
     }
 }

@@ -19,6 +19,8 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceV
         myServiceList = list;
     }
 
+
+
     @NonNull
     @Override
     public ServiceViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
