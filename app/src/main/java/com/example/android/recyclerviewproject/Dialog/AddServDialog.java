@@ -12,11 +12,14 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
 import com.example.android.recyclerviewproject.R;
 import com.example.android.recyclerviewproject.Custom_Object.RandomColor;
 
 public class AddServDialog extends AppCompatDialogFragment {
 
+    //TODO #1 Clean up addprogram dialog using private helper methods
     private EditText prgrmName;
     private EditText currHrs;
     private EditText role;
@@ -52,12 +55,12 @@ public class AddServDialog extends AppCompatDialogFragment {
                            if(prgrmName.getText().toString().equals("")){
                                Animation shake = AnimationUtils.loadAnimation(myView.getContext(), R.anim.shake);
                                prgrmName.startAnimation(shake);
+                               Toast msg = Toast.makeText(myView.getContext(), "Program Name is Required", Toast.LENGTH_SHORT);
+                               msg.show();
                            }
                            else{
-                               double hrs;
-                               if(currHrs.getText().toString().equals("")) hrs = 0;
-                               else hrs = Double.parseDouble(currHrs.getText().toString());
                                String name = prgrmName.getText().toString();
+                               double hrs = checkHours();
                                String myRole = role.getText().toString();
                                RandomColor rand = new RandomColor();
                                listener.applyText(name, hrs, myRole, rand);
@@ -71,6 +74,12 @@ public class AddServDialog extends AppCompatDialogFragment {
 
         });
         return myDialog;
+    }
+
+    private double checkHours(){
+        double hrs;
+        if(currHrs.getText().toString().equals("")) return 0;
+        else return Double.parseDouble(currHrs.getText().toString());
     }
 
     @Override
