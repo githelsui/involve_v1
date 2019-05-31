@@ -149,8 +149,8 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
         int position = temp.getAdapterPosition();
         ArrayList<ServiceItem> tempList = myItem.getServiceList();
         myItem.subtractHrs(tempList.get(position).getHours());
-        myItem.removeItem(position);
         initRecyclerView();
+        myItem.removeItem(position);
         myAdapter.notifyItemRemoved(position);
         Toast msg = Toast.makeText(getApplicationContext(), "Service Removed from List", Toast.LENGTH_SHORT);
         msg.show();
