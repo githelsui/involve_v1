@@ -65,10 +65,13 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
         if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
            ExampleItem passedItem =(ExampleItem)(data.getExtras().get("passed_item"));
            double passedHour = (double) (data.getExtras().get("passed_hour"));
+           double deleteHrs = (double) (data.getExtras().get("passed_delete"));
            int position = (passedItem.getPosition());
            myList.remove(position);
            myList.add(position, passedItem);
            addTotalHours(passedHour);
+           subtractHours(deleteHrs);
+
            initRecyclerView();
         }
     }

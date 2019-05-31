@@ -26,6 +26,7 @@ import java.util.ArrayList;
 public class ProgramActivity extends AppCompatActivity implements ServeInfoDialog.ServeInfoDialogListener, DeleteProgramDialog.DeleteProgramDialogListener {
 
     private ArrayList<ServiceItem> serviceList;
+    private double deleteHrs;
     private TextView myName;
     private double tempHrs;
     private TextView myHrs;
@@ -96,6 +97,7 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
         Intent returnIntent = new Intent();
        // myItem.setHrs(myHrs);
         returnIntent.putExtra("passed_item", myItem);
+        returnIntent.putExtra("passed_delete", deleteHrs);
         returnIntent.putExtra("passed_hour", tempHrs);
         setResult(RESULT_OK, returnIntent);
         super.finish();
@@ -141,6 +143,7 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
     private void updateHrs(double i){
         tempHrs += i;
     }
+    private void subtHrs(double i){deleteHrs += i;}
 
     @Override
     public void applyServiceText(double hours, String startDate, String endDate, String duties) {
@@ -158,6 +161,7 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
         int position = temp.getAdapterPosition();
         ArrayList<ServiceItem> tempList = myItem.getServiceList();
         myItem.subtractHrs(tempList.get(position).getHours());
+        subtHrs(tempList.get(position).getHours());
         initRecyclerView();
         myItem.removeItem(position);
         myAdapter.notifyItemRemoved(position);
