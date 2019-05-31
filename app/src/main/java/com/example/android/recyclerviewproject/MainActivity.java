@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
     private RecyclerView myRecycler;
     private ExampleAdapter myAdapter;
     private RecyclerView.LayoutManager myLayout;
+    private double totalHours;
     private static final int REQUEST_CODE = 5;
     private ArrayList<ExampleItem> myList;
     private TextView myTotalHrs;
@@ -41,9 +42,6 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
         loadData();
         initRecyclerView();
         initAddButton();
-
-        //TODO #8 create java class to store apps myTotal hours and update it using SharedPreferences
-        myTotalHrs = findViewById(R.id.numhrs_lbl);
     }
 
     @Override
@@ -53,11 +51,15 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
            ExampleItem passedItem =(ExampleItem)(data.getExtras().get("passed_item"));
            myList.get(passedItem.getPosition()).setList(passedItem.getServiceList());
            myList.get(passedItem.getPosition()).setHrs(passedItem.getHours());
+           updateTotalHours(myList.get(passedItem.getPosition()).getHours());
+           initRecyclerView();
         }
     }
 
     private void initRecyclerView() {
-        //initialize all objects
+        myTotalHrs = findViewById(R.id.numhrs_lbl);
+        myTotalHrs.setText(totalHours + " hours");
+
         myRecycler = findViewById(R.id.recycler_view);
         myRecycler.setHasFixedSize(true);
         myLayout = new LinearLayoutManager(this);
@@ -74,6 +76,10 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
                 openProgActivity(pos);
             }
         });
+    }
+
+    private void updateTotalHours(double i){
+        totalHours = i;
     }
 
     private void openProgActivity(int pos){
@@ -110,14 +116,18 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
         String json = sharedPreferences.getString("service_list", null);
         Type myType = new TypeToken<ArrayList <ExampleItem> >(){}.getType();
         myList = myGson.fromJson(json, myType);
-
         if(myList == null) myList = new ArrayList<>();
-    }
+
+        double temp = Double.longBitsToDouble(sharedPreferences.getLong("my_hours", Double.doubleToLongBits(0)));
+        totalHours = temp;
+
+        }
 
     @Override //implements interface AddServeDialogListener; function is executed AFTER 'save' is clicked on dialog layout
     public void applyText(String name, double hrs, String myRole, RandomColor picker) {
         ExampleItem myItem = new ExampleItem(name, hrs, myRole, picker);
         myList.add(myItem); //adds new service into private arraylist
+        updateTotalHours(hrs);
         initRecyclerView(); //refresh list on layout.xml
     }
 
@@ -126,8 +136,10 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
         SharedPreferences sharedPreferences = getSharedPreferences("SHARED PREF", Context.MODE_PRIVATE);
         SharedPreferences.Editor myEdit = sharedPreferences.edit();
         Gson myGson = new Gson();
-         String json = myGson.toJson(myList);
+        String json = myGson.toJson(myList);
         myEdit.putString("service_list", json);
+        myEdit.putLong("my_hours", Double.doubleToRawLongBits(totalHours));
         myEdit.apply();
+
     }
 }

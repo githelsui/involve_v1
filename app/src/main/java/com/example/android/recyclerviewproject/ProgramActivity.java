@@ -89,14 +89,15 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
     @Override //for animation
     public void finish() {
         Intent returnIntent = new Intent();
-        returnIntent.putExtra("passed_item", myItem); //myItem with an UPDATED service list
-        setResult(RESULT_OK, returnIntent); //By not passing the intent in the result, the calling activity will get null data.
+       // myItem.setHrs(myHrs);
+        returnIntent.putExtra("passed_item", myItem);
+        setResult(RESULT_OK, returnIntent);
         super.finish();
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
     private void initRecyclerView() {
-        myHrs.setText(Double.toString(myItem.getHours()) + " HOURS");
+        myHrs.setText(Double.toString(myItem.getHours()) + " hours");
         myRecycler = findViewById(R.id.serverecycler_view);
         myRecycler.setHasFixedSize(true);
         myLayout = new LinearLayoutManager(this);
