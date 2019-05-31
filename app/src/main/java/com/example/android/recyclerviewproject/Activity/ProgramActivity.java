@@ -141,6 +141,7 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
         ServiceItem temp = new ServiceItem(hours, startDate, endDate, duties);
         myItem.addItem(temp);
         myItem.addHrs(hours);
+        //TODO #1 fix hours and update them properly when going BACK to mainactivity
         initRecyclerView();
     }
 
