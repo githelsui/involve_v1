@@ -73,10 +73,10 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
 
         myRecycler = findViewById(R.id.recycler_view);
         myRecycler.setHasFixedSize(true);
-        myRecycler.setLayoutManager(myLayout);
-        myRecycler.setAdapter(myAdapter);
         myLayout = new LinearLayoutManager(this);
         myAdapter = new ExampleAdapter(myList, this);
+        myRecycler.setLayoutManager(myLayout);
+        myRecycler.setAdapter(myAdapter);
 
         //touch item -> open ProgramActivity
         myAdapter.setOnItemClickListener(new ExampleAdapter.OnItemClickListener() {
@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
                 new RecyclerItemTouchHelper(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT, new RecyclerItemTouchHelper.RecyclerItemTouchHelperListener() {
                     @Override
                     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
-                        openDeleteDialog();
+                       // openDeleteDialog(position);
                     }
 
                 });
@@ -99,8 +99,11 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
 
     }
 
-    public void openDeleteDialog(){
+    public void openDeleteDialog(int pos){
+        ExampleItem temp = myList.get(pos);
         DeleteDialog myDialog = new DeleteDialog();
+        //myDialog.setMyItem(temp);
+        myDialog.show(getSupportFragmentManager(), "Delete Program");
     }
 
     private void updateTotalHours(double i){
@@ -170,6 +173,7 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
         myEdit.putString("service_list", json);
         myEdit.putLong("my_hours", Double.doubleToRawLongBits(totalHours));
         myEdit.apply();
-
     }
+
+
 }
