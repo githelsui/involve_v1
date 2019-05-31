@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.android.recyclerviewproject.Custom_Object.ServiceItem;
 import com.example.android.recyclerviewproject.Dialog.AddServDialog;
 import com.example.android.recyclerviewproject.Adapter.ExampleAdapter;
 import com.example.android.recyclerviewproject.Custom_Object.ExampleItem;
@@ -63,9 +64,11 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
            ExampleItem passedItem =(ExampleItem)(data.getExtras().get("passed_item"));
-           myList.get(passedItem.getPosition()).setList(passedItem.getServiceList());
-           myList.get(passedItem.getPosition()).setHrs(passedItem.getHours());
-           updateTotalHours(myList.get(passedItem.getPosition()).getHours());
+           double passedHour = (double) (data.getExtras().get("passed_hour"));
+           int position = (passedItem.getPosition());
+           myList.remove(position);
+           myList.add(position, passedItem);
+           addTotalHours(passedHour);
            initRecyclerView();
         }
     }

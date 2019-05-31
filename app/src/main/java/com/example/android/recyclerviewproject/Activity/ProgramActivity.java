@@ -27,6 +27,7 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
 
     private ArrayList<ServiceItem> serviceList;
     private TextView myName;
+    private double tempHrs;
     private TextView myHrs;
     private Button addServBtn;
     private RecyclerView myRecycler;
@@ -95,6 +96,7 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
         Intent returnIntent = new Intent();
        // myItem.setHrs(myHrs);
         returnIntent.putExtra("passed_item", myItem);
+        returnIntent.putExtra("passed_hour", tempHrs);
         setResult(RESULT_OK, returnIntent);
         super.finish();
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
@@ -136,11 +138,16 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
         myDialog.show(getSupportFragmentManager(), "Delete Program");
     }
 
+    private void updateHrs(double i){
+        tempHrs += i;
+    }
+
     @Override
     public void applyServiceText(double hours, String startDate, String endDate, String duties) {
         ServiceItem temp = new ServiceItem(hours, startDate, endDate, duties);
         myItem.addItem(temp);
         myItem.addHrs(hours);
+        updateHrs(hours);
         //TODO #1 fix hours and update them properly when going BACK to mainactivity
         initRecyclerView();
     }
