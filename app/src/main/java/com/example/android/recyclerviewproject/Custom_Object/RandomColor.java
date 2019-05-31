@@ -1,12 +1,10 @@
-package com.example.android.recyclerviewproject;
+package com.example.android.recyclerviewproject.Custom_Object;
 
-import android.content.Context;
-import android.content.res.Resources;
-import android.content.res.TypedArray;
-import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.view.View;
+
+import com.example.android.recyclerviewproject.R;
 
 public class RandomColor implements Parcelable {
 

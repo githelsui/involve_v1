@@ -1,4 +1,4 @@
-package com.example.android.recyclerviewproject;
+package com.example.android.recyclerviewproject.Dialog;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -10,7 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
-import java.util.Random;
+import com.example.android.recyclerviewproject.R;
+import com.example.android.recyclerviewproject.Custom_Object.RandomColor;
 
 public class AddServDialog extends AppCompatDialogFragment {
 

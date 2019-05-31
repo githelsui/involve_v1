@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:background="@color/white"
     android:background="@android:color/white"
-    tools:context=".MainActivity">
+    tools:context=".Activity.MainActivity">
 
     <android.support.v7.widget.CardView
         xmlns:android="http://schemas.android.com/apk/res/android"

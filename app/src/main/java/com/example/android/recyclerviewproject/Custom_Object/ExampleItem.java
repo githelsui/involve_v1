@@ -1,4 +1,4 @@
-package com.example.android.recyclerviewproject;
+package com.example.android.recyclerviewproject.Custom_Object;
 
 import java.util.ArrayList;
 

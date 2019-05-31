@@ -1,9 +1,7 @@
-package com.example.android.recyclerviewproject;
+package com.example.android.recyclerviewproject.Custom_Object;
 
 import android.os.Parcelable;
-import java.util.ArrayList;
 import android.os.Parcel;
-import android.os.Parcelable;
 
 
 //class for one service within a program

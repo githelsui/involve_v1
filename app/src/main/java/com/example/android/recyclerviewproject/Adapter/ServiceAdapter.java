@@ -1,4 +1,4 @@
-package com.example.android.recyclerviewproject;
+package com.example.android.recyclerviewproject.Adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.example.android.recyclerviewproject.Custom_Object.ExampleItem;
+import com.example.android.recyclerviewproject.R;
+import com.example.android.recyclerviewproject.Custom_Object.RandomColor;
+import com.example.android.recyclerviewproject.Custom_Object.ServiceItem;
 
 import java.util.ArrayList;
 

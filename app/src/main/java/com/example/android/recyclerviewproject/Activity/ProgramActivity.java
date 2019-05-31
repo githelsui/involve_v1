@@ -1,9 +1,6 @@
-package com.example.android.recyclerviewproject;
+package com.example.android.recyclerviewproject.Activity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,10 +10,12 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import com.example.android.recyclerviewproject.Custom_Object.ExampleItem;
+import com.example.android.recyclerviewproject.R;
+import com.example.android.recyclerviewproject.Dialog.ServeInfoDialog;
+import com.example.android.recyclerviewproject.Adapter.ServiceAdapter;
+import com.example.android.recyclerviewproject.Custom_Object.ServiceItem;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class ProgramActivity extends AppCompatActivity implements ServeInfoDialog.ServeInfoDialogListener {
