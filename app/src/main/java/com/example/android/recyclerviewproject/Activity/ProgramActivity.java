@@ -5,12 +5,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.android.recyclerviewproject.Custom_Object.ExampleItem;
+import com.example.android.recyclerviewproject.Dialog.DeleteProgramDialog;
+import com.example.android.recyclerviewproject.Helper.RecyclerItemTouchHelper;
+import com.example.android.recyclerviewproject.Helper.RecyclerServiceTouchHelper;
 import com.example.android.recyclerviewproject.R;
 import com.example.android.recyclerviewproject.Dialog.ServeInfoDialog;
 import com.example.android.recyclerviewproject.Adapter.ServiceAdapter;
@@ -18,7 +23,7 @@ import com.example.android.recyclerviewproject.Custom_Object.ServiceItem;
 
 import java.util.ArrayList;
 
-public class ProgramActivity extends AppCompatActivity implements ServeInfoDialog.ServeInfoDialogListener {
+public class ProgramActivity extends AppCompatActivity implements ServeInfoDialog.ServeInfoDialogListener, DeleteProgramDialog.DeleteProgramDialogListener {
 
     private ArrayList<ServiceItem> serviceList;
     private TextView myName;
@@ -113,6 +118,22 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
                 //TODO #7 create a dialog for a service item when arrow button is clicked(fill with info)
             }
         });
+
+        ItemTouchHelper.SimpleCallback itemTouchHelperCallback =
+                new RecyclerServiceTouchHelper(0, ItemTouchHelper.LEFT, new RecyclerServiceTouchHelper.RecyclerItemTouchHelperListener() {
+                    @Override
+                    public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
+                        openDeleteDialog(viewHolder);
+                    }
+                });
+        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(myRecycler);
+
+    }
+
+    public void openDeleteDialog(RecyclerView.ViewHolder view){
+        DeleteProgramDialog myDialog = new DeleteProgramDialog();
+        myDialog.setView(view);
+        myDialog.show(getSupportFragmentManager(), "Delete Program");
     }
 
     @Override
@@ -121,5 +142,22 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
         myItem.addItem(temp);
         myItem.addHrs(hours);
         initRecyclerView();
+    }
+
+    @Override
+    public void removeProgram(RecyclerView.ViewHolder temp) {
+        int position = temp.getAdapterPosition();
+        ArrayList<ServiceItem> tempList = myItem.getServiceList();
+        myItem.subtractHrs(tempList.get(position).getHours());
+        myItem.removeItem(position);
+        initRecyclerView();
+        myAdapter.notifyItemRemoved(position);
+        Toast msg = Toast.makeText(getApplicationContext(), "Service Removed from List", Toast.LENGTH_SHORT);
+        msg.show();
+    }
+
+    @Override
+    public void notifyChanges(RecyclerView.ViewHolder temp) {
+        myAdapter.notifyItemChanged(temp.getAdapterPosition());
     }
 }

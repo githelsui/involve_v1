@@ -29,9 +29,15 @@ public class ExampleItem implements Parcelable{
         //list view
     }
 
+    public void removeItem(int i){
+        serviceList.remove(i);
+    }
+
     public void addHrs(double i){
         myHrs += i;
     }
+
+    public void subtractHrs(double i) { myHrs -= i; }
 
     public int getPosition(){
         return position;

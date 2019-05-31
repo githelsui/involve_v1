@@ -40,9 +40,10 @@ public class AddServDialog extends AppCompatDialogFragment {
                 .setPositiveButton("Save", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int i) {
-
+                        double hrs;
+                        if(currHrs.getText().toString().equals("")) hrs = 0;
+                        else hrs = Double.parseDouble(currHrs.getText().toString());
                         String name = prgrmName.getText().toString();
-                        double hrs = Double.parseDouble(currHrs.getText().toString());
                         String myRole = role.getText().toString();
 
                         RandomColor rand = new RandomColor();

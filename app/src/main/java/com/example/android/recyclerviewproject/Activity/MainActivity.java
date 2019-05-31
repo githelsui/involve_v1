@@ -71,23 +71,18 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
     private void initRecyclerView() {
         myTotalHrs = findViewById(R.id.numhrs_lbl);
         myTotalHrs.setText(totalHours + " hours");
-
         myRecycler = findViewById(R.id.recycler_view);
         myRecycler.setHasFixedSize(true);
         myLayout = new LinearLayoutManager(this);
         myAdapter = new ExampleAdapter(myList, this);
         myRecycler.setLayoutManager(myLayout);
         myRecycler.setAdapter(myAdapter);
-
-        //touch item -> open ProgramActivity
         myAdapter.setOnItemClickListener(new ExampleAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int pos) {
                 openProgActivity(pos);
             }
         });
-
-        //swipe item -> reveal background view of exampleitem
         ItemTouchHelper.SimpleCallback itemTouchHelperCallback =
                 new RecyclerItemTouchHelper(0, ItemTouchHelper.LEFT, new RecyclerItemTouchHelper.RecyclerItemTouchHelperListener() {
                     @Override
@@ -156,13 +151,13 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
 
         }
 
-    @Override //implements interface AddServeDialogListener; function is executed AFTER 'save' is clicked on dialog layout
+    @Override
     public void applyText(String name, double hrs, String myRole, RandomColor picker) {
         ExampleItem myItem = new ExampleItem(name, hrs, myRole, picker);
-        myList.add(myItem); //adds new service into private arraylist
+        myList.add(myItem);
         addTotalHours(hrs);
         updateTotalHours(hrs);
-        initRecyclerView(); //refresh list on layout.xml
+        initRecyclerView();
     }
 
     @Override //implements interface AddServeDialogListener; function is executed AFTER 'save' is clicked on dialog layout
