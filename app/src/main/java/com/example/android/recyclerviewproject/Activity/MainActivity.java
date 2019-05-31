@@ -113,6 +113,8 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
         totalHours += i;
     }
 
+    private void subtractHours(double i) { totalHours -= i; }
+
     private void openProgActivity(int pos){
         //opens up ProgramActivity layout
         Intent myInt = new Intent(this, ProgramActivity.class);
@@ -177,7 +179,9 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
 
     @Override
     public void removeProgram(RecyclerView.ViewHolder temp) {
+        subtractHours(myList.get(temp.getAdapterPosition()).getHours());
         myList.remove(temp.getAdapterPosition());
+        initRecyclerView();
         myAdapter.notifyItemRemoved(temp.getAdapterPosition());
         Toast msg = Toast.makeText(getApplicationContext(), "Program Removed from List", Toast.LENGTH_SHORT);
         msg.show();
