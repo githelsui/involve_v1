@@ -29,6 +29,10 @@ public class ExampleItem implements Parcelable{
         //list view
     }
 
+    public void addHrs(double i){
+        myHrs += i;
+    }
+
     public int getPosition(){
         return position;
     }
@@ -43,6 +47,10 @@ public class ExampleItem implements Parcelable{
 
     public void setList(ArrayList<ServiceItem> temp){
         serviceList = temp;
+    }
+
+    public void setHrs(double i){
+        myHrs = i;
     }
 
     protected ExampleItem(Parcel in) {

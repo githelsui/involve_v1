@@ -23,6 +23,7 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
 
     private ArrayList<ServiceItem> serviceList;
     private TextView myName;
+    private TextView myHrs;
     private Button addServBtn;
     private RecyclerView myRecycler;
     private ServiceAdapter myAdapter;
@@ -52,6 +53,8 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
 
         cardLayout = findViewById(R.id.program_layout);
         cardLayout.setBackgroundResource(colorChoices[myItem.getMyColor()]);
+
+        myHrs = findViewById(R.id.servehrs_lbl);
     }
 
     private void setColorChoices(){
@@ -93,7 +96,7 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
     }
 
     private void initRecyclerView() {
-        //initialize all objects
+        myHrs.setText(Double.toString(myItem.getHours()) + " HOURS");
         myRecycler = findViewById(R.id.serverecycler_view);
         myRecycler.setHasFixedSize(true);
         myLayout = new LinearLayoutManager(this);
@@ -116,6 +119,7 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
     public void applyServiceText(double hours, String startDate, String endDate, String duties) {
         ServiceItem temp = new ServiceItem(hours, startDate, endDate, duties);
         myItem.addItem(temp);
+        myItem.addHrs(hours);
         initRecyclerView();
     }
 }
