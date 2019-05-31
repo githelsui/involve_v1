@@ -85,10 +85,10 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
 
         //swipe item -> reveal background view of exampleitem
         ItemTouchHelper.SimpleCallback itemTouchHelperCallback =
-                new RecyclerItemTouchHelper(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT, new RecyclerItemTouchHelper.RecyclerItemTouchHelperListener() {
+                new RecyclerItemTouchHelper(0, ItemTouchHelper.LEFT, new RecyclerItemTouchHelper.RecyclerItemTouchHelperListener() {
                     @Override
                     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
-                       // openDeleteDialog(position);
+                       openDeleteDialog();
                     }
 
                 });
@@ -126,8 +126,7 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
         addServBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               //openDialog();
-                openDeleteDialog();
+               openDialog();
             }
         });
     }
