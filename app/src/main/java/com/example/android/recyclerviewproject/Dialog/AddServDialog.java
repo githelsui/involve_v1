@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.EditText;
 import com.example.android.recyclerviewproject.R;
 import com.example.android.recyclerviewproject.Custom_Object.RandomColor;
@@ -34,35 +35,41 @@ public class AddServDialog extends AppCompatDialogFragment {
         final View myView = inflater.inflate(R.layout.layout_dialog, null);
         //Attaches java dialog onto its XML layout file (GUI)
         builder.setView(myView)
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int i) { }
-                }) //when "Cancelled" do nothing
-                .setPositiveButton("Save", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int i) {
-                        if(prgrmName.getText().toString().equals("")){
-                            Animation shake = AnimationUtils.loadAnimation(myView.getContext(), R.anim.shake);
-                            prgrmName.startAnimation(shake);
-                        }
-                        double hrs;
-                        if(currHrs.getText().toString().equals("")) hrs = 0;
-                        else hrs = Double.parseDouble(currHrs.getText().toString());
-                        String name = prgrmName.getText().toString();
-                        String myRole = role.getText().toString();
-
-                        RandomColor rand = new RandomColor();
-
-                        listener.applyText(name, hrs, myRole, rand); //creates Exampleitem then appends it to list
-                        listener.saveData(); //saves data for long term
-                    }
-                });
+                .setNegativeButton("Cancel", null)
+                .setPositiveButton("Save", null);
         prgrmName = myView.findViewById(R.id.program_name);
         currHrs = myView.findViewById(R.id.current_hours);
         role = myView.findViewById(R.id.position_lbl);
-
-        Dialog myDialog = builder.create();
+        final Dialog myDialog = builder.create();
         myDialog.setCanceledOnTouchOutside(false);
+        myDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                Button saveBtn = ((AlertDialog) myDialog).getButton(AlertDialog.BUTTON_POSITIVE);
+                   saveBtn.setOnClickListener(new View.OnClickListener() {
+                       @Override
+                       public void onClick(View v) {
+                           if(prgrmName.getText().toString().equals("")){
+                               Animation shake = AnimationUtils.loadAnimation(myView.getContext(), R.anim.shake);
+                               prgrmName.startAnimation(shake);
+                           }
+                           else{
+                               double hrs;
+                               if(currHrs.getText().toString().equals("")) hrs = 0;
+                               else hrs = Double.parseDouble(currHrs.getText().toString());
+                               String name = prgrmName.getText().toString();
+                               String myRole = role.getText().toString();
+                               RandomColor rand = new RandomColor();
+                               listener.applyText(name, hrs, myRole, rand);
+                               listener.saveData();
+                               myDialog.dismiss();
+                           }
+
+                       }
+                   });
+            }
+
+        });
         return myDialog;
     }
 
