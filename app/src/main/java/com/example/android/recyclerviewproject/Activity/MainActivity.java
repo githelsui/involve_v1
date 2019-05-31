@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.example.android.recyclerviewproject.Dialog.AddServDialog;
 import com.example.android.recyclerviewproject.Adapter.ExampleAdapter;
 import com.example.android.recyclerviewproject.Custom_Object.ExampleItem;
+import com.example.android.recyclerviewproject.Helper.RecyclerItemTouchHelper;
 import com.example.android.recyclerviewproject.R;
 import com.example.android.recyclerviewproject.Custom_Object.RandomColor;
 import com.google.gson.Gson;
@@ -85,20 +86,14 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
         });
 
         //swipe item -> reveal background view of exampleitem
-
         ItemTouchHelper.SimpleCallback itemTouchHelperCallback =
-                new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
-
+                new RecyclerItemTouchHelper(0, ItemTouchHelper.LEFT, new RecyclerItemTouchHelper.RecyclerItemTouchHelperListener() {
                     @Override
-                    public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder viewHolder1) {
-                        return false;
+                    public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
+
                     }
 
-                    @Override
-                    public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-
-                    }
-                };
+                });
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(myRecycler);
 
     }
