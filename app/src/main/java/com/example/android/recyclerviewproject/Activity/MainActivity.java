@@ -156,7 +156,6 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
         ExampleItem myItem = new ExampleItem(name, hrs, myRole, picker);
         myList.add(myItem);
         addTotalHours(hrs);
-        updateTotalHours(hrs);
         initRecyclerView();
     }
 
