@@ -4,13 +4,10 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import java.lang.reflect.Type;
 
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -21,7 +18,7 @@ import android.widget.TextView;
 import com.example.android.recyclerviewproject.Dialog.AddServDialog;
 import com.example.android.recyclerviewproject.Adapter.ExampleAdapter;
 import com.example.android.recyclerviewproject.Custom_Object.ExampleItem;
-import com.example.android.recyclerviewproject.Dialog.DeleteDialog;
+import com.example.android.recyclerviewproject.Dialog.DeleteProgramDialog;
 import com.example.android.recyclerviewproject.Helper.RecyclerItemTouchHelper;
 import com.example.android.recyclerviewproject.R;
 import com.example.android.recyclerviewproject.Custom_Object.RandomColor;
@@ -30,7 +27,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements AddServDialog.AddServeDialogListener {
+public class MainActivity extends AppCompatActivity implements AddServDialog.AddServeDialogListener, DeleteProgramDialog.DeleteProgramDialogListener {
 
     private RecyclerView myRecycler;
     private ExampleAdapter myAdapter;
@@ -46,9 +43,9 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        SharedPreferences sharedPreferences = getSharedPreferences("SHARED PREF", MODE_PRIVATE);
-        sharedPreferences.edit().clear().commit();
+//
+//        SharedPreferences sharedPreferences = getSharedPreferences("SHARED PREF", MODE_PRIVATE);
+//        sharedPreferences.edit().clear().commit();
 
         loadData();
         initRecyclerView();
@@ -99,10 +96,8 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
 
     }
 
-    public void openDeleteDialog(int pos){
-        ExampleItem temp = myList.get(pos);
-        DeleteDialog myDialog = new DeleteDialog();
-        //myDialog.setMyItem(temp);
+    public void openDeleteDialog(){
+        DeleteProgramDialog myDialog = new DeleteProgramDialog();
         myDialog.show(getSupportFragmentManager(), "Delete Program");
     }
 
@@ -131,7 +126,8 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
         addServBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openDialog();
+               //openDialog();
+                openDeleteDialog();
             }
         });
     }
@@ -176,4 +172,8 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
     }
 
 
+    @Override
+    public void removeProgram(int i) {
+
+    }
 }
