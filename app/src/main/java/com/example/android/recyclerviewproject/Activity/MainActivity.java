@@ -168,6 +168,8 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
         addTotalHours(hrs);
         introMsg.setVisibility(View.INVISIBLE);
         myRecycler.setVisibility(View.VISIBLE);
+        Toast msg = Toast.makeText(getApplicationContext(), "New Program Added", Toast.LENGTH_SHORT);
+        msg.show();
         initRecyclerView();
     }
 

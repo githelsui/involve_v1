@@ -148,7 +148,8 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
         myItem.addItem(temp);
         myItem.addHrs(hours);
         updateHrs(hours);
-        //TODO #1 fix hours and update them properly when going BACK to mainactivity
+        Toast msg = Toast.makeText(getApplicationContext(), "New Service Added", Toast.LENGTH_SHORT);
+        msg.show();
         initRecyclerView();
     }
 
