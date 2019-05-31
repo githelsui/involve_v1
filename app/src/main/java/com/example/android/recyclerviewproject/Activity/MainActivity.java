@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
     private ArrayList<ExampleItem> myList;
     private TextView myTotalHrs;
     private Button addServBtn;
+    private CardView introMsg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,9 +71,14 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
     }
 
     private void initRecyclerView() {
+        myRecycler = findViewById(R.id.recycler_view);
+        if(myList.size() == 0){
+            introMsg = findViewById(R.id.introview);
+            introMsg.setVisibility(View.VISIBLE);
+            myRecycler.setVisibility(View.INVISIBLE);
+        }
         myTotalHrs = findViewById(R.id.numhrs_lbl);
         myTotalHrs.setText(totalHours + " hours");
-        myRecycler = findViewById(R.id.recycler_view);
         myRecycler.setHasFixedSize(true);
         myLayout = new LinearLayoutManager(this);
         myAdapter = new ExampleAdapter(myList, this);
@@ -156,6 +163,8 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
         ExampleItem myItem = new ExampleItem(name, hrs, myRole, picker);
         myList.add(myItem);
         addTotalHours(hrs);
+        introMsg.setVisibility(View.INVISIBLE);
+        myRecycler.setVisibility(View.VISIBLE);
         initRecyclerView();
     }
 

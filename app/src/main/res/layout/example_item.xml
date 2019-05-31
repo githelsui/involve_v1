@@ -6,10 +6,10 @@
     android:layout_width="match_parent"
     app:cardElevation="5dp"
     app:cardCornerRadius="8dp"
-    android:layout_marginBottom="4dp"
-    android:layout_marginRight="8dp"
-    android:layout_marginLeft="8dp"
-    android:layout_marginTop="4dp"
+    android:layout_marginBottom="5dp"
+    android:layout_marginRight="12dp"
+    android:layout_marginLeft="12dp"
+    android:layout_marginTop="5dp"
     android:layout_height="70dp">
 
     <!--BACKGROUND LAYOUT-->
@@ -28,8 +28,9 @@
             android:layout_marginTop="6dp"
             android:text="DELETE"
             android:padding="4dp"
-            android:textColor="@android:color/white"
+            android:textColor="@color/greyhex"
             android:textSize="25sp"
+            android:textStyle="bold"
             android:layout_toLeftOf="@id/delete_img"
             android:fontFamily="@font/myriadpro_light" />
 

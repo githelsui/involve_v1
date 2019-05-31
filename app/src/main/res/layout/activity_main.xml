@@ -32,11 +32,51 @@
        android:textStyle="italic"
        android:text="@string/initialHrs" />
 
+   <android.support.v7.widget.CardView
+       xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:tools="http://schemas.android.com/tools"
+       xmlns:app="http://schemas.android.com/apk/res-auto"
+       android:id="@+id/introview"
+       android:visibility="invisible"
+       android:layout_below="@id/numhrs_lbl"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       app:cardCornerRadius="10dp"
+       android:layout_marginRight="20dp"
+       android:layout_marginLeft="20dp"
+       android:layout_marginTop="10dp"
+       android:layout_marginBottom="90dp"
+       app:cardBackgroundColor="@color/greyhex">
+
+      <RelativeLayout
+          android:id="@+id/introrelative_view"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          tools:ignore="InvalidId">
+
+         <TextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_centerHorizontal="true"
+             android:layout_centerVertical="true"
+             android:gravity="center"
+             android:padding="10dp"
+             android:fontFamily="@font/myriadpro_light"
+             android:textSize="25sp"
+             android:textColor="@color/white"
+             android:text="List is currently empty.\n\nAdd a new program down below."/>
+
+      </RelativeLayout>
+
+   </android.support.v7.widget.CardView>
+
+
    <android.support.v7.widget.RecyclerView
        android:id="@+id/recycler_view"
        android:layout_below="@id/numhrs_lbl"
        android:layout_width="match_parent"
        android:layout_height="match_parent"
+       android:visibility="visible"
        android:background="@android:color/white"
        android:layout_marginTop="6dp"
        android:layout_marginBottom="60dp"
