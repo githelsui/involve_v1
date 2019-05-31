@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import java.lang.reflect.Type;
 
+import android.graphics.Canvas;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -90,7 +91,6 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
                     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
                        openDeleteDialog();
                     }
-
                 });
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(myRecycler);
 

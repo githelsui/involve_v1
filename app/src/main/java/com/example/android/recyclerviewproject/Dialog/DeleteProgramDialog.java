@@ -14,10 +14,8 @@ import com.example.android.recyclerviewproject.Custom_Object.RandomColor;
 
 public class DeleteProgramDialog extends AppCompatDialogFragment {
 
-    private EditText prgrmName;
-    private EditText currHrs;
-    private EditText role;
     private DeleteProgramDialogListener listener;
+
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -25,17 +23,21 @@ public class DeleteProgramDialog extends AppCompatDialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         final View myView = inflater.inflate(R.layout.deleteprogram_dialog, null);
         builder.setView(myView)
+                .setCancelable(false)
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int i) { }
+
                 }) //when "Cancelled" do nothing
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int i) {
-
+                        listener.removeProgram(i);
                     }
                 });
-        return builder.create();
+        Dialog dialogRes = builder.create();
+        dialogRes.setCanceledOnTouchOutside(false);
+        return dialogRes;
     }
 
     @Override
@@ -44,7 +46,7 @@ public class DeleteProgramDialog extends AppCompatDialogFragment {
         try{
             listener = (DeleteProgramDialogListener) context;
         }catch(ClassCastException e){
-            throw new ClassCastException(context.toString() + " IMPLEMENT ADDSERVEDIALOGLISTENER");
+            throw new ClassCastException(context.toString() + " IMPLEMENT DeleteProgramDialog");
         }
     }
 
