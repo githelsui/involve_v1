@@ -9,6 +9,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -70,12 +72,12 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
 
         myRecycler = findViewById(R.id.recycler_view);
         myRecycler.setHasFixedSize(true);
-        myLayout = new LinearLayoutManager(this);
-        myAdapter = new ExampleAdapter(myList, this);
-
-        //configure objects to the recyclerview
         myRecycler.setLayoutManager(myLayout);
         myRecycler.setAdapter(myAdapter);
+        myLayout = new LinearLayoutManager(this);
+        myAdapter = new ExampleAdapter(myList, this);
+        myRecycler.setItemAnimator(new DefaultItemAnimator());
+        myRecycler.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
         //touch item -> open ProgramActivity
         myAdapter.setOnItemClickListener(new ExampleAdapter.OnItemClickListener() {
@@ -87,10 +89,12 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
 
         //swipe item -> reveal background view of exampleitem
         ItemTouchHelper.SimpleCallback itemTouchHelperCallback =
-                new RecyclerItemTouchHelper(0, ItemTouchHelper.LEFT, new RecyclerItemTouchHelper.RecyclerItemTouchHelperListener() {
+                new RecyclerItemTouchHelper(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT, new RecyclerItemTouchHelper.RecyclerItemTouchHelperListener() {
                     @Override
                     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
-
+//                        if (direction == ItemTouchHelper.LEFT) {
+//                            myAdapter.notifyItemChanged(viewHolder.getAdapterPosition());
+//                        }
                     }
 
                 });
@@ -100,6 +104,10 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
 
     private void updateTotalHours(double i){
         totalHours = i;
+    }
+
+    private void addTotalHours(double i){
+        totalHours += i;
     }
 
     private void openProgActivity(int pos){
@@ -147,6 +155,7 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
     public void applyText(String name, double hrs, String myRole, RandomColor picker) {
         ExampleItem myItem = new ExampleItem(name, hrs, myRole, picker);
         myList.add(myItem); //adds new service into private arraylist
+        addTotalHours(hrs);
         updateTotalHours(hrs);
         initRecyclerView(); //refresh list on layout.xml
     }

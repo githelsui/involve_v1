@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
-
 import com.example.android.recyclerviewproject.Adapter.ExampleAdapter;
 
 public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback{
@@ -19,7 +18,7 @@ public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback{
 
     @Override
     public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder viewHolder1) {
-        return false;
+        return true;
     }
 
     @Override
@@ -32,12 +31,9 @@ public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback{
     }
 
     @Override
-    public void onChildDrawOver(Canvas c, RecyclerView recyclerView,
-                                RecyclerView.ViewHolder viewHolder, float dX, float dY,
-                                int actionState, boolean isCurrentlyActive) {
+    public void onChildDrawOver(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
         final View foregroundView = ((ExampleAdapter.ExampleViewHolder) viewHolder).mCardView;
-        getDefaultUIUtil().onDrawOver(c, recyclerView, foregroundView, dX , dY,
-                actionState, isCurrentlyActive);
+        getDefaultUIUtil().onDrawOver(c, recyclerView, foregroundView, dX , dY, actionState, isCurrentlyActive);
     }
 
     @Override
@@ -47,13 +43,9 @@ public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback{
     }
 
     @Override
-    public void onChildDraw(Canvas c, RecyclerView recyclerView,
-                            RecyclerView.ViewHolder viewHolder, float dX, float dY,
-                            int actionState, boolean isCurrentlyActive) {
+    public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
         final View foregroundView = ((ExampleAdapter.ExampleViewHolder) viewHolder).mCardView;
-
-        getDefaultUIUtil().onDraw(c, recyclerView, foregroundView, dX , dY,
-                actionState, isCurrentlyActive);
+        getDefaultUIUtil().onDraw(c, recyclerView, foregroundView, dX , dY, actionState, isCurrentlyActive);
     }
 
     @Override
@@ -63,6 +55,10 @@ public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback{
 
     @Override
     public int convertToAbsoluteDirection(int flags, int layoutDirection) {
+        if (swipeBack) {
+            swipeBack = false;
+            return 0;
+        }
         return super.convertToAbsoluteDirection(flags, layoutDirection);
     }
 

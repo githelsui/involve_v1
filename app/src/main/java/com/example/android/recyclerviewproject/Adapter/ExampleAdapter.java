@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.example.android.recyclerviewproject.Custom_Object.ExampleItem;
 import com.example.android.recyclerviewproject.R;
 import com.example.android.recyclerviewproject.Custom_Object.RandomColor;
@@ -62,13 +61,10 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
         return myListAdapt.size();
     }
 
-
-    //using a button INSIDE a cardview requires an interface class
     public interface OnItemClickListener{
         void onItemClick(int pos);
     }
 
-    //custom function of ExampleAdapter
     public void setOnItemClickListener(OnItemClickListener listener){
         mListener = listener;
     }
