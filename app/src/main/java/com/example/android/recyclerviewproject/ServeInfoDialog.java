@@ -44,7 +44,6 @@ public class ServeInfoDialog extends AppCompatDialogFragment {
                         String info = mInfo.getText().toString();
 
                         listener.applyServiceText(hrs, startDate, endDate, info);
-                        listener.saveServiceData();
                     }
                 });
         mStartDate = myView.findViewById(R.id.date_started);
@@ -64,8 +63,7 @@ public class ServeInfoDialog extends AppCompatDialogFragment {
         }
     }
 
-    public interface ServeInfoDialogListener{
-        void applyServiceText(double hours, String startDate, String endDate, String duties); //CREATE A SERVICEITEM OBJECT -> ADDS TO PROGRAM'S LIST OF SERVICES
-        void saveServiceData(); //uses SharedPreferences to store Data permanently
+    public interface ServeInfoDialogListener {
+        void applyServiceText(double hours, String startDate, String endDate, String duties);
     }
 }

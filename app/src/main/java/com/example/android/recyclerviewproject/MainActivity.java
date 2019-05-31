@@ -35,23 +35,15 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        SharedPreferences sharedPreferences = getSharedPreferences("SHARED PREF", MODE_PRIVATE);
+        sharedPreferences.edit().clear().commit();
 
-        //TEMPORARY FIELD (RESETS ALL SAVED ITEMS)
-//        SharedPreferences sharedPreferences = getSharedPreferences("SHARED PREF", MODE_PRIVATE);
-//        sharedPreferences.edit().clear().commit();
-
-        //perform these three main functions: load saved data, present on listview, initialize button instantaneously
         loadData();
         initRecyclerView();
         initAddButton();
 
         //TODO #8 create java class to store apps myTotal hours and update it using SharedPreferences
         myTotalHrs = findViewById(R.id.numhrs_lbl);
-    }
-
-    private void getBackFromProgram(){
-        //get Parceable of updated serviceList from the selected program
-        //insert or initialize this serviceList to be the new private list of myList.get(position)
     }
 
     @Override

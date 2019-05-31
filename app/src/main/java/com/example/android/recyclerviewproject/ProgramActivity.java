@@ -39,22 +39,11 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
 //        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
 //       sharedPreferences.edit().clear().commit();
 
-        //loadData();
         getParceables();
         setColorChoices();
         setLayouts();
         initRecyclerView();
         initAddButton();
-    }
-
-    private void loadData(){
-        SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
-        Gson gson = new Gson();
-        String json = appSharedPrefs.getString("MyItem", "");
-        myItem = gson.fromJson(json, ExampleItem.class);
-
-        if (myItem != null) serviceList = myItem.getServiceList();
-        else getParceables();
     }
 
     private void setLayouts(){
@@ -128,16 +117,5 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
         ServiceItem temp = new ServiceItem(hours, startDate, endDate, duties);
         myItem.addItem(temp);
         initRecyclerView();
-    }
-
-
-    @Override
-    public void saveServiceData() {
-        SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
-        SharedPreferences.Editor prefsEditor = appSharedPrefs.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(myItem);
-        prefsEditor.putString("MyItem", json);
-        prefsEditor.commit();
     }
 }
