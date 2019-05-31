@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import java.lang.reflect.Type;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import java.util.Iterator;
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -25,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
     private RecyclerView myRecycler;
     private ExampleAdapter myAdapter;
     private RecyclerView.LayoutManager myLayout;
+    private ItemTouchHelper.SimpleCallback touchHelper;
     private double totalHours;
     private static final int REQUEST_CODE = 5;
     private ArrayList<ExampleItem> myList;
@@ -69,13 +72,31 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
         myRecycler.setLayoutManager(myLayout);
         myRecycler.setAdapter(myAdapter);
 
-        //configures button on each cardview by accessing this custom function from ExampleAdapter
+        //touch item -> open ProgramActivity
         myAdapter.setOnItemClickListener(new ExampleAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int pos) {
                 openProgActivity(pos);
             }
         });
+
+        //swipe item -> reveal background view of exampleitem
+
+        ItemTouchHelper.SimpleCallback itemTouchHelperCallback =
+                new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+
+                    @Override
+                    public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder viewHolder1) {
+                        return false;
+                    }
+
+                    @Override
+                    public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+
+                    }
+                };
+        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(myRecycler);
+
     }
 
     private void updateTotalHours(double i){

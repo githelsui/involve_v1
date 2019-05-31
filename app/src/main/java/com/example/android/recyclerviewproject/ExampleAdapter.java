@@ -73,7 +73,7 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
 
             //creates the contents of a card at initialization and connects them to respected xml contents
     public static class ExampleViewHolder extends RecyclerView.ViewHolder   {
-                    public RelativeLayout mCardView;
+                    public RelativeLayout mCardView, mBackground;
                     public TextView mTextView1; //TextView shows program name
                     public TextView mTextView2; //TextView shows hours done for that specific program
                     public ImageView mArrow;
@@ -83,6 +83,7 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
             super(itemView);
             //constructor for cardviewholder java class
             mCardView = itemView.findViewById(R.id.relative_layout);
+            mBackground = itemView.findViewById(R.id.backgroundprog_layout);
             mTextView1 = itemView.findViewById(R.id.text_view1);
             mTextView2 = itemView.findViewById(R.id.text_view2);
             mArrow = itemView.findViewById(R.id.arrow_img);
