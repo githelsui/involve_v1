@@ -89,15 +89,16 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
                 new RecyclerItemTouchHelper(0, ItemTouchHelper.LEFT, new RecyclerItemTouchHelper.RecyclerItemTouchHelperListener() {
                     @Override
                     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
-                       openDeleteDialog();
+                        openDeleteDialog(viewHolder);
                     }
                 });
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(myRecycler);
 
     }
 
-    public void openDeleteDialog(){
+    public void openDeleteDialog(RecyclerView.ViewHolder view){
         DeleteProgramDialog myDialog = new DeleteProgramDialog();
+        myDialog.setView(view);
         myDialog.show(getSupportFragmentManager(), "Delete Program");
     }
 
@@ -174,5 +175,11 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
     @Override
     public void removeProgram(int i) {
 
+    }
+
+    @Override
+    public void notifyChanges(RecyclerView.ViewHolder temp) {
+        myAdapter.notifyItemChanged(temp.getAdapterPosition());
+        System.out.println("POsition = " + temp.getAdapterPosition());
     }
 }
