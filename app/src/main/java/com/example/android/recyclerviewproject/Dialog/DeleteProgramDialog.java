@@ -43,7 +43,7 @@ public class DeleteProgramDialog extends AppCompatDialogFragment {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int i) {
-                        listener.removeProgram(i);
+                        listener.removeProgram(myV);
                     }
                 });
         Dialog dialogRes = builder.create();
@@ -62,7 +62,7 @@ public class DeleteProgramDialog extends AppCompatDialogFragment {
     }
 
     public interface DeleteProgramDialogListener{
-        void removeProgram(int i);
+        void removeProgram(RecyclerView.ViewHolder temp);
         void notifyChanges(RecyclerView.ViewHolder temp);
     }
 }

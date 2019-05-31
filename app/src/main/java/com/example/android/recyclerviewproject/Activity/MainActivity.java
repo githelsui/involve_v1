@@ -15,6 +15,7 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.android.recyclerviewproject.Dialog.AddServDialog;
 import com.example.android.recyclerviewproject.Adapter.ExampleAdapter;
@@ -44,9 +45,11 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//
-//        SharedPreferences sharedPreferences = getSharedPreferences("SHARED PREF", MODE_PRIVATE);
-//        sharedPreferences.edit().clear().commit();
+
+        SharedPreferences sharedPreferences = getSharedPreferences("SHARED PREF", MODE_PRIVATE);
+        SharedPreferences myHrs = getSharedPreferences("my_hours", MODE_PRIVATE);
+        sharedPreferences.edit().clear().commit();
+        myHrs.edit().clear().commit();
 
         loadData();
         initRecyclerView();
@@ -173,13 +176,16 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
 
 
     @Override
-    public void removeProgram(int i) {
-
+    public void removeProgram(RecyclerView.ViewHolder temp) {
+        myList.remove(temp.getAdapterPosition());
+        myAdapter.notifyItemRemoved(temp.getAdapterPosition());
+        Toast msg = Toast.makeText(getApplicationContext(), "Program Removed from List", Toast.LENGTH_SHORT);
+        msg.show();
+        saveData();
     }
 
     @Override
     public void notifyChanges(RecyclerView.ViewHolder temp) {
         myAdapter.notifyItemChanged(temp.getAdapterPosition());
-        System.out.println("POsition = " + temp.getAdapterPosition());
     }
 }
