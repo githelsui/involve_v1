@@ -25,11 +25,11 @@ public class DeleteProgramDialog extends AppCompatDialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         final View myView = inflater.inflate(R.layout.deleteprogram_dialog, null);
         builder.setView(myView)
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int i) { }
                 }) //when "Cancelled" do nothing
-                .setPositiveButton("Save", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int i) {
 
