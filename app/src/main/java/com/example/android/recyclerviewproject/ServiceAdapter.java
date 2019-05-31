@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -14,8 +15,10 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceV
 
     private ArrayList<ServiceItem> myServiceList;
     private OnItemClickListener mListener;
+    private ExampleItem obj;
 
-    public ServiceAdapter(ArrayList<ServiceItem> list) {
+    public ServiceAdapter(ArrayList<ServiceItem> list, ExampleItem temp) {
+        obj = temp;
         myServiceList = list;
     }
 
@@ -35,6 +38,10 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceV
         ServiceItem temp = myServiceList.get(i);
         serviceViewHolder.mTextView1.setText("date");
         serviceViewHolder.mTextView2.setText(Double.toString(temp.getHours()) + " ");
+
+        RandomColor colors = new RandomColor();
+        int[] choices = colors.getMyArray();
+        (serviceViewHolder.mCardView).setBackgroundResource(choices[obj.getMyColor()]);
     }
 
     @Override
@@ -51,6 +58,7 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceV
     }
 
     public static class ServiceViewHolder extends RecyclerView.ViewHolder {
+        public RelativeLayout mCardView;
         public TextView mTextView1; //TextView shows a Date (month.day.year)
         public TextView mTextView2; //TextView shows hours done for that specific service
         public ImageView mArrow;    //button to be clicked for info regarding that service -> opens up to Dialog with Data
@@ -58,7 +66,7 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceV
 
         public ServiceViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
-            //constructor for cardviewholder java class
+            mCardView = itemView.findViewById(R.id.relative_layout);
             mTextView1 = itemView.findViewById(R.id.text_view1);
             mTextView2 = itemView.findViewById(R.id.text_view2);
             mArrow = itemView.findViewById(R.id.arrow_img);

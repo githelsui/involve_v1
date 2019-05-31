@@ -15,7 +15,7 @@
      <RelativeLayout
         android:id="@+id/relative_layout"
         android:layout_width="match_parent"
-         android:background="@drawable/red_grad"
+         android:background="@android:color/background_dark"
         android:layout_height="match_parent"
         tools:ignore="InvalidId">
 

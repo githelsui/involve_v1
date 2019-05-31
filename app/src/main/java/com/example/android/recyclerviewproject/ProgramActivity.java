@@ -108,7 +108,7 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
         myRecycler = findViewById(R.id.serverecycler_view);
         myRecycler.setHasFixedSize(true);
         myLayout = new LinearLayoutManager(this);
-        myAdapter = new ServiceAdapter(myItem.getServiceList());
+        myAdapter = new ServiceAdapter(myItem.getServiceList(), myItem);
 
         //configure objects to the recyclerview
         myRecycler.setLayoutManager(myLayout);
@@ -122,25 +122,6 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
             }
         });
     }
-
-//    private void checkAdapter(){
-//        if(myItem.getMyAdapter() != null) System.out.println("NOT NULL!");
-//        else{
-//            System.out.println("NULL ADAPTER");
-//            myItem.setMyAdapter(serviceList);
-//            if(myItem.getMyAdapter() != null){
-//                System.out.println("CREATED NEW ADAPTER WITH SIZE: " + myItem.getMyAdapter().getItemCount());
-//            }
-//            else System.out.println("Adapter is still null even after creation");
-//        }
-//
-//        Intent intent = getIntent();
-//        ServiceAdapter temp = myItem.getMyAdapter();
-//        finish();
-//        intent.putExtra("MyAdapter", temp);
-//        startActivity(intent);
-//
-//    }
 
     @Override
     public void applyServiceText(double hours, String startDate, String endDate, String duties) {

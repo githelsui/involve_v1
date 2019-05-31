@@ -12,7 +12,6 @@ public class ExampleItem implements Parcelable{
     private String myRole;
     private transient RandomColor myPick;
     private int myColor;
-    private ServiceAdapter myAdapter;
     private int position;
 
 
@@ -28,7 +27,6 @@ public class ExampleItem implements Parcelable{
         myColor = myPick.getRandomGradient();
 
         //list view
-        myAdapter = new ServiceAdapter(serviceList);
     }
 
     public int getPosition(){
@@ -41,14 +39,6 @@ public class ExampleItem implements Parcelable{
 
     public RandomColor getMyPick(){
         return myPick;
-    }
-
-    public void setMyAdapter(ArrayList<ServiceItem> list){
-        myAdapter = new ServiceAdapter(list);
-    }
-
-    public ServiceAdapter getMyAdapter(){
-        return myAdapter;
     }
 
     public void setList(ArrayList<ServiceItem> temp){

@@ -37,8 +37,8 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
 
 
         //TEMPORARY FIELD (RESETS ALL SAVED ITEMS)
-        SharedPreferences sharedPreferences = getSharedPreferences("SHARED PREF", MODE_PRIVATE);
-        sharedPreferences.edit().clear().commit();
+//        SharedPreferences sharedPreferences = getSharedPreferences("SHARED PREF", MODE_PRIVATE);
+//        sharedPreferences.edit().clear().commit();
 
         //perform these three main functions: load saved data, present on listview, initialize button instantaneously
         loadData();
