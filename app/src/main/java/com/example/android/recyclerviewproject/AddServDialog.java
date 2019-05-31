@@ -48,7 +48,7 @@ public class AddServDialog extends AppCompatDialogFragment {
                         RandomColor rand = new RandomColor();
 
                         listener.applyText(name, hrs, myRole, rand); //creates Exampleitem then appends it to list
-                        listener.saveData(); //saves data for long term
+                       //TODO listener.saveData(); //saves data for long term
                     }
                 });
         prgrmName = myView.findViewById(R.id.program_name);

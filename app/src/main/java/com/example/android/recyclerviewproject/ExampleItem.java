@@ -12,19 +12,47 @@ public class ExampleItem implements Parcelable{
     private String myRole;
     private transient RandomColor myPick;
     private int myColor;
+    private ServiceAdapter myAdapter;
+    private int position;
 
 
     public ExampleItem(String program, double hours, String role, RandomColor picker){
+        //intrinsic values
         myHrs = hours;
         myProg = program;
         myRole = role;
+        serviceList = new ArrayList<>();
+
+        //colors
         myPick = picker;
         myColor = myPick.getRandomGradient();
-        serviceList = new ArrayList<>();
+
+        //list view
+        myAdapter = new ServiceAdapter(serviceList);
+    }
+
+    public int getPosition(){
+        return position;
+    }
+
+    public void setPos(int temp){
+        position = temp;
     }
 
     public RandomColor getMyPick(){
         return myPick;
+    }
+
+    public void setMyAdapter(ArrayList<ServiceItem> list){
+        myAdapter = new ServiceAdapter(list);
+    }
+
+    public ServiceAdapter getMyAdapter(){
+        return myAdapter;
+    }
+
+    public void setList(ArrayList<ServiceItem> temp){
+        serviceList = temp;
     }
 
     protected ExampleItem(Parcel in) {
@@ -33,6 +61,7 @@ public class ExampleItem implements Parcelable{
         myRole = in.readString();
         myColor = in.readInt();
         serviceList = in.readArrayList(ServiceItem.class.getClassLoader());
+        position = in.readInt();
     }
 
     public static final Creator<ExampleItem> CREATOR = new Creator<ExampleItem>() {
@@ -60,6 +89,7 @@ public class ExampleItem implements Parcelable{
         dest.writeString(myRole);
         dest.writeInt(myColor);
         dest.writeList(serviceList);
+        dest.writeInt(position);
     }
 
     public void addItem(ServiceItem temp){

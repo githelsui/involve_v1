@@ -35,12 +35,12 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_program);
-//
+
 //        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
 //       sharedPreferences.edit().clear().commit();
 
-
-        loadData();
+        //loadData();
+        getParceables();
         setColorChoices();
         setLayouts();
         initRecyclerView();
@@ -52,6 +52,7 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
         Gson gson = new Gson();
         String json = appSharedPrefs.getString("MyItem", "");
         myItem = gson.fromJson(json, ExampleItem.class);
+
         if (myItem != null) serviceList = myItem.getServiceList();
         else getParceables();
     }
@@ -62,8 +63,6 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
 
         cardLayout = findViewById(R.id.program_layout);
         cardLayout.setBackgroundResource(colorChoices[myItem.getMyColor()]);
-
-       // serviceList = myItem.getServiceList();
     }
 
     private void setColorChoices(){
@@ -77,6 +76,7 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
     private void getParceables(){ //gains access to item's intrinsic values (name, hours, role, etc)
         Intent myInt = getIntent();
         myItem = myInt.getParcelableExtra("Item");
+        serviceList = myItem.getServiceList();
     }
 
     private void initAddButton() {
@@ -96,6 +96,9 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
 
     @Override //for animation
     public void finish() {
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra("passed_item", myItem); //myItem with an UPDATED service list
+        setResult(RESULT_OK, returnIntent); //By not passing the intent in the result, the calling activity will get null data.
         super.finish();
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
@@ -120,11 +123,24 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
         });
     }
 
-    private void saveAdapter(){
-        Intent intent = getIntent();
-        finish();
-        startActivity(intent);
-    }
+//    private void checkAdapter(){
+//        if(myItem.getMyAdapter() != null) System.out.println("NOT NULL!");
+//        else{
+//            System.out.println("NULL ADAPTER");
+//            myItem.setMyAdapter(serviceList);
+//            if(myItem.getMyAdapter() != null){
+//                System.out.println("CREATED NEW ADAPTER WITH SIZE: " + myItem.getMyAdapter().getItemCount());
+//            }
+//            else System.out.println("Adapter is still null even after creation");
+//        }
+//
+//        Intent intent = getIntent();
+//        ServiceAdapter temp = myItem.getMyAdapter();
+//        finish();
+//        intent.putExtra("MyAdapter", temp);
+//        startActivity(intent);
+//
+//    }
 
     @Override
     public void applyServiceText(double hours, String startDate, String endDate, String duties) {

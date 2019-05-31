@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import java.lang.reflect.Type;
 import android.os.Parcelable;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import java.util.Iterator;
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
     private RecyclerView myRecycler;
     private ExampleAdapter myAdapter;
     private RecyclerView.LayoutManager myLayout;
+    private static final int REQUEST_CODE = 5;
     private ArrayList<ExampleItem> myList;
     private TextView myTotalHrs;
     private Button addServBtn;
@@ -35,9 +37,8 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
 
 
         //TEMPORARY FIELD (RESETS ALL SAVED ITEMS)
-//        SharedPreferences sharedPreferences = getSharedPreferences("SHARED PREF", MODE_PRIVATE);
-//        sharedPreferences.edit().clear().commit();
-
+        SharedPreferences sharedPreferences = getSharedPreferences("SHARED PREF", MODE_PRIVATE);
+        sharedPreferences.edit().clear().commit();
 
         //perform these three main functions: load saved data, present on listview, initialize button instantaneously
         loadData();
@@ -46,6 +47,20 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
 
         //TODO #8 create java class to store apps myTotal hours and update it using SharedPreferences
         myTotalHrs = findViewById(R.id.numhrs_lbl);
+    }
+
+    private void getBackFromProgram(){
+        //get Parceable of updated serviceList from the selected program
+        //insert or initialize this serviceList to be the new private list of myList.get(position)
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
+           ExampleItem passedItem =(ExampleItem)(data.getExtras().get("passed_item"));
+           myList.get(passedItem.getPosition()).setList(passedItem.getServiceList());
+        }
     }
 
     private void initRecyclerView() {
@@ -71,15 +86,10 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
     private void openProgActivity(int pos){
         //opens up ProgramActivity layout
         Intent myInt = new Intent(this, ProgramActivity.class);
-
         ExampleItem temp = myList.get(pos);
-        RandomColor randomColor = new RandomColor();
-        int[] choices = randomColor.getMyArray();
+        temp.setPos(pos);
         myInt.putExtra("Item", temp);
-        myInt.putExtra("Colors", choices);
-        startActivity(myInt);
-
-        //slide animation for second activityview
+        startActivityForResult(myInt, REQUEST_CODE);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
