@@ -179,10 +179,11 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
 
     @Override
     public void removeProgram(RecyclerView.ViewHolder temp) {
-        subtractHours(myList.get(temp.getAdapterPosition()).getHours());
-        myList.remove(temp.getAdapterPosition());
+        int position = temp.getAdapterPosition();
+        subtractHours(myList.get(position).getHours());
+        myList.remove(position);
         initRecyclerView();
-        myAdapter.notifyItemRemoved(temp.getAdapterPosition());
+        myAdapter.notifyItemRemoved(position);
         Toast msg = Toast.makeText(getApplicationContext(), "Program Removed from List", Toast.LENGTH_SHORT);
         msg.show();
         saveData();
