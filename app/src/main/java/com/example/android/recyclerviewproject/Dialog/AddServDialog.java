@@ -8,6 +8,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import com.example.android.recyclerviewproject.R;
 import com.example.android.recyclerviewproject.Custom_Object.RandomColor;
@@ -30,7 +32,6 @@ public class AddServDialog extends AppCompatDialogFragment {
 
         //creates the View in which we can access the Dialog xml file's contents
         final View myView = inflater.inflate(R.layout.layout_dialog, null);
-
         //Attaches java dialog onto its XML layout file (GUI)
         builder.setView(myView)
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -40,6 +41,10 @@ public class AddServDialog extends AppCompatDialogFragment {
                 .setPositiveButton("Save", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int i) {
+                        if(prgrmName.getText().toString().equals("")){
+                            Animation shake = AnimationUtils.loadAnimation(myView.getContext(), R.anim.shake);
+                            prgrmName.startAnimation(shake);
+                        }
                         double hrs;
                         if(currHrs.getText().toString().equals("")) hrs = 0;
                         else hrs = Double.parseDouble(currHrs.getText().toString());
@@ -56,8 +61,9 @@ public class AddServDialog extends AppCompatDialogFragment {
         currHrs = myView.findViewById(R.id.current_hours);
         role = myView.findViewById(R.id.position_lbl);
 
-        //returns the Dialog View
-        return builder.create();
+        Dialog myDialog = builder.create();
+        myDialog.setCanceledOnTouchOutside(false);
+        return myDialog;
     }
 
     @Override
