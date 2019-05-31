@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.example.android.recyclerviewproject.Dialog.AddServDialog;
 import com.example.android.recyclerviewproject.Adapter.ExampleAdapter;
 import com.example.android.recyclerviewproject.Custom_Object.ExampleItem;
+import com.example.android.recyclerviewproject.Dialog.DeleteDialog;
 import com.example.android.recyclerviewproject.Helper.RecyclerItemTouchHelper;
 import com.example.android.recyclerviewproject.R;
 import com.example.android.recyclerviewproject.Custom_Object.RandomColor;
@@ -76,8 +77,6 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
         myRecycler.setAdapter(myAdapter);
         myLayout = new LinearLayoutManager(this);
         myAdapter = new ExampleAdapter(myList, this);
-        myRecycler.setItemAnimator(new DefaultItemAnimator());
-        myRecycler.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
         //touch item -> open ProgramActivity
         myAdapter.setOnItemClickListener(new ExampleAdapter.OnItemClickListener() {
@@ -92,14 +91,16 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
                 new RecyclerItemTouchHelper(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT, new RecyclerItemTouchHelper.RecyclerItemTouchHelperListener() {
                     @Override
                     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
-//                        if (direction == ItemTouchHelper.LEFT) {
-//                            myAdapter.notifyItemChanged(viewHolder.getAdapterPosition());
-//                        }
+                        openDeleteDialog();
                     }
 
                 });
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(myRecycler);
 
+    }
+
+    public void openDeleteDialog(){
+        DeleteDialog myDialog = new DeleteDialog();
     }
 
     private void updateTotalHours(double i){

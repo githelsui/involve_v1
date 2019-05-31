@@ -25,7 +25,7 @@
             android:id="@+id/deletelbl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="6dp"
             android:text="DELETE"
             android:padding="4dp"
             android:textColor="@android:color/white"
@@ -38,7 +38,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/ic_delete"
-            android:layout_marginTop="9dp"
+            android:layout_marginTop="0dp"
             android:layout_alignParentEnd="true"/>
 
     </RelativeLayout>
