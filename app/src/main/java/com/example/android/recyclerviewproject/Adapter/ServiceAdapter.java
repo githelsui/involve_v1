@@ -41,7 +41,7 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceV
     @Override
     public void onBindViewHolder(@NonNull ServiceViewHolder serviceViewHolder, int i) {
         ServiceItem temp = myServiceList.get(i);
-        serviceViewHolder.mTextView1.setText("date");
+        serviceViewHolder.mTextView1.setText(temp.getStartDate());
         serviceViewHolder.mTextView2.setText(Double.toString(temp.getHours()) + " ");
 
         RandomColor colors = new RandomColor();

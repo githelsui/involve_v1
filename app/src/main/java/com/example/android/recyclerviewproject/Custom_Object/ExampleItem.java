@@ -29,36 +29,6 @@ public class ExampleItem implements Parcelable{
         //list view
     }
 
-    public void removeItem(int i){
-        serviceList.remove(i);
-    }
-
-    public void addHrs(double i){
-        myHrs += i;
-    }
-
-    public void subtractHrs(double i) { myHrs -= i; }
-
-    public int getPosition(){
-        return position;
-    }
-
-    public void setPos(int temp){
-        position = temp;
-    }
-
-    public RandomColor getMyPick(){
-        return myPick;
-    }
-
-    public void setList(ArrayList<ServiceItem> temp){
-        serviceList = temp;
-    }
-
-    public void setHrs(double i){
-        myHrs = i;
-    }
-
     protected ExampleItem(Parcel in) {
         myHrs = in.readDouble();
         myProg = in.readString();
@@ -124,4 +94,33 @@ public class ExampleItem implements Parcelable{
     public int getMyColor(){
         return myColor;}
 
+    public void removeItem(int i){
+        serviceList.remove(i);
+    }
+
+    public void addHrs(double i){
+        myHrs += i;
+    }
+
+    public void subtractHrs(double i) { myHrs -= i; }
+
+    public int getPosition(){
+        return position;
+    }
+
+    public void setPos(int temp){
+        position = temp;
+    }
+
+    public RandomColor getMyPick(){
+        return myPick;
+    }
+
+    public void setList(ArrayList<ServiceItem> temp){
+        serviceList = temp;
+    }
+
+    public void setHrs(double i){
+        myHrs = i;
+    }
 }

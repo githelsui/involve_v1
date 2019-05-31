@@ -4,6 +4,11 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.view.LayoutInflater;
@@ -48,9 +53,14 @@ public class ServeInfoDialog extends AppCompatDialogFragment {
                         listener.applyServiceText(hrs, startDate, endDate, info);
                     }
                 });
+        Date currentDate = Calendar.getInstance().getTime();
+        SimpleDateFormat simpleDate = new SimpleDateFormat("MM/dd/yyyy");
         mStartDate = myView.findViewById(R.id.date_started);
+        mStartDate.setHint(simpleDate.format(currentDate));
         mEndDate = myView.findViewById(R.id.date_end);
+        mEndDate.setHint(mStartDate.getHint());
         mHours = myView.findViewById(R.id.ind_hours);
+        mHours.setHint("0.00");
         mInfo = myView.findViewById(R.id.duties_info);
         return builder.create();
     }

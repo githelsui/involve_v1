@@ -20,7 +20,10 @@ public class ServiceItem implements Parcelable{
     }
 
     protected ServiceItem(Parcel in){
-
+        myHrs = in.readDouble();
+        myDateStart = in.readString();
+        myDateEnd = in.readString();
+        myDuties =in.readString();
     }
 
     public static final Creator<ServiceItem> CREATOR = new Creator<ServiceItem>(){
@@ -35,6 +38,19 @@ public class ServiceItem implements Parcelable{
         }
     };
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeDouble(myHrs);
+        dest.writeString(myDateStart);
+        dest.writeString(myDateEnd);
+        dest.writeString(myDuties);
+    }
+
     public double getHours(){
         return myHrs;
     }
@@ -45,13 +61,4 @@ public class ServiceItem implements Parcelable{
 
     public String getMyDuties(){return myDuties;}
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-
-    }
 }

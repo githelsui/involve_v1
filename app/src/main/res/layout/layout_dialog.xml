@@ -28,8 +28,8 @@
         android:hint="Name of Program/Organization"/>
 
     <EditText
-        android:importantForAutofill="no"
         android:id="@+id/current_hours"
+        android:autofillHints="0.0"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="15dp"
