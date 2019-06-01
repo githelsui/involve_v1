@@ -13,7 +13,11 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.android.recyclerviewproject.R;
 
@@ -26,34 +30,57 @@ public class ServeInfoDialog extends AppCompatDialogFragment {
     private EditText mHours;
     private EditText mInfo;
 
+//    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//        @Override
+//        public void onClick(DialogInterface dialog, int i) { }
+//    }) //when "Cancelled" do nothing
+//            .setPositiveButton("Save", new DialogInterface.OnClickListener() {
+//        @Override
+//        public void onClick(DialogInterface dialog, int i) {
+//            String startDate = mStartDate.getText().toString();
+//            String endDate = mEndDate.getText().toString();
+//            double hrs = Double.parseDouble(mHours.getText().toString());
+//            String info = mInfo.getText().toString();
+//
+//            listener.applyServiceText(hrs, startDate, endDate, info);
+//        }
+//    });
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        //creates Dialog java class by taking info from getActivity()
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
-        //creates an object that helps configure Dialog java class to its correct xml file
         LayoutInflater inflater = getActivity().getLayoutInflater();
-
-        //creates the View in which we can access the Dialog xml file's contents
         final View myView = inflater.inflate(R.layout.serviceinfo_dialog, null);
-
-        //Attaches java dialog onto its XML layout file (GUI)
         builder.setView(myView)
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                .setNegativeButton("Cancel", null)
+                .setPositiveButton("Save", null);
+        setViews(myView);
+        final Dialog myDialog = builder.create();
+        myDialog.setCanceledOnTouchOutside(false);
+        myDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                Button saveBtn = ((AlertDialog) myDialog).getButton(AlertDialog.BUTTON_POSITIVE);
+                saveBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int i) { }
-                }) //when "Cancelled" do nothing
-                .setPositiveButton("Save", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int i) {
-                        String startDate = mStartDate.getText().toString();
-                        String endDate = mEndDate.getText().toString();
-                        double hrs = Double.parseDouble(mHours.getText().toString());
-                        String info = mInfo.getText().toString();
+                    public void onClick(View v) {
+                        if(mStartDate.getText().toString().equals("")){
+                            Animation shake = AnimationUtils.loadAnimation(myView.getContext(), R.anim.shake);
+                            mStartDate.startAnimation(shake);
+                            Toast msg = Toast.makeText(myView.getContext(), "Date is Required", Toast.LENGTH_SHORT);
+                            msg.show();
+                        }
+                        else{
 
-                        listener.applyServiceText(hrs, startDate, endDate, info);
+                        }
                     }
                 });
+            }
+        });
+        return myDialog;
+    }
+
+    public void setViews(View myView){
         Date currentDate = Calendar.getInstance().getTime();
         SimpleDateFormat simpleDate = new SimpleDateFormat("MM/dd/yyyy");
         mStartDate = myView.findViewById(R.id.date_started);
@@ -61,9 +88,8 @@ public class ServeInfoDialog extends AppCompatDialogFragment {
         mEndDate = myView.findViewById(R.id.date_end);
         mEndDate.setHint(mStartDate.getHint());
         mHours = myView.findViewById(R.id.ind_hours);
-        mHours.setHint("0.00");
+        mHours.setHint(getString (R.string.initialHrs));
         mInfo = myView.findViewById(R.id.duties_info);
-        return builder.create();
     }
 
     @Override

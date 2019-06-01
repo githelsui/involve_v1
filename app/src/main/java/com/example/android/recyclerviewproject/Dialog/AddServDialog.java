@@ -27,16 +27,9 @@ public class AddServDialog extends AppCompatDialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-
-        //creates Dialog java class by taking info from getActivity()
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
-        //creates an object that helps configure Dialog java class to its correct xml file
         LayoutInflater inflater = getActivity().getLayoutInflater();
-
-        //creates the View in which we can access the Dialog xml file's contents
         final View myView = inflater.inflate(R.layout.layout_dialog, null);
-        //Attaches java dialog onto its XML layout file (GUI)
         builder.setView(myView)
                 .setNegativeButton("Cancel", null)
                 .setPositiveButton("Save", null);
@@ -77,7 +70,6 @@ public class AddServDialog extends AppCompatDialogFragment {
     }
 
     private double checkHours(){
-        double hrs;
         if(currHrs.getText().toString().equals("")) return 0;
         else return Double.parseDouble(currHrs.getText().toString());
     }
