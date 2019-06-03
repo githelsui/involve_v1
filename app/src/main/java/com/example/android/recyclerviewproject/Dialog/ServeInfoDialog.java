@@ -26,7 +26,6 @@ public class ServeInfoDialog extends AppCompatDialogFragment {
     //TODO #1 Clean up addServiceDialog. Remove mEndDate. Add a check or switch for boolean ifComplete()
      private ServeInfoDialogListener listener;
     private EditText mStartDate;
-    private EditText mEndDate;
     private EditText mHours;
     private EditText mInfo;
 
@@ -85,8 +84,6 @@ public class ServeInfoDialog extends AppCompatDialogFragment {
         SimpleDateFormat simpleDate = new SimpleDateFormat("MM/dd/yyyy");
         mStartDate = myView.findViewById(R.id.date_started);
         mStartDate.setHint(simpleDate.format(currentDate));
-        mEndDate = myView.findViewById(R.id.date_end);
-        mEndDate.setHint(mStartDate.getHint());
         mHours = myView.findViewById(R.id.ind_hours);
         mHours.setHint(getString (R.string.initialHrs));
         mInfo = myView.findViewById(R.id.duties_info);

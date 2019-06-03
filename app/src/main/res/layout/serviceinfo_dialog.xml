@@ -26,7 +26,7 @@
         android:textColor="@color/cardview_dark_background"
         android:textSize="20sp"
         android:fontFamily="@font/myriadpro_light"
-        android:text="Date Started (Month/Day/Year)"/>
+        android:text="Date of Event (Month/Day/Year)"/>
 
     <EditText
         android:importantForAutofill="no"
@@ -40,34 +40,34 @@
         android:fontFamily="@font/myriadpro_light"
         android:hint="Today: 01 / 01 / 2019 "/>
 
-    <TextView
-        android:id="@+id/dateend_lbl"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/date_started"
-        android:paddingTop="20dp"
-        android:textColor="@color/cardview_dark_background"
-        android:textSize="20sp"
-        android:fontFamily="@font/myriadpro_light"
-        android:text="Date of Completion (Month/Day/Year)"/>
+    <!--<TextView-->
+        <!--android:id="@+id/dateend_lbl"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@id/date_started"-->
+        <!--android:paddingTop="20dp"-->
+        <!--android:textColor="@color/cardview_dark_background"-->
+        <!--android:textSize="20sp"-->
+        <!--android:fontFamily="@font/myriadpro_light"-->
+        <!--android:text="Date of Completion (Month/Day/Year)"/>-->
 
-    <EditText
-        android:importantForAutofill="no"
-        android:id="@+id/date_end"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="date"
-        android:padding="10dp"
-        android:textSize="20sp"
-        android:fontFamily="@font/myriadpro_light"
-        android:hint="Today: 01 / 01 / 2019 "
-        android:layout_below="@id/dateend_lbl"/>
+    <!--<EditText-->
+        <!--android:importantForAutofill="no"-->
+        <!--android:id="@+id/date_end"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:inputType="date"-->
+        <!--android:padding="10dp"-->
+        <!--android:textSize="20sp"-->
+        <!--android:fontFamily="@font/myriadpro_light"-->
+        <!--android:hint="Today: 01 / 01 / 2019 "-->
+        <!--android:layout_below="@id/dateend_lbl"/>-->
 
     <TextView
         android:id="@+id/servicehours_lbl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/date_end"
+        android:layout_below="@id/date_started"
         android:paddingTop="20dp"
         android:textColor="@color/cardview_dark_background"
         android:textSize="20sp"
@@ -82,7 +82,7 @@
         android:padding="10dp"
         android:textSize="20sp"
         android:fontFamily="@font/myriadpro_light"
-        android:hint="Enter Here"
+        android:hint="@string/initialHrs"
         android:layout_below="@id/servicehours_lbl"/>
 
     <TextView
