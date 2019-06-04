@@ -1,7 +1,9 @@
 package com.example.android.recyclerviewproject.Custom_Object;
 
 import java.util.ArrayList;
-
+import java.util.Collection;
+import java.util.Date;
+import java.util.Collections;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -25,8 +27,6 @@ public class ExampleItem implements Parcelable{
         //colors
         myPick = picker;
         myColor = myPick.getRandomGradient();
-
-        //list view
     }
 
     protected ExampleItem(Parcel in) {
@@ -122,5 +122,13 @@ public class ExampleItem implements Parcelable{
 
     public void setHrs(double i){
         myHrs = i;
+    }
+
+    public void sortDates() throws Exception {
+        ArrayList<Date> allDates = new ArrayList<>();
+        for(int i = 0; i < serviceList.size(); i++){
+            ServiceItem temp = serviceList.get(i);
+            allDates.add(temp.parseToDate());
+        }
     }
 }

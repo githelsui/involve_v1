@@ -3,6 +3,9 @@ package com.example.android.recyclerviewproject.Custom_Object;
 import android.os.Parcelable;
 import android.os.Parcel;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 //class for one service within a program
 public class ServiceItem implements Parcelable{
@@ -61,4 +64,13 @@ public class ServiceItem implements Parcelable{
 
     public String getMyDuties(){return myDuties;}
 
+    public Date parseToDate() throws Exception {
+        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+        //throws exception when String mydatestart does not follow format properly
+        try{
+           return format.parse(myDateStart);
+        }catch (Exception e){
+            throw new Exception(e);
+        }
+    }
 }

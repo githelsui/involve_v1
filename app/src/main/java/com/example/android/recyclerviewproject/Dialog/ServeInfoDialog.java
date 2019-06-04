@@ -70,13 +70,22 @@ public class ServeInfoDialog extends AppCompatDialogFragment {
                             msg.show();
                         }
                         else{
-
+                            String date = mStartDate.getText().toString();
+                            double hrs = checkHours();
+                            String info = mInfo.getText().toString();
+                            listener.applyServiceText(hrs,date, "end", info);
+                            myDialog.dismiss();
                         }
                     }
                 });
             }
         });
         return myDialog;
+    }
+
+    private double checkHours(){
+        if(mHours.getText().toString().equals("")) return 0;
+        else return Double.parseDouble(mHours.getText().toString());
     }
 
     public void setViews(View myView){
