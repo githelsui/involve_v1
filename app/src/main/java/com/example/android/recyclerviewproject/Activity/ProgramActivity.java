@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.android.recyclerviewproject.Custom_Object.ExampleItem;
 import com.example.android.recyclerviewproject.Dialog.DeleteProgramDialog;
+import com.example.android.recyclerviewproject.Dialog.EventDialog;
 import com.example.android.recyclerviewproject.Helper.RecyclerItemTouchHelper;
 import com.example.android.recyclerviewproject.Helper.RecyclerServiceTouchHelper;
 import com.example.android.recyclerviewproject.R;
@@ -23,7 +24,8 @@ import com.example.android.recyclerviewproject.Custom_Object.ServiceItem;
 
 import java.util.ArrayList;
 
-public class ProgramActivity extends AppCompatActivity implements ServeInfoDialog.ServeInfoDialogListener, DeleteProgramDialog.DeleteProgramDialogListener {
+public class ProgramActivity extends AppCompatActivity implements ServeInfoDialog.ServeInfoDialogListener,
+        DeleteProgramDialog.DeleteProgramDialogListener, EventDialog.EventDialogListener {
 
     private ArrayList<ServiceItem> serviceList;
     private double deleteHrs;
@@ -119,6 +121,7 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
         myAdapter.setOnItemClickListener(new ServiceAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int pos) {
+                openEventDialog();
                 //TODO #7 create a dialog for a service item when arrow button is clicked(fill with info)
             }
         });
@@ -134,7 +137,12 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
 
     }
 
-    public void openDeleteDialog(RecyclerView.ViewHolder view){
+    private void openEventDialog(){
+        EventDialog dialog = new EventDialog();
+        dialog.show(getSupportFragmentManager(), "View Event Info");
+    }
+
+    private void openDeleteDialog(RecyclerView.ViewHolder view){
         DeleteProgramDialog myDialog = new DeleteProgramDialog();
         myDialog.setView(view);
         myDialog.show(getSupportFragmentManager(), "Delete Program");
@@ -172,5 +180,10 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
     @Override
     public void notifyChanges(RecyclerView.ViewHolder temp) {
         myAdapter.notifyItemChanged(temp.getAdapterPosition());
+    }
+
+    @Override
+    public void editEvent() {
+
     }
 }
