@@ -97,6 +97,19 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
                 closeInfo();
             }
         });
+        setInfo();
+    }
+
+    private void setInfo(){
+        TextView initialhrs = findViewById(R.id.initialhours);
+        TextView role = findViewById(R.id.role);
+        TextView advisor = findViewById(R.id.advisor);
+        initialhrs.setText("Initial hours added to " + myItem.getProgram()
+                + ": " + Double.toString(myItem.getInitialHr()));
+        if(myItem.getRole().equals("")) role.setText("Role: " + getString(R.string.n_a));
+        if(myItem.getAdvisor() == null) advisor.setText("Advisor: " + getString(R.string.n_a));
+
+
     }
 
     private void closeInfo(){

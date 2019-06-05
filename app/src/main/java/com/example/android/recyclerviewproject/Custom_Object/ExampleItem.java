@@ -11,15 +11,18 @@ public class ExampleItem implements Parcelable{
     private double myHrs;
     private ArrayList<ServiceItem> serviceList;
     private String myProg;
+    private String myAdvisor;
     private String myRole;
     private transient RandomColor myPick;
     private int myColor;
+    private double initialHr;
     private int position;
 
 
     public ExampleItem(String program, double hours, String role, RandomColor picker){
         //intrinsic values
         myHrs = hours;
+        initialHr = hours;
         myProg = program;
         myRole = role;
         serviceList = new ArrayList<>();
@@ -36,6 +39,7 @@ public class ExampleItem implements Parcelable{
         myColor = in.readInt();
         serviceList = in.readArrayList(ServiceItem.class.getClassLoader());
         position = in.readInt();
+        initialHr = in.readDouble();
     }
 
     public static final Creator<ExampleItem> CREATOR = new Creator<ExampleItem>() {
@@ -64,6 +68,7 @@ public class ExampleItem implements Parcelable{
         dest.writeInt(myColor);
         dest.writeList(serviceList);
         dest.writeInt(position);
+        dest.writeDouble(initialHr);
     }
 
     public void addItem(ServiceItem temp){
@@ -98,6 +103,14 @@ public class ExampleItem implements Parcelable{
         serviceList.remove(i);
     }
 
+    public void setMyAdvisor(String name){
+        myAdvisor = name;
+    }
+
+    public String getAdvisor(){
+        return myAdvisor;
+    }
+
     public void addHrs(double i){
         myHrs += i;
     }
@@ -130,5 +143,9 @@ public class ExampleItem implements Parcelable{
             ServiceItem temp = serviceList.get(i);
             allDates.add(temp.parseToDate());
         }
+    }
+
+    public double getInitialHr(){
+        return initialHr;
     }
 }
