@@ -3,11 +3,13 @@ package com.example.android.recyclerviewproject.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,6 +38,7 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
     private RecyclerView myRecycler;
     private ServiceAdapter myAdapter;
     private ExampleItem myItem;
+    private ImageView btnDown;
     private RelativeLayout cardLayout;
     private int[] colorChoices;
     private RecyclerView.LayoutManager myLayout;
@@ -63,6 +66,21 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
         cardLayout.setBackgroundResource(colorChoices[myItem.getMyColor()]);
 
         myHrs = findViewById(R.id.servehrs_lbl);
+
+        btnDown = findViewById(R.id.reveal_button);
+        btnDown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                System.out.println("image clicked...");//check logcat
+                openInfo();
+
+            }
+        });
+    }
+
+    private void openInfo(){
+        CardView hiddenView = findViewById(R.id.program_info);
+        hiddenView.setVisibility(View.VISIBLE);
     }
 
     private void setColorChoices(){

@@ -21,7 +21,6 @@ import com.example.android.recyclerviewproject.Custom_Object.RandomColor;
 
 public class AddServDialog extends AppCompatDialogFragment {
 
-    //TODO #1 Clean up addprogram dialog using private helper methods
     private EditText prgrmName;
     private EditText currHrs;
     private EditText role;

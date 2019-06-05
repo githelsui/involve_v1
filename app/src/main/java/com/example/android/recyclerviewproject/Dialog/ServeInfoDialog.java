@@ -25,6 +25,7 @@ import com.example.android.recyclerviewproject.R;
 public class ServeInfoDialog extends AppCompatDialogFragment {
 
     //TODO #1 Clean up addServiceDialog. Remove mEndDate. Add a check or switch for boolean ifComplete()
+    //TODO maybe use a dateview instead of editText for startDate and change entire dialog layout using FRAGMENTS
      private ServeInfoDialogListener listener;
     private EditText mStartDate;
     private EditText mHours;
