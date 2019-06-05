@@ -81,7 +81,7 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
     private void openInfo(){
         hiddenView = findViewById(R.id.program_info);
         hiddenView.setVisibility(View.VISIBLE);
-        btnDown.setBackgroundResource(R.drawable.ic_edit);
+        btnDown.setImageResource(R.drawable.ic_edit);
         btnDown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
@@ -101,7 +101,7 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
     private void closeInfo(){
         System.out.println("close info works");
         hiddenView.setVisibility(View.INVISIBLE);
-        btnDown.setBackgroundResource(R.drawable.ic_arrow);
+        btnDown.setImageResource(R.drawable.ic_arrow);
         btnDown.setRotation(90);
         btnDown.setOnClickListener(new View.OnClickListener() {
             @Override
