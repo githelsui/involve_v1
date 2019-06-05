@@ -25,11 +25,6 @@ public class AddServDialog extends AppCompatDialogFragment {
     private EditText currHrs;
     private EditText role;
     private AddServeDialogListener listener;
-//
-//    Dialog myDialog = builder.create();
-//    Window myWindow = myDialog.getWindow();
-//        myWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//        myWindow.getAttributes().windowAnimations = R.style.EventDialogTheme;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {

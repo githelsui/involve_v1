@@ -201,6 +201,7 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
 
     private void openEventDialog(){
         EventDialog dialog = new EventDialog();
+        dialog.setColorCode(myItem.getMyColor());
         dialog.show(getSupportFragmentManager(), "View Event Info");
     }
 
