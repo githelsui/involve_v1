@@ -32,6 +32,7 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
     private ArrayList<ServiceItem> serviceList;
     private double deleteHrs;
     private TextView myName;
+    private CardView hiddenView;
     private double tempHrs;
     private TextView myHrs;
     private Button addServBtn;
@@ -73,14 +74,46 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
             public void onClick(View v){
                 System.out.println("image clicked...");//check logcat
                 openInfo();
-
             }
         });
     }
 
     private void openInfo(){
-        CardView hiddenView = findViewById(R.id.program_info);
+        hiddenView = findViewById(R.id.program_info);
         hiddenView.setVisibility(View.VISIBLE);
+        btnDown.setBackgroundResource(R.drawable.ic_edit);
+        btnDown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                System.out.println("image clicked...");//check logcat
+                editInfo();
+            }
+        });
+        ImageView closeUp = findViewById(R.id.backup_button);
+        closeUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                closeInfo();
+            }
+        });
+    }
+
+    private void closeInfo(){
+        System.out.println("close info works");
+        hiddenView.setVisibility(View.INVISIBLE);
+        btnDown.setBackgroundResource(R.drawable.ic_arrow);
+        btnDown.setRotation(90);
+        btnDown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                System.out.println("image clicked...");//check logcat
+                openInfo();
+            }
+        });
+    }
+
+    private void editInfo(){
+        System.out.println("check edit button");
     }
 
     private void setColorChoices(){
