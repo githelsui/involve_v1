@@ -72,20 +72,21 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
         btnDown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                System.out.println("image clicked...");//check logcat
                 openInfo();
             }
         });
     }
 
     private void openInfo(){
+        RelativeLayout setColorInfo = findViewById(R.id.hidden_relative);
         hiddenView = findViewById(R.id.program_info);
+        setColorInfo.setBackgroundResource(colorChoices[myItem.getMyColor()]);
         hiddenView.setVisibility(View.VISIBLE);
         btnDown.setImageResource(R.drawable.ic_edit);
+        btnDown.setRotation(360);
         btnDown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                System.out.println("image clicked...");//check logcat
                 editInfo();
             }
         });
@@ -99,14 +100,12 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
     }
 
     private void closeInfo(){
-        System.out.println("close info works");
         hiddenView.setVisibility(View.INVISIBLE);
         btnDown.setImageResource(R.drawable.ic_arrow);
         btnDown.setRotation(90);
         btnDown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                System.out.println("image clicked...");//check logcat
                 openInfo();
             }
         });
