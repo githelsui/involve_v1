@@ -3,11 +3,13 @@ package com.example.android.recyclerviewproject.Dialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -24,6 +26,11 @@ public class AddServDialog extends AppCompatDialogFragment {
     private EditText currHrs;
     private EditText role;
     private AddServeDialogListener listener;
+//
+//    Dialog myDialog = builder.create();
+//    Window myWindow = myDialog.getWindow();
+//        myWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//        myWindow.getAttributes().windowAnimations = R.style.EventDialogTheme;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -37,6 +44,8 @@ public class AddServDialog extends AppCompatDialogFragment {
         currHrs = myView.findViewById(R.id.current_hours);
         role = myView.findViewById(R.id.position_lbl);
         final Dialog myDialog = builder.create();
+        Window myWindow = myDialog.getWindow();
+        myWindow.getAttributes().windowAnimations = R.style.DialogSlide;
         myDialog.setCanceledOnTouchOutside(false);
         myDialog.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override

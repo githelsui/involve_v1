@@ -13,6 +13,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -39,6 +40,8 @@ public class ServeInfoDialog extends AppCompatDialogFragment {
                 .setPositiveButton("Save", null);
         setViews(myView);
         final Dialog myDialog = builder.create();
+        Window myWindow = myDialog.getWindow();
+        myWindow.getAttributes().windowAnimations = R.style.DialogSlide;
         myDialog.setCanceledOnTouchOutside(false);
         myDialog.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override

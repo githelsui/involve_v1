@@ -41,7 +41,7 @@
        android:layout_below="@id/numhrs_lbl"
        android:layout_width="match_parent"
        android:layout_height="match_parent"
-       app:cardCornerRadius="10dp"
+       app:cardCornerRadius="4dp"
        android:layout_marginRight="20dp"
        android:layout_marginLeft="20dp"
        android:layout_marginTop="10dp"
@@ -63,7 +63,7 @@
              android:padding="10dp"
              android:fontFamily="@font/myriadpro_light"
              android:textSize="25sp"
-             android:textColor="@color/white"
+             android:textColor="@color/cardview_dark_background"
              android:text="List is currently empty.\n\nAdd a new program down below."/>
 
       </RelativeLayout>
