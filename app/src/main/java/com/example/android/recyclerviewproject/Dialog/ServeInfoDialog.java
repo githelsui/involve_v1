@@ -29,22 +29,6 @@ public class ServeInfoDialog extends AppCompatDialogFragment {
     private EditText mHours;
     private EditText mInfo;
 
-//    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//        @Override
-//        public void onClick(DialogInterface dialog, int i) { }
-//    }) //when "Cancelled" do nothing
-//            .setPositiveButton("Save", new DialogInterface.OnClickListener() {
-//        @Override
-//        public void onClick(DialogInterface dialog, int i) {
-//            String startDate = mStartDate.getText().toString();
-//            String endDate = mEndDate.getText().toString();
-//            double hrs = Double.parseDouble(mHours.getText().toString());
-//            String info = mInfo.getText().toString();
-//
-//            listener.applyServiceText(hrs, startDate, endDate, info);
-//        }
-//    });
-
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());

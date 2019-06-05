@@ -122,7 +122,6 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
             @Override
             public void onItemClick(int pos) {
                 openEventDialog();
-                //TODO #7 create a dialog for a service item when arrow button is clicked(fill with info)
             }
         });
 
