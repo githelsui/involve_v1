@@ -12,8 +12,10 @@ public class ServiceItem implements Parcelable{
 
     private String myDateStart;
     private String myDateEnd;
+    private String location;
+    private String serviceName;
     private double myHrs;
-    private String myDuties; //grab data from a large editText view findViewById(R.id.extra_duties)
+    private String myDuties;
 
     public ServiceItem(double hours, String startDate, String endDate, String duties){
         myHrs = hours;
@@ -58,11 +60,15 @@ public class ServiceItem implements Parcelable{
         return myHrs;
     }
 
+    public String getServiceName() { return serviceName; }
+
     public String getStartDate(){ return myDateStart; }
 
     public String getEndDate(){return myDateEnd;}
 
     public String getMyDuties(){return myDuties;}
+
+    public String getLocation() {return location;}
 
     public Date parseToDate() throws Exception {
         SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");

@@ -63,7 +63,6 @@ public class AddServDialog extends AppCompatDialogFragment {
                                listener.saveData();
                                myDialog.dismiss();
                            }
-
                        }
                    });
             }

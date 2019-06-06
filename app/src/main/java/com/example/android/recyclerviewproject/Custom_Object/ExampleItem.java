@@ -9,7 +9,7 @@ import android.os.Parcelable;
 
 public class ExampleItem implements Parcelable{
     private double myHrs;
-    private ArrayList<ServiceItem> serviceList;
+    private ArrayList serviceList;
     private String myProg;
     private String myAdvisor;
     private String myRole;
@@ -140,7 +140,7 @@ public class ExampleItem implements Parcelable{
     public void sortDates() throws Exception {
         ArrayList<Date> allDates = new ArrayList<>();
         for(int i = 0; i < serviceList.size(); i++){
-            ServiceItem temp = serviceList.get(i);
+            ServiceItem temp = (ServiceItem)serviceList.get(i);
             allDates.add(temp.parseToDate());
         }
     }

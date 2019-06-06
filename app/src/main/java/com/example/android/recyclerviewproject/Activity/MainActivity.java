@@ -51,10 +51,10 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("SHARED PREF", MODE_PRIVATE);
-        SharedPreferences myHrs = getSharedPreferences("my_hours", MODE_PRIVATE);
-        sharedPreferences.edit().clear().commit();
-        myHrs.edit().clear().commit();
+//        SharedPreferences sharedPreferences = getSharedPreferences("SHARED PREF", MODE_PRIVATE);
+//        SharedPreferences myHrs = getSharedPreferences("my_hours", MODE_PRIVATE);
+//        sharedPreferences.edit().clear().commit();
+//        myHrs.edit().clear().commit();
 
 
         loadData();
@@ -81,8 +81,8 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
 
     private void initRecyclerView() {
         myRecycler = findViewById(R.id.recycler_view);
+        introMsg = findViewById(R.id.introview);
         if(myList.size() == 0){
-            introMsg = findViewById(R.id.introview);
             introMsg.setVisibility(View.VISIBLE);
             myRecycler.setVisibility(View.INVISIBLE);
         }

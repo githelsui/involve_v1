@@ -7,7 +7,13 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.transition.Slide;
+import android.transition.Transition;
+import android.transition.TransitionManager;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -108,8 +114,6 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
                 + ": " + Double.toString(myItem.getInitialHr()));
         if(myItem.getRole().equals("")) role.setText("Role: " + getString(R.string.n_a));
         if(myItem.getAdvisor() == null) advisor.setText("Advisor: " + getString(R.string.n_a));
-
-
     }
 
     private void closeInfo(){
@@ -125,6 +129,7 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
     }
 
     private void editInfo(){
+        //TODO make another dialog + listener that lets you change values of the program in openEditMode() function
         System.out.println("check edit button");
     }
 
@@ -140,6 +145,7 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
         Intent myInt = getIntent();
         myItem = myInt.getParcelableExtra("Item");
         serviceList = myItem.getServiceList();
+        System.out.println("Size: " + myItem.getServiceList().size());
     }
 
     private void initAddButton() {
@@ -184,7 +190,7 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
         myAdapter.setOnItemClickListener(new ServiceAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int pos) {
-                openEventDialog();
+                openEventDialog(pos);
             }
         });
 
@@ -199,9 +205,10 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
 
     }
 
-    private void openEventDialog(){
+    private void openEventDialog(int pos){
         EventDialog dialog = new EventDialog();
         dialog.setColorCode(myItem.getMyColor());
+        dialog.setService(myItem.getServiceList().get(pos));
         dialog.show(getSupportFragmentManager(), "View Event Info");
     }
 

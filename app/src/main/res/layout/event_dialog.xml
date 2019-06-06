@@ -44,59 +44,98 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:id="@+id/event_datelbl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/myriadpro_light"
+                    android:padding="18dp"
+                    android:text="Date of Event:"
+                    android:textColor="@color/cardview_dark_background"
+                    android:textSize="20sp" />
+
+                <TextView
                     android:id="@+id/event_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_gravity="left"
                     android:layout_centerHorizontal="true"
                     android:fontFamily="@font/myriadpro_light"
                     android:padding="18dp"
-                    android:text="Date of Event"
+                    android:text="@string/n_a"
+                    android:textColor="@color/cardview_dark_background"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/event_hourlbl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/myriadpro_light"
+                    android:padding="18dp"
+                    android:text="Total Hours:"
                     android:textColor="@color/cardview_dark_background"
                     android:textSize="20sp"
-                    android:textStyle="italic" />
+                    android:layout_below="@id/event_date"/>
 
                 <TextView
                     android:id="@+id/eventhour"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_below="@id/event_date"
                     android:layout_centerHorizontal="true"
+                    android:layout_gravity="left"
                     android:fontFamily="@font/myriadpro_light"
                     android:padding="18dp"
-                    android:text="Total Hours"
+                    android:text="@string/n_a"
+                    android:textColor="@color/cardview_dark_background"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/duty_lbl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/myriadpro_light"
+                    android:padding="18dp"
+                    android:text="Duties:"
                     android:textColor="@color/cardview_dark_background"
                     android:textSize="20sp"
-                    android:textStyle="italic"
-                    android:layout_below="@id/event_date"/>
+                    android:layout_below="@id/eventhour"/>
 
                 <TextView
                     android:id="@+id/event_duty"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_below="@id/eventhour"
                     android:layout_centerHorizontal="true"
+                    android:layout_gravity="left"
                     android:fontFamily="@font/myriadpro_light"
                     android:padding="18dp"
-                    android:text="Duties"
+                    android:text="@string/n_a"
+                    android:textColor="@color/cardview_dark_background"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/loc_lbl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/myriadpro_light"
+                    android:padding="18dp"
+                    android:text="Location:"
                     android:textColor="@color/cardview_dark_background"
                     android:textSize="20sp"
-                    android:layout_below="@id/eventhour"
-                    android:textStyle="italic"/>
+                    android:layout_below="@id/event_duty"/>
 
                 <TextView
                     android:id="@+id/event_location"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_below="@id/event_duty"
                     android:layout_centerHorizontal="true"
+                    android:layout_gravity="left"
                     android:fontFamily="@font/myriadpro_light"
                     android:padding="18dp"
-                    android:text="Event Location"
+                    android:text="@string/n_a"
                     android:textColor="@color/cardview_dark_background"
-                    android:textSize="20sp"
-                    android:layout_below="@id/event_duty"
-                    android:textStyle="italic"/>
+                    android:textSize="20sp" />
 
 
 
@@ -105,6 +144,7 @@
         </android.support.v7.widget.CardView>
 
         <Button
+            android:id="@+id/edit_eventbtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/eventpage"
@@ -119,6 +159,7 @@
     </RelativeLayout>
 
     <ImageView
+        android:id="@+id/closebtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_x"
