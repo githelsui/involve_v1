@@ -24,6 +24,7 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceV
 
     public ServiceAdapter(ArrayList<ServiceItem> list, ExampleItem temp) {
         obj = temp;
+        //TODO CONVERT ARRAYLIST OF PARCEABLES INTO SERVICE ITEMS
         myServiceList = list;
     }
 
@@ -32,15 +33,15 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceV
     @NonNull
     @Override
     public ServiceViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        LayoutInflater obj = LayoutInflater.from(viewGroup.getContext());
-        View newView = obj.inflate(R.layout.example_item, viewGroup, false);
+        LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
+        View newView = inflater.inflate(R.layout.example_item, viewGroup, false);
         ServiceViewHolder mySelf = new ServiceViewHolder(newView, mListener);
         return mySelf;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ServiceViewHolder serviceViewHolder, int i) {
-        ServiceItem temp = myServiceList.get(i);
+        ServiceItem temp = (ServiceItem) (myServiceList.get(i));
         serviceViewHolder.mTextView1.setText(temp.getStartDate());
         serviceViewHolder.mTextView2.setText(Double.toString(temp.getHours()) + " ");
 

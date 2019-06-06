@@ -146,6 +146,7 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
         myItem = myInt.getParcelableExtra("Item");
         serviceList = myItem.getServiceList();
         System.out.println("Size: " + myItem.getServiceList().size());
+        System.out.println("Hors: " + myItem.getHours());
     }
 
     private void initAddButton() {
@@ -167,6 +168,8 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
     public void finish() {
         Intent returnIntent = new Intent();
        // myItem.setHrs(myHrs);
+        serviceList = myItem.getServiceList();
+        //returnIntent.putExtra("passed_list", serviceList);
         returnIntent.putExtra("passed_item", myItem);
         returnIntent.putExtra("passed_delete", deleteHrs);
         returnIntent.putExtra("passed_hour", tempHrs);
