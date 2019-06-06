@@ -48,6 +48,8 @@ public class ServiceItem implements Parcelable{
         return 0;
     }
 
+
+    //TODO http://prasanta-paul.blogspot.com/2010/06/android-parcelable-example.html
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeDouble(myHrs);
