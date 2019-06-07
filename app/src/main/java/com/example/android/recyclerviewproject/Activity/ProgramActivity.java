@@ -233,8 +233,8 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
     private void subtHrs(double i){deleteHrs += i;}
 
     @Override
-    public void applyServiceText(double hours, String startDate, String endDate, String duties) {
-        ServiceItem temp = new ServiceItem(hours, startDate, endDate, duties);
+    public void applyServiceText(double hours, String startDate, String endDate, String duties, String name) {
+        ServiceItem temp = new ServiceItem(hours, startDate, endDate, duties, name);
         myItem.addItem(temp);
         myItem.addHrs(hours);
         updateHrs(hours);
@@ -276,12 +276,8 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
 
     @Override
     public void editProgram(ExampleItem passed) {
-        double oldHour = myItem.getInitialHr();
         myItem = passed;
         updateHrs(myItem.getHours());
-
-
-
         setLayouts();
         closeInfo();
         initRecyclerView();

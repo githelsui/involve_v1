@@ -29,6 +29,7 @@ public class ServeInfoDialog extends AppCompatDialogFragment {
      private ServeInfoDialogListener listener;
     private EditText mStartDate;
     private EditText mHours;
+    private EditText mName;
     private EditText mInfo;
 
     @Override
@@ -61,7 +62,7 @@ public class ServeInfoDialog extends AppCompatDialogFragment {
                             String date = mStartDate.getText().toString();
                             double hrs = checkHours();
                             String info = mInfo.getText().toString();
-                            listener.applyServiceText(hrs,date, "end", info);
+                            listener.applyServiceText(hrs,date, "end", info, checkTexts());
                             myDialog.dismiss();
                         }
                     }
@@ -76,9 +77,15 @@ public class ServeInfoDialog extends AppCompatDialogFragment {
         else return Double.parseDouble(mHours.getText().toString());
     }
 
+    private String checkTexts(){
+        if(mName.getText().toString().toString().equals("")) return getString(R.string.no_name);
+        else return mName.getText().toString();
+    }
+
     public void setViews(View myView){
         Date currentDate = Calendar.getInstance().getTime();
         SimpleDateFormat simpleDate = new SimpleDateFormat("MM/dd/yyyy");
+        mName = myView.findViewById(R.id.eventname_text);
         mStartDate = myView.findViewById(R.id.date_started);
         mStartDate.setHint(simpleDate.format(currentDate));
         mHours = myView.findViewById(R.id.ind_hours);
@@ -97,6 +104,6 @@ public class ServeInfoDialog extends AppCompatDialogFragment {
     }
 
     public interface ServeInfoDialogListener {
-        void applyServiceText(double hours, String startDate, String endDate, String duties);
+        void applyServiceText(double hours, String startDate, String endDate, String duties, String name);
     }
 }

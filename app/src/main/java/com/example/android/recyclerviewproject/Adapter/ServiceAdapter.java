@@ -34,7 +34,7 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceV
     @Override
     public ServiceViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
-        View newView = inflater.inflate(R.layout.example_item, viewGroup, false);
+        View newView = inflater.inflate(R.layout.service_item, viewGroup, false);
         ServiceViewHolder mySelf = new ServiceViewHolder(newView, mListener);
         return mySelf;
     }
@@ -42,8 +42,18 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceV
     @Override
     public void onBindViewHolder(@NonNull ServiceViewHolder serviceViewHolder, int i) {
         ServiceItem temp = (ServiceItem) (myServiceList.get(i));
-        serviceViewHolder.mTextView1.setText(temp.getStartDate());
-        serviceViewHolder.mTextView2.setText(Double.toString(temp.getHours()) + " ");
+        if(temp.getMyName().length() > 13){
+            int indexEnd = 13;
+            for(int j = indexEnd; j < temp.getMyName().length(); j++){
+                if(temp.getMyName().substring(i, i+1) == " ") indexEnd = j-1;
+            }
+            String msg = temp.getMyName().substring(0, indexEnd);
+            serviceViewHolder.mTextView1.setText(msg + "...");
+        }
+        else (serviceViewHolder.mTextView1).setText(temp.getMyName());
+        serviceViewHolder.mTextView2.setText(temp.getStartDate());
+        serviceViewHolder.mHour.setText(Double.toString(temp.getHours()) + " hours");
+
 
         RandomColor colors = new RandomColor();
         int[] choices = colors.getMyArray();
@@ -68,12 +78,14 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceV
         public TextView mTextView1; //TextView shows a Date (month.day.year)
         public TextView mTextView2; //TextView shows hours done for that specific service
         public ImageView mArrow;    //button to be clicked for info regarding that service -> opens up to Dialog with Data
+        public TextView mHour;
         private OnItemClickListener mListener;
 
         public ServiceViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
             mCardView = itemView.findViewById(R.id.relative_layout);
             mTextView1 = itemView.findViewById(R.id.text_view1);
+            mHour = itemView.findViewById(R.id.hourslbl);
             mTextView2 = itemView.findViewById(R.id.text_view2);
             mArrow = itemView.findViewById(R.id.arrow_img);
             mListener = listener;

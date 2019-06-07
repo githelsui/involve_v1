@@ -28,6 +28,7 @@
         android:fontFamily="@font/myriadpro_light"
         android:text="Date of Event (Month/Day/Year)"/>
 
+
     <EditText
         android:importantForAutofill="no"
         android:id="@+id/date_started"
@@ -39,6 +40,29 @@
         android:textSize="20sp"
         android:fontFamily="@font/myriadpro_light"
         android:hint="Today: 01 / 01 / 2019 "/>
+
+    <TextView
+        android:id="@+id/eventname_lbl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/date_started"
+        android:paddingTop="15dp"
+        android:textColor="@color/cardview_dark_background"
+        android:textSize="20sp"
+        android:fontFamily="@font/myriadpro_light"
+        android:text="Name of Event"/>
+
+
+    <EditText
+        android:importantForAutofill="no"
+        android:id="@+id/eventname_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/eventname_lbl"
+        android:padding="10dp"
+        android:textSize="20sp"
+        android:fontFamily="@font/myriadpro_light"
+        android:hint="Enter Here"/>
 
     <!--<TextView-->
         <!--android:id="@+id/dateend_lbl"-->
@@ -67,7 +91,7 @@
         android:id="@+id/servicehours_lbl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/date_started"
+        android:layout_below="@id/eventname_text"
         android:paddingTop="20dp"
         android:textColor="@color/cardview_dark_background"
         android:textSize="20sp"

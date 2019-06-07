@@ -83,7 +83,10 @@ public class EventDialog extends AppCompatDialogFragment {
         service_layout = myView.findViewById(R.id.event_color);
         service_layout.setBackgroundResource(colorChoices[colorCode]);
         eventName = myView.findViewById(R.id.event_name);
-        eventName.setText(checkNull(myEvent.getServiceName()));
+        if(myEvent.getMyName() != null)
+            eventName.setText(myEvent.getMyName());
+        else
+            eventName.setText(getString(R.string.no_name));
         dateStart = myView.findViewById(R.id.event_date);
         dateStart.setText(myEvent.getStartDate());
         eventHour = myView.findViewById(R.id.eventhour);
