@@ -6,11 +6,15 @@ import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -19,7 +23,9 @@ import com.example.android.recyclerviewproject.Custom_Object.RandomColor;
 import com.example.android.recyclerviewproject.Custom_Object.ServiceItem;
 import com.example.android.recyclerviewproject.R;
 
-public class EventDialog extends AppCompatDialogFragment {
+import static android.content.ContentValues.TAG;
+
+public class EventDialog extends AppCompatDialogFragment implements EditEventDialog.EditEventListener {
     //TODO make editMode() function by dialog.setPositive to edit button
 
     private EventDialogListener listener;
@@ -31,7 +37,9 @@ public class EventDialog extends AppCompatDialogFragment {
     private TextView eventHour;
     private TextView location;
     private ServiceItem myEvent;
+    private EditEventDialog myEditDialog;
     private int colorCode;
+    private Context myContext;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -49,6 +57,15 @@ public class EventDialog extends AppCompatDialogFragment {
             @Override
             public void onShow(DialogInterface dialog) {
                 ImageView closeBtn = myView.findViewById(R.id.closebtn);
+                Button editBtn = myView.findViewById(R.id.edit_eventbtn);
+                editBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        myDialog.dismiss();
+                        showEditDialog();
+                    }
+                });
+
                 closeBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -58,6 +75,20 @@ public class EventDialog extends AppCompatDialogFragment {
             }
         });
         return myDialog;
+    }
+
+    public void setMyContext(Context cont){
+        myContext = cont;
+    }
+
+    private void showEditDialog(){
+        myEditDialog = new EditEventDialog();
+        try {
+            FragmentManager fragmentManager = ((FragmentActivity) myContext).getSupportFragmentManager();
+        } catch (ClassCastException e) {
+            Log.e(TAG, "Can't get fragment manager");
+        }
+        myEditDialog.show(getFragmentManager(), "Edit Event");
     }
 
     @Override
@@ -103,6 +134,11 @@ public class EventDialog extends AppCompatDialogFragment {
             else return temp;
         }
         return "N/A";
+    }
+
+    @Override
+    public void saveData(ServiceItem item) {
+        listener.editEvent();
     }
 
     public interface EventDialogListener{

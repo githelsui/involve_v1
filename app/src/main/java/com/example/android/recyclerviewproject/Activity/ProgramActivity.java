@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.example.android.recyclerviewproject.Custom_Object.ExampleItem;
 import com.example.android.recyclerviewproject.Dialog.DeleteProgramDialog;
+import com.example.android.recyclerviewproject.Dialog.EditEventDialog;
 import com.example.android.recyclerviewproject.Dialog.EditProgram;
 import com.example.android.recyclerviewproject.Dialog.EventDialog;
 import com.example.android.recyclerviewproject.Helper.RecyclerItemTouchHelper;
@@ -35,7 +36,7 @@ import com.example.android.recyclerviewproject.Custom_Object.ServiceItem;
 import java.util.ArrayList;
 
 public class ProgramActivity extends AppCompatActivity implements ServeInfoDialog.ServeInfoDialogListener,
-        DeleteProgramDialog.DeleteProgramDialogListener, EventDialog.EventDialogListener, EditProgram.EditProgramListener {
+        DeleteProgramDialog.DeleteProgramDialogListener, EventDialog.EventDialogListener, EditProgram.EditProgramListener, EditEventDialog.EditEventListener {
 
     private ArrayList<ServiceItem> serviceList;
     private double deleteHrs;
@@ -218,6 +219,7 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
         EventDialog dialog = new EventDialog();
         dialog.setColorCode(myItem.getMyColor());
         dialog.setService(myItem.getServiceList().get(pos));
+        dialog.setMyContext(ProgramActivity.this);
         dialog.show(getSupportFragmentManager(), "View Event Info");
     }
 
@@ -266,14 +268,6 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
 
     }
 
-    //old = 4
-    //new = 2
-
-    //total hours = 10
-    //ex: 6
-    //ex: 4 -->
-
-
     @Override
     public void editProgram(ExampleItem passed) {
         myItem = passed;
@@ -284,4 +278,8 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
     }
 
 
+    @Override
+    public void saveData(ServiceItem item) {
+
+    }
 }
