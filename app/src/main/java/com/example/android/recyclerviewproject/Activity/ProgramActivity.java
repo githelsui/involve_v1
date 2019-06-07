@@ -47,6 +47,7 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
     private Button addServBtn;
     private RecyclerView myRecycler;
     private ServiceAdapter myAdapter;
+    private CardView introMsg;
     private ExampleItem myItem;
     private ImageView btnDown;
     private RelativeLayout cardLayout;
@@ -188,6 +189,11 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
     private void initRecyclerView() {
         myHrs.setText(Double.toString(myItem.getHours()) + " hours");
         myRecycler = findViewById(R.id.serverecycler_view);
+        introMsg = findViewById(R.id.introview);
+        if(myItem.getServiceList().size() == 0){
+            introMsg.setVisibility(View.VISIBLE);
+            myRecycler.setVisibility(View.INVISIBLE);
+        }
         myRecycler.setHasFixedSize(true);
         myLayout = new LinearLayoutManager(this);
         myAdapter = new ServiceAdapter(myItem.getServiceList(), myItem);

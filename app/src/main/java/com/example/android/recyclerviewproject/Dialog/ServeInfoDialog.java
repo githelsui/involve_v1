@@ -52,13 +52,7 @@ public class ServeInfoDialog extends AppCompatDialogFragment {
                 saveBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(mStartDate.getText().toString().equals("")){
-                            Animation shake = AnimationUtils.loadAnimation(myView.getContext(), R.anim.shake);
-                            mStartDate.startAnimation(shake);
-                            Toast msg = Toast.makeText(myView.getContext(), "Date is Required", Toast.LENGTH_SHORT);
-                            msg.show();
-                        }
-                        else{
+                        if(checkDate(myView) == true){
                             String date = mStartDate.getText().toString();
                             double hrs = checkHours();
                             String info = mInfo.getText().toString();
@@ -70,6 +64,54 @@ public class ServeInfoDialog extends AppCompatDialogFragment {
             }
         });
         return myDialog;
+    }
+
+    private boolean checkDate(View myView){
+        Animation shake = AnimationUtils.loadAnimation(myView.getContext(), R.anim.shake);
+        String date = mStartDate.getText().toString();
+        if(date.equals("")){
+            mStartDate.startAnimation(shake);
+            Toast msg = Toast.makeText(myView.getContext(), "Date is Required", Toast.LENGTH_SHORT);
+            msg.show();
+            return false;
+        }
+        int slashCount = 0;
+        for(int i = 0; i < date.length(); i++){
+            if(date.substring(i, i+1).equals("/")) slashCount++;
+        }
+        if(slashCount != 2){
+            mStartDate.startAnimation(shake);
+            Toast msg = Toast.makeText(myView.getContext(), "Follow the format mm/dd/yyyy", Toast.LENGTH_SHORT);
+            msg.show();
+            return false;
+        }
+        if (checkContents(myView, date) == false){
+            mStartDate.startAnimation(shake);
+            Toast msg = Toast.makeText(myView.getContext(), "Follow wwwthe format mm/dd/yyyy", Toast.LENGTH_SHORT);
+            msg.show();
+            return false;
+        }
+        return true;
+    }
+
+    private boolean checkContents(View myView, String temp){
+        boolean marker = false;
+        int counter = 0;
+        for(int i = 0; i < temp.length(); i++){
+            if(marker == false && !temp.substring(i, i+1).equals("/")){
+                marker = false;
+                counter++;
+            }
+            if(marker == true && !temp.substring(i, i+1).equals("/")){
+                marker = false;
+                counter = 0;
+            }
+            if(temp.substring(i, i+1).equals("/")) marker = true;
+            if(counter > 3) {
+                return false;
+            }
+        }
+        return  true;
     }
 
     private double checkHours(){
