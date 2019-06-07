@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.example.android.recyclerviewproject.Custom_Object.ExampleItem;
 import com.example.android.recyclerviewproject.Dialog.DeleteProgramDialog;
+import com.example.android.recyclerviewproject.Dialog.EditProgram;
 import com.example.android.recyclerviewproject.Dialog.EventDialog;
 import com.example.android.recyclerviewproject.Helper.RecyclerItemTouchHelper;
 import com.example.android.recyclerviewproject.Helper.RecyclerServiceTouchHelper;
@@ -33,7 +34,7 @@ import com.example.android.recyclerviewproject.Custom_Object.ServiceItem;
 import java.util.ArrayList;
 
 public class ProgramActivity extends AppCompatActivity implements ServeInfoDialog.ServeInfoDialogListener,
-        DeleteProgramDialog.DeleteProgramDialogListener, EventDialog.EventDialogListener {
+        DeleteProgramDialog.DeleteProgramDialogListener, EventDialog.EventDialogListener, EditProgram.EditProgramListener {
 
     private ArrayList<ServiceItem> serviceList;
     private double deleteHrs;
@@ -129,8 +130,11 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
     }
 
     private void editInfo(){
-        //TODO make another dialog + listener that lets you change values of the program in openEditMode() function
-        System.out.println("check edit button");
+        EditProgram myDialog = new EditProgram();
+        myDialog.setMyItem(myItem);
+        myDialog.show(getSupportFragmentManager(), "Edit Program");
+        Toast msg = Toast.makeText(getApplicationContext(), "Program Information Saved", Toast.LENGTH_SHORT);
+        msg.show();
     }
 
     private void setColorChoices(){
@@ -257,6 +261,11 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
 
     @Override
     public void editEvent() {
+
+    }
+
+    @Override
+    public void editProgram(ExampleItem passed) {
 
     }
 }

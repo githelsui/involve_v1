@@ -56,7 +56,6 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
 //        sharedPreferences.edit().clear().commit();
 //        myHrs.edit().clear().commit();
 
-
         loadData();
         initRecyclerView();
         initAddButton();
@@ -69,14 +68,12 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
            ExampleItem passedItem =(ExampleItem)(data.getExtras().get("passed_item"));
            int position = (passedItem.getPosition());
            myList.set(position, passedItem);
-           //ExampleItem mainItem = myList.get(position);
-            //ArrayList<ServiceItem> passedList = (ArrayList) (data.getExtras().get("passed_list"))
            double passedHour = (double) (data.getExtras().get("passed_hour"));
            double deleteHrs = (double) (data.getExtras().get("passed_delete"));
            addTotalHours(passedHour);
            subtractHours(deleteHrs);
            //TODO Call save data in program activity
-            saveData();
+            //saveData();
            initRecyclerView();
         }
     }
