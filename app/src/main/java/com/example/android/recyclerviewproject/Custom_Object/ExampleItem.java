@@ -40,6 +40,7 @@ public class ExampleItem implements Parcelable{
         serviceList = in.readArrayList(ServiceItem.class.getClassLoader());
         position = in.readInt();
         initialHr = in.readDouble();
+        myAdvisor = in.readString();
     }
 
     public static final Creator<ExampleItem> CREATOR = new Creator<ExampleItem>() {
@@ -69,6 +70,7 @@ public class ExampleItem implements Parcelable{
         dest.writeList(serviceList);
         dest.writeInt(position);
         dest.writeDouble(initialHr);
+        dest.writeString(myAdvisor);
     }
 
     public void addItem(ServiceItem temp){
@@ -96,8 +98,27 @@ public class ExampleItem implements Parcelable{
         return myRole;
     }
 
-    public int getMyColor(){
-        return myColor;}
+    public int getMyColor(){ return myColor;}
+
+
+    //old initial is 8
+    //new initial is 6
+
+    //if there are serviceitems present-> totalhours = serviceitems.hours + new initial-oldinitial
+    //total hours should be 8
+    public void setInitialHr(double temp) {
+        double oldInitial = initialHr;
+        initialHr = temp;
+        if(initialHr == myHrs) myHrs = temp;
+        else{
+            if(oldInitial<initialHr) myHrs += initialHr-oldInitial;
+            else myHrs -= oldInitial-initialHr;
+        }
+    }
+    public void setMyRole(String temp){ myRole = temp;}
+    public void setAdvisor(String temp){myAdvisor = temp;}
+    public void setProgramName(String temp){myProg = temp;}
+
 
     public void removeItem(int i){
         serviceList.remove(i);

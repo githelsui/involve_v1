@@ -1,5 +1,6 @@
 package com.example.android.recyclerviewproject.Activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -107,6 +108,7 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
         setInfo();
     }
 
+    @SuppressLint("SetTextI18n")
     private void setInfo(){
         TextView initialhrs = findViewById(R.id.initialhours);
         TextView role = findViewById(R.id.role);
@@ -114,7 +116,9 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
         initialhrs.setText("Initial hours added to " + myItem.getProgram()
                 + ": " + Double.toString(myItem.getInitialHr()));
         if(myItem.getRole().equals("")) role.setText("Role: " + getString(R.string.n_a));
+        else role.setText("Role: " + myItem.getRole());
         if(myItem.getAdvisor() == null) advisor.setText("Advisor: " + getString(R.string.n_a));
+        else advisor.setText("Advisor: " + myItem.getAdvisor());
     }
 
     private void closeInfo(){
@@ -133,8 +137,6 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
         EditProgram myDialog = new EditProgram();
         myDialog.setMyItem(myItem);
         myDialog.show(getSupportFragmentManager(), "Edit Program");
-        Toast msg = Toast.makeText(getApplicationContext(), "Program Information Saved", Toast.LENGTH_SHORT);
-        msg.show();
     }
 
     private void setColorChoices(){
@@ -264,8 +266,26 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
 
     }
 
+    //old = 4
+    //new = 2
+
+    //total hours = 10
+    //ex: 6
+    //ex: 4 -->
+
+
     @Override
     public void editProgram(ExampleItem passed) {
+        double oldHour = myItem.getInitialHr();
+        myItem = passed;
+        updateHrs(myItem.getHours());
 
+
+
+        setLayouts();
+        closeInfo();
+        initRecyclerView();
     }
+
+
 }
