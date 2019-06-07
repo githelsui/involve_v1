@@ -78,7 +78,7 @@ public class ServeInfoDialog extends AppCompatDialogFragment {
     }
 
     private String checkTexts(){
-        if(mName.getText().toString().toString().equals("")) return getString(R.string.no_name);
+        if(mName.getText().toString().equals("")) return getString(R.string.no_name);
         else return mName.getText().toString();
     }
 

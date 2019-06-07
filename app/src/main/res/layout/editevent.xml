@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:padding="17dp">
 
-        <EditText
+        <TextView
             android:id="@+id/event_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -27,8 +27,7 @@
             android:textColor="@color/white"
             android:fontFamily="@font/myriadpro_light"
             android:textColorHint="@color/cardview_dark_background"
-            android:background="@color/white"
-            android:hint="Event Name "/>
+            android:text="Edit Event"/>
 
         <android.support.v7.widget.CardView
             android:layout_marginTop="10dp"
@@ -46,24 +45,48 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:id="@+id/event_namelbl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/myriadpro_light"
+                    android:padding="18dp"
+                    android:text="Name of Event:"
+                    android:textColor="@color/cardview_dark_background"
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/edit_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:layout_centerHorizontal="true"
+                    android:fontFamily="@font/myriadpro_light"
+                    android:padding="18dp"
+                    android:hint="@string/n_a"
+                    android:textColor="@color/cardview_dark_background"
+                    android:textSize="20sp" />
+
+                <TextView
                     android:id="@+id/event_datelbl"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/myriadpro_light"
                     android:padding="18dp"
+                    android:layout_below="@+id/event_namelbl"
                     android:text="Date of Event:"
                     android:textColor="@color/cardview_dark_background"
                     android:textSize="20sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/event_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="left"
+                    android:gravity="start"
                     android:layout_centerHorizontal="true"
+                    android:layout_below="@id/edit_name"
                     android:fontFamily="@font/myriadpro_light"
                     android:padding="18dp"
-                    android:text="@string/n_a"
+                    android:hint="@string/n_a"
                     android:textColor="@color/cardview_dark_background"
                     android:textSize="20sp" />
 
@@ -76,18 +99,18 @@
                     android:text="Total Hours:"
                     android:textColor="@color/cardview_dark_background"
                     android:textSize="20sp"
-                    android:layout_below="@id/event_date"/>
+                    android:layout_below="@id/event_datelbl"/>
 
-                <TextView
+                <EditText
                     android:id="@+id/eventhour"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/event_date"
                     android:layout_centerHorizontal="true"
-                    android:layout_gravity="left"
+                    android:gravity="start"
                     android:fontFamily="@font/myriadpro_light"
                     android:padding="18dp"
-                    android:text="@string/n_a"
+                    android:hint="@string/n_a"
                     android:textColor="@color/cardview_dark_background"
                     android:textSize="20sp" />
 
@@ -102,16 +125,16 @@
                     android:textSize="20sp"
                     android:layout_below="@id/eventhour"/>
 
-                <TextView
+                <EditText
                     android:id="@+id/event_duty"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/eventhour"
                     android:layout_centerHorizontal="true"
-                    android:layout_gravity="left"
+                    android:gravity="start"
                     android:fontFamily="@font/myriadpro_light"
                     android:padding="18dp"
-                    android:text="@string/n_a"
+                    android:hint="@string/n_a"
                     android:textColor="@color/cardview_dark_background"
                     android:textSize="20sp" />
 
@@ -126,46 +149,54 @@
                     android:textSize="20sp"
                     android:layout_below="@id/event_duty"/>
 
-                <TextView
+                <EditText
                     android:id="@+id/event_location"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/event_duty"
                     android:layout_centerHorizontal="true"
-                    android:layout_gravity="left"
+                    android:gravity="start"
                     android:fontFamily="@font/myriadpro_light"
                     android:padding="18dp"
-                    android:text="@string/n_a"
+                    android:hint="@string/n_a"
                     android:textColor="@color/cardview_dark_background"
                     android:textSize="20sp" />
-
-
 
             </RelativeLayout>
 
         </android.support.v7.widget.CardView>
 
-        <Button
-            android:id="@+id/save_event"
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/eventpage"
-            android:textColor="@color/cardview_dark_background"
-            android:textSize="20sp"
-            android:layout_centerHorizontal="true"
-            android:fontFamily="@font/myriadpro_light"
-            android:layout_marginTop="20dp"
-            android:textAllCaps="false"
-            android:text="Save"/>
+            android:layout_centerHorizontal="true">
+            <Button
+                android:id="@+id/save_event"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/cardview_dark_background"
+                android:layout_toRightOf="@id/cancel_edit"
+                android:textSize="20sp"
+                android:fontFamily="@font/myriadpro_light"
+                android:layout_marginTop="20dp"
+                android:textAllCaps="false"
+                android:text="Save"/>
+
+            <Button
+                android:id="@+id/cancel_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/cardview_dark_background"
+                android:textSize="20sp"
+                android:fontFamily="@font/myriadpro_light"
+                android:layout_marginTop="20dp"
+                android:textAllCaps="false"
+                android:text="Cancel"/>
+
+        </RelativeLayout>
 
     </RelativeLayout>
-
-    <ImageView
-        android:id="@+id/closebtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_x"
-        android:padding="8dp"/>
 
 
 </android.support.v7.widget.CardView>

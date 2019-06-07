@@ -88,6 +88,8 @@ public class EventDialog extends AppCompatDialogFragment implements EditEventDia
         } catch (ClassCastException e) {
             Log.e(TAG, "Can't get fragment manager");
         }
+        myEditDialog.setService(myEvent);
+        myEditDialog.setColorCode(colorCode);
         myEditDialog.show(getFragmentManager(), "Edit Event");
     }
 

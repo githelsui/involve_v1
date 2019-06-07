@@ -60,10 +60,10 @@ public class EditProgram extends AppCompatDialogFragment {
                             msg.show();
                         }
                         else{
-                            if(mName.getText().toString().equals("")== false) myItem.setProgramName(mName.getText().toString());
-                            if(mHours.getText().toString().equals("") == false) myItem.setInitialHr(Double.parseDouble(mHours.getText().toString()));
-                            if(mRole.getText().toString().equals("") == false) myItem.setMyRole(mRole.getText().toString());
-                            if(mAdvisor.getText().toString().equals("") == false) myItem.setAdvisor(mAdvisor.getText().toString());
+                            if(!mName.getText().toString().equals("")) myItem.setProgramName(mName.getText().toString());
+                            if(!mHours.getText().toString().equals("")) myItem.setInitialHr(Double.parseDouble(mHours.getText().toString()));
+                            if(!mRole.getText().toString().equals("")) myItem.setMyRole(mRole.getText().toString());
+                            if(!mAdvisor.getText().toString().equals("")) myItem.setAdvisor(mAdvisor.getText().toString());
                             listener.editProgram(myItem);
                             myDialog.dismiss();
                             Toast msg = Toast.makeText(myView.getContext(), "Changes saved", Toast.LENGTH_SHORT);
