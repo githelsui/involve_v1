@@ -11,10 +11,13 @@ import android.support.v7.app.AppCompatDialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.android.recyclerviewproject.Custom_Object.RandomColor;
 import com.example.android.recyclerviewproject.Custom_Object.ServiceItem;
@@ -60,8 +63,30 @@ public class EditEventDialog extends AppCompatDialogFragment {
                 saveBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
-                    }
+                        if(mName.getText().toString().equals("") && mDate.getText().toString().equals("")
+                                && mHour.getText().toString().equals("") && mDuty.getText().toString().equals("") && mLoc.getText().toString().equals("")) {
+                            Animation shake = AnimationUtils.loadAnimation(myView.getContext(), R.anim.shake);
+                            mName.startAnimation(shake);
+                            mDate.startAnimation(shake);
+                            mDuty.startAnimation(shake);
+                            mHour.startAnimation(shake);
+                            mLoc.startAnimation(shake);
+                            Toast msg = Toast.makeText(myView.getContext(), "No changes made", Toast.LENGTH_SHORT);
+                            msg.show();
+                              }
+                        else
+                            {
+                                if(!mName.getText().toString().equals("")) myItem.setName(mName.getText().toString());
+                                if(!mHour.getText().toString().equals("")) myItem.setHours(Double.parseDouble(mHour.getText().toString()));
+                                if(!mDate.getText().toString().equals("")) myItem.setDate(mDate.getText().toString());
+                                if(!mDuty.getText().toString().equals("")) myItem.setDuty(mDuty.getText().toString());
+                                if(!mLoc.getText().toString().equals("")) myItem.setLoc(mLoc.getText().toString());
+                                listener.saveData(myItem);
+                                myDialog.dismiss();
+                                Toast msg = Toast.makeText(myView.getContext(), "Changes saved", Toast.LENGTH_SHORT);
+                                msg.show();
+                            }
+                        }
                 });
             }
         });

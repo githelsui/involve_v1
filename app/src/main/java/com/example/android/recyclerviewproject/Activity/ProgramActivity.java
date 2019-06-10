@@ -194,6 +194,10 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
             introMsg.setVisibility(View.VISIBLE);
             myRecycler.setVisibility(View.INVISIBLE);
         }
+        else{
+            introMsg.setVisibility(View.INVISIBLE);
+            myRecycler.setVisibility(View.VISIBLE);
+        }
         myRecycler.setHasFixedSize(true);
         myLayout = new LinearLayoutManager(this);
         myAdapter = new ServiceAdapter(myItem.getServiceList(), myItem);
@@ -246,9 +250,9 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
         myItem.addItem(temp);
         myItem.addHrs(hours);
         updateHrs(hours);
+        initRecyclerView();
         Toast msg = Toast.makeText(getApplicationContext(), "New Service Added", Toast.LENGTH_SHORT);
         msg.show();
-        initRecyclerView();
     }
 
     @Override

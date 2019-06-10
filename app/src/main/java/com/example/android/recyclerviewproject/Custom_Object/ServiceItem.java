@@ -63,6 +63,26 @@ public class ServiceItem implements Parcelable{
 
     public  String  getMyName(){return myName;}
 
+    public void setName(String temp){
+        myName = temp;
+    }
+
+    public void setHours(double i){
+        myHrs = i;
+    }
+
+    public void setDate(String temp){
+        myDateStart = temp;
+    }
+
+    public void setDuty(String temp){
+        myDuties = temp;
+    }
+
+    public void setLoc(String temp){
+        location = temp;
+    }
+
     public double getHours(){
         return myHrs;
     }
