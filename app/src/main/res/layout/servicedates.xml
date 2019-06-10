@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:layout_constraintCircleRadius="20dp"
+    android:scrollbars="vertical"
+    android:fadeScrollbars="true"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/servicename"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:textSize="35sp"
+        android:padding="4dp"
+        android:fontFamily="@font/myriadpro_light"
+        android:text="@string/adddateservice"/>
+
+        <TextView
+            android:id="@+id/datestart_lbl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/servicename"
+            android:paddingTop="15dp"
+            android:textColor="@color/cardview_dark_background"
+            android:textSize="20sp"
+            android:fontFamily="@font/myriadpro_light"
+            android:layout_centerHorizontal="true"
+            android:text="Date of Event "/>
+
+
+        <DatePicker
+            android:id="@+id/date_started"
+            android:datePickerMode="spinner"
+            android:calendarViewShown="false"
+            android:layout_below="@id/datestart_lbl"
+            android:background="@drawable/red_grad"
+            android:layout_width="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/dateend_lbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/date_started"
+        android:paddingTop="15dp"
+        android:textColor="@color/cardview_dark_background"
+        android:textSize="20sp"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/myriadpro_light"
+        android:text="Date of Completion"/>
+
+
+    <DatePicker
+        android:id="@+id/date_end"
+        android:datePickerMode="spinner"
+        android:calendarViewShown="false"
+        android:layout_below="@id/dateend_lbl"
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/red_grad"
+        android:layout_height="wrap_content" />
+
+
+</RelativeLayout>

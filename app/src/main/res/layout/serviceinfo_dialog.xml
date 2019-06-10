@@ -4,6 +4,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:layout_constraintCircleRadius="20dp"
+    android:scrollbars="vertical"
+    android:fadeScrollbars="true"
     android:padding="16dp">
 
        <TextView
@@ -18,34 +20,10 @@
         android:text="@string/adddateservice"/>
 
     <TextView
-        android:id="@+id/datestart_lbl"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/servicename"
-        android:paddingTop="15dp"
-        android:textColor="@color/cardview_dark_background"
-        android:textSize="20sp"
-        android:fontFamily="@font/myriadpro_light"
-        android:text="Date of Event (Month/Day/Year)"/>
-
-
-    <EditText
-        android:importantForAutofill="no"
-        android:id="@+id/date_started"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/datestart_lbl"
-        android:inputType="date"
-        android:padding="10dp"
-        android:textSize="20sp"
-        android:fontFamily="@font/myriadpro_light"
-        android:hint="Today: 01 / 01 / 2019 "/>
-
-    <TextView
         android:id="@+id/eventname_lbl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/date_started"
+        android:layout_below="@id/servicename"
         android:paddingTop="15dp"
         android:textColor="@color/cardview_dark_background"
         android:textSize="20sp"
@@ -64,56 +42,34 @@
         android:fontFamily="@font/myriadpro_light"
         android:hint="Enter Here"/>
 
+
     <!--<TextView-->
-        <!--android:id="@+id/dateend_lbl"-->
+        <!--android:id="@+id/servicehours_lbl"-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@id/date_started"-->
+        <!--android:layout_below="@id/eventname_text"-->
         <!--android:paddingTop="20dp"-->
         <!--android:textColor="@color/cardview_dark_background"-->
         <!--android:textSize="20sp"-->
         <!--android:fontFamily="@font/myriadpro_light"-->
-        <!--android:text="Date of Completion (Month/Day/Year)"/>-->
+        <!--android:text="Total Hours of Service"/>-->
 
     <!--<EditText-->
-        <!--android:importantForAutofill="no"-->
-        <!--android:id="@+id/date_end"-->
+        <!--android:id="@+id/ind_hours"-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="wrap_content"-->
-        <!--android:inputType="date"-->
+        <!--android:inputType="numberDecimal"-->
         <!--android:padding="10dp"-->
         <!--android:textSize="20sp"-->
         <!--android:fontFamily="@font/myriadpro_light"-->
-        <!--android:hint="Today: 01 / 01 / 2019 "-->
-        <!--android:layout_below="@id/dateend_lbl"/>-->
-
-    <TextView
-        android:id="@+id/servicehours_lbl"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/eventname_text"
-        android:paddingTop="20dp"
-        android:textColor="@color/cardview_dark_background"
-        android:textSize="20sp"
-        android:fontFamily="@font/myriadpro_light"
-        android:text="Total Hours of Service"/>
-
-    <EditText
-        android:id="@+id/ind_hours"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:padding="10dp"
-        android:textSize="20sp"
-        android:fontFamily="@font/myriadpro_light"
-        android:hint="@string/initialHrs"
-        android:layout_below="@id/servicehours_lbl"/>
+        <!--android:hint="@string/initialHrs"-->
+        <!--android:layout_below="@id/servicehours_lbl"/>-->
 
     <TextView
         android:id="@+id/duties_lbl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/ind_hours"
+        android:layout_below="@id/eventname_text"
         android:paddingTop="20dp"
         android:textColor="@color/cardview_dark_background"
         android:textSize="20sp"
@@ -132,9 +88,27 @@
         android:hint="Enter Here"
         android:layout_below="@id/duties_lbl"/>
 
-   <!--<CheckBox-->
-       <!--android:layout_width="match_parent"-->
-       <!--android:layout_height="match_parent" -->
-       <!--android:layout_below="@id/duties_info"/>-->
+    <TextView
+        android:id="@+id/location_lbl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/duties_info"
+        android:paddingTop="20dp"
+        android:textColor="@color/cardview_dark_background"
+        android:textSize="20sp"
+        android:fontFamily="@font/myriadpro_light"
+        android:text="Location"/>
+
+    <EditText
+        android:importantForAutofill="no"
+        android:id="@+id/loc_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:inputType="textMultiLine"
+        android:textSize="20sp"
+        android:fontFamily="@font/myriadpro_light"
+        android:hint="Enter Here"
+        android:layout_below="@id/location_lbl"/>
 
     </RelativeLayout>
