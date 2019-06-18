@@ -58,7 +58,7 @@
                     android:id="@+id/edit_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="start"
+                    android:gravity="end"
                     android:layout_centerHorizontal="true"
                     android:fontFamily="@font/myriadpro_light"
                     android:padding="18dp"

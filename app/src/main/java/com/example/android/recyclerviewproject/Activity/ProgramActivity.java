@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.recyclerviewproject.Custom_Object.ExampleItem;
+import com.example.android.recyclerviewproject.Dialog.DateDialog;
 import com.example.android.recyclerviewproject.Dialog.DeleteProgramDialog;
 import com.example.android.recyclerviewproject.Dialog.EditEventDialog;
 import com.example.android.recyclerviewproject.Dialog.EditProgram;
@@ -36,7 +37,7 @@ import com.example.android.recyclerviewproject.Custom_Object.ServiceItem;
 import java.util.ArrayList;
 
 public class ProgramActivity extends AppCompatActivity implements ServeInfoDialog.ServeInfoDialogListener,
-        DeleteProgramDialog.DeleteProgramDialogListener, EventDialog.EventDialogListener, EditProgram.EditProgramListener, EditEventDialog.EditEventListener {
+        DeleteProgramDialog.DeleteProgramDialogListener, EventDialog.EventDialogListener, EditProgram.EditProgramListener, DateDialog.DateDialogListener, EditEventDialog.EditEventListener {
 
     private ArrayList<ServiceItem> serviceList;
     private double deleteHrs;
@@ -169,6 +170,7 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
 
     private void openDialog() {
         ServeInfoDialog myDialog = new ServeInfoDialog();
+        myDialog.setMyContext(ProgramActivity.this);
         myDialog.show(getSupportFragmentManager(), "Add New Service Dialog");
     }
 
@@ -290,6 +292,11 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
 
     @Override
     public void saveData(ServiceItem item) {
+            //TODO save service item after being edited
+    }
 
+    @Override
+    public void passServeElements() {
+        //create
     }
 }

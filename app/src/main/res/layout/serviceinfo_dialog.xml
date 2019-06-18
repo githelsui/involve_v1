@@ -14,7 +14,8 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:textSize="35sp"
+           android:gravity="center"
+        android:textSize="25sp"
         android:padding="4dp"
         android:fontFamily="@font/myriadpro_light"
         android:text="@string/adddateservice"/>
@@ -41,29 +42,6 @@
         android:textSize="20sp"
         android:fontFamily="@font/myriadpro_light"
         android:hint="Enter Here"/>
-
-
-    <!--<TextView-->
-        <!--android:id="@+id/servicehours_lbl"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@id/eventname_text"-->
-        <!--android:paddingTop="20dp"-->
-        <!--android:textColor="@color/cardview_dark_background"-->
-        <!--android:textSize="20sp"-->
-        <!--android:fontFamily="@font/myriadpro_light"-->
-        <!--android:text="Total Hours of Service"/>-->
-
-    <!--<EditText-->
-        <!--android:id="@+id/ind_hours"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:inputType="numberDecimal"-->
-        <!--android:padding="10dp"-->
-        <!--android:textSize="20sp"-->
-        <!--android:fontFamily="@font/myriadpro_light"-->
-        <!--android:hint="@string/initialHrs"-->
-        <!--android:layout_below="@id/servicehours_lbl"/>-->
 
     <TextView
         android:id="@+id/duties_lbl"

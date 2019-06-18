@@ -18,7 +18,6 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.android.recyclerviewproject.Custom_Object.RandomColor;
 import com.example.android.recyclerviewproject.Custom_Object.ServiceItem;
 import com.example.android.recyclerviewproject.R;

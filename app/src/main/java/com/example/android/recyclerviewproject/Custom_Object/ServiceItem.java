@@ -61,6 +61,10 @@ public class ServiceItem implements Parcelable{
         dest.writeString(myName);
     }
 
+    public boolean isOneDay(){
+        return myDateStart.equals(myDateEnd);
+    }
+
     public  String  getMyName(){return myName;}
 
     public void setName(String temp){

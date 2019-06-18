@@ -51,7 +51,8 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceV
             serviceViewHolder.mTextView1.setText(msg + "...");
         }
         else (serviceViewHolder.mTextView1).setText(temp.getMyName());
-        serviceViewHolder.mTextView2.setText(temp.getStartDate());
+        if(temp.isOneDay()) serviceViewHolder.mTextView2.setText(temp.getStartDate());
+        else serviceViewHolder.mTextView2.setText(temp.getStartDate() + " - " + temp.getEndDate());
         serviceViewHolder.mHour.setText(Double.toString(temp.getHours()) + " hours");
 
 
