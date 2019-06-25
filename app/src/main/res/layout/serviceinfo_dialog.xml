@@ -13,8 +13,8 @@
     <!--close/cancel button (imageview)-->
     <ImageView
         android:id="@+id/closebtn"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:src="@drawable/ic_x"
         android:padding="2dp"/>
 
@@ -27,8 +27,7 @@
             android:gravity="center"
             android:textColor="@color/white"
             android:textSize="35sp"
-            android:padding="12dp"
-            android:layout_below="@id/closebtn"
+            android:padding="14dp"
             android:fontFamily="@font/myriadpro_light"
             android:text="@string/adddateservice"/>
 
@@ -155,16 +154,43 @@
                 android:timePickerMode="spinner"
                 android:layout_centerHorizontal="true"
                 android:layout_below="@id/time_endlbl"/>
-            <TextView
-                android:id="@+id/startinfo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/timeend"
-                android:textSize="20sp"
-                android:fontFamily="@font/myriadpro_light"
-                android:layout_centerHorizontal="true"
-                android:text="Start Time at hh:mm"/>
         </RelativeLayout>
+
+    <!--Hours View-->
+    <RelativeLayout
+        android:id="@+id/hours_view"
+        android:visibility="invisible"
+        android:background="@color/white"
+        android:padding="18dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_below="@id/servicename"
+        android:layout_width="300dp"
+        android:layout_height="250dp">
+
+        <TextView
+            android:id="@+id/hoursviewlbl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:textColor="@color/cardview_dark_background"
+            android:textSize="25sp"
+            android:fontFamily="@font/myriadpro_light"
+            android:text="Total Hours of Service:"/>
+
+        <EditText
+            android:id="@+id/hoursedit_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:layout_below="@id/hoursviewlbl"
+            android:padding="20dp"
+            android:hint="0.0"
+            android:textSize="28sp"
+            android:fontFamily="@font/myriadpro_light"
+            android:layout_centerHorizontal="true"/>
+
+    </RelativeLayout>
 
         <!--Final View-->
         <RelativeLayout
@@ -258,9 +284,10 @@
         android:text="NEXT"
         android:textSize="22sp"
         android:textColor="@color/white"
+        android:textStyle="bold"
         android:onClick="onClick"
         android:layout_alignParentRight="true"
-        android:layout_below="@id/endtime_view"
+        android:layout_below="@id/last_view"
         android:padding="20dp"
         android:fontFamily="@font/myriadpro_light"
         android:clickable="true"/>
@@ -268,6 +295,7 @@
     <TextView
         android:visibility="invisible"
         android:id="@+id/back_btn"
+        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="BACK"
@@ -275,7 +303,7 @@
         android:textSize="22sp"
         android:textColor="@color/white"
         android:onClick="onClick"
-        android:layout_below="@id/endtime_view"
+        android:layout_below="@id/last_view"
         android:padding="20dp"
         android:fontFamily="@font/myriadpro_light"
         android:clickable="true"/>

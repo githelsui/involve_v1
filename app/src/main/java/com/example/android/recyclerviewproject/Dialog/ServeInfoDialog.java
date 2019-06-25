@@ -34,6 +34,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 import com.example.android.recyclerviewproject.Activity.ProgramActivity;
 import com.example.android.recyclerviewproject.Custom_Object.ExampleItem;
+import com.example.android.recyclerviewproject.Custom_Object.ServiceItem;
 import com.example.android.recyclerviewproject.R;
 import static android.content.ContentValues.TAG;
 
@@ -43,17 +44,27 @@ public class ServeInfoDialog extends AppCompatDialogFragment{
     private RelativeLayout startDateView;
     private RelativeLayout startTimeView;
     private RelativeLayout endTimeView;
+    private RelativeLayout hoursView;
     private RelativeLayout finalView;
     private Context myContext;
     private DatePicker dateStart;
     private DatePicker dateEnd;
     private TextView title;
-    private TextView startTimeTitle;
     private TextView backBtn;
     private TimePicker timeStart;
     private ExampleItem myItem;
     private int[] colorChoices;
     private TimePicker timeEnd;
+    private int startHr;
+    private int endHr;
+    private int startMin;
+    private int endMin;
+    private EditText mLoc;
+    private EditText mName;
+    private EditText mInfo;
+    private EditText mHours;
+    private double hrs;
+    private ServeInfoDialogListener listener;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -91,6 +102,20 @@ public class ServeInfoDialog extends AppCompatDialogFragment{
         return myDialog;
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try{
+            listener = (ServeInfoDialogListener) context;
+        }catch(ClassCastException e){
+            throw new ClassCastException(context.toString() + " IMPLEMENT ADDSERVEDIALOGLISTENER");
+        }
+    }
+
+    public interface ServeInfoDialogListener{
+        void saveNewService(ServiceItem item);
+    }
+
     public void setColors(ExampleItem item, int[] arr){
         myItem = item;
         colorChoices = arr;
@@ -98,8 +123,6 @@ public class ServeInfoDialog extends AppCompatDialogFragment{
 
     private void showEndDate(final TextView btn, final Dialog myDialog, final View myView){
         int shortAnimationDuration = getResources().getInteger(android.R.integer.config_shortAnimTime);
-        title.setText("Service for " + getStartDate());
-        title.setTextSize(32);
         startDateView.setVisibility(View.INVISIBLE);
         endDateView.setVisibility(View.VISIBLE);
         endDateView.setAlpha(0f);
@@ -177,12 +200,18 @@ public class ServeInfoDialog extends AppCompatDialogFragment{
                 .alpha(1f)
                 .setDuration(shortAnimationDuration)
                 .setListener(null);
-        startTimeTitle.setText("Start Time at " + getStartTime());
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                endTimeView.setVisibility(View.INVISIBLE);
-                showFinalView(btn, myDialog, myView);
+                if(checkTimes() == false){
+                    Animation shake = AnimationUtils.loadAnimation(myView.getContext(), R.anim.shake);
+                    timeEnd.startAnimation(shake);
+                    Toast.makeText(myContext, "End time cannot exist before start time", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    endTimeView.setVisibility(View.INVISIBLE);
+                    showHoursView(btn, myDialog, myView);
+                }
             }
         });
         backBtn.setOnClickListener(new View.OnClickListener() {
@@ -194,9 +223,42 @@ public class ServeInfoDialog extends AppCompatDialogFragment{
         });
     }
 
+    private void showHoursView(final TextView btn, final Dialog myDialog, final View myView){
+        int shortAnimationDuration = getResources().getInteger(android.R.integer.config_shortAnimTime);
+        title.setText("Service for\n" + getDateInfo() + "\nfrom " + getStartTime() + " to " + getEndTime());
+        title.setTextSize(28);
+        mHours.setHint(getHrs() + "");
+        hoursView.setVisibility(View.VISIBLE);
+        hoursView.setAlpha(0f);
+        hoursView.animate()
+                .alpha(1f)
+                .setDuration(shortAnimationDuration)
+                .setListener(null);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hoursView.setVisibility(View.INVISIBLE);
+                checkHours();
+                showFinalView(btn, myDialog, myView);
+            }
+        });
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hoursView.setVisibility(View.INVISIBLE);
+                showEndTime(btn, myDialog, myView);
+            }
+        });
+    }
+
+    private void checkHours(){
+        if(mHours.getText().toString().equals("")) hrs = getHrs();
+        else hrs = Double.parseDouble(mHours.getText().toString());
+    }
+
     private void showFinalView(final TextView btn, final Dialog myDialog, final View myView){
         int shortAnimationDuration = getResources().getInteger(android.R.integer.config_shortAnimTime);
-        title.setText("Service for\n" + getDateInfo());
+        title.setText("Service for\n" + getDateInfo() + "\nfrom " + getStartTime() + " to " + getEndTime());
         title.setTextSize(28);
         finalView.setVisibility(View.VISIBLE);
         finalView.setAlpha(0f);
@@ -204,11 +266,15 @@ public class ServeInfoDialog extends AppCompatDialogFragment{
                 .alpha(1f)
                 .setDuration(shortAnimationDuration)
                 .setListener(null);
+        btn.setText("SAVE");
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finalView.setVisibility(View.INVISIBLE);
-                //call listener.saveService and override in programactivity.java
+                ServiceItem temp = new ServiceItem(hrs, getStartDate(), getEndDate(), mInfo.getText().toString(), checkTexts());
+                temp.setLoc(mLoc.getText().toString());
+                listener.saveNewService(temp);
+                myDialog.dismiss();
             }
         });
         backBtn.setOnClickListener(new View.OnClickListener() {
@@ -220,8 +286,59 @@ public class ServeInfoDialog extends AppCompatDialogFragment{
         });
     }
 
+    private String checkTexts(){
+        if(mName.getText().toString().equals("")) return getString(R.string.no_name);
+        else return mName.getText().toString();
+    }
+
+    private double getHrs(){
+        final Calendar c = Calendar.getInstance();
+        int numDays = 1;
+        long startDate;
+        long endDate;
+        try{
+            SimpleDateFormat format = new SimpleDateFormat("MMMMM dd, yyyy");
+            Date date1 = format.parse(getStartDate());
+            Date date2 = format.parse(getEndDate());
+            startDate = date1.getTime();
+            endDate = date2.getTime();
+            System.out.println(startDate + " and " + endDate);
+            numDays = numDaysBetween(c, startDate, endDate);
+        }catch (ParseException e){
+            System.out.println("pase exception!");
+        }
+        double num = (double)(numDays) * numHoursBetween();
+        return Math.round(num * 100.0) / 100.0;
+    }
+
+    private int numDaysBetween(final Calendar c, final long fromTime, final long toTime) {
+        int result = 0;
+        if (toTime <= fromTime) return 1;
+
+        c.setTimeInMillis(toTime);
+        final int toYear = c.get(Calendar.YEAR);
+        result += c.get(Calendar.DAY_OF_YEAR);
+
+        c.setTimeInMillis(fromTime);
+        result -= c.get(Calendar.DAY_OF_YEAR);
+
+        while (c.get(Calendar.YEAR) < toYear) {
+            result += c.getActualMaximum(Calendar.DAY_OF_YEAR);
+            c.add(Calendar.YEAR, 1);
+        }
+        result += 1;
+        return result;
+    }
+
+    private double numHoursBetween(){
+        double totalMin = ((endHr * 60) + endMin) - ((startHr*60)+startMin);
+        //double min = (double)((endMin-startMin) / 60);
+        return totalMin / (double) 60;
+    }
+
     private void showStartDate(final TextView btn, final Dialog myDialog, final View myView){
         int shortAnimationDuration = getResources().getInteger(android.R.integer.config_shortAnimTime);
+        backBtn.setVisibility(View.INVISIBLE);
         title.setText("Add New Service");
         title.setTextSize(35);
         endDateView.setVisibility(View.INVISIBLE);
@@ -238,7 +355,6 @@ public class ServeInfoDialog extends AppCompatDialogFragment{
                     showEndDate(btn, myDialog, myView);
             }
         });
-        backBtn.setVisibility(View.INVISIBLE);
     }
 
     public void setMyContext(Context cont){
@@ -253,31 +369,61 @@ public class ServeInfoDialog extends AppCompatDialogFragment{
     }
 
     private String getDateInfo(){
-        if(getStartDate().equals(getEndDate())) return getStartDate();
+        if(oneDay()) return getStartDate();
         else return getStartDate() + " - " + getEndDate();
+    }
+
+    private boolean oneDay(){
+        if(getStartDate().equals(getEndDate())) return true;
+        else return false;
     }
 
     private String getStartTime(){
         int hr = timeStart.getCurrentHour();
+        startHr = hr;
+
+        System.out.println("start hour: " + startHr);
+
         String am_pm = (timeStart.getCurrentHour() < 12) ? "AM" : "PM";
         if(am_pm.equals("PM")) hr -= 12;
         if(hr == 0) hr = 12;
-        return hr + ":" + timeStart.getCurrentMinute() + " " + am_pm;
+        startMin = timeStart.getCurrentMinute();
+        String minutes = (timeStart.getCurrentMinute() < 10) ? "0" : "";
+        return hr + ":" +  minutes + "" + timeStart.getCurrentMinute() + " " + am_pm;
+    }
+
+    private void setEndTime(){
+        endHr = timeEnd.getCurrentHour();
+        endMin = timeEnd.getCurrentMinute();
+    }
+
+    private void setStartTime(){
+        startHr = timeStart.getCurrentHour();
+        startMin = timeStart.getCurrentMinute();
     }
 
     private String getEndTime(){
-        final Calendar c = Calendar.getInstance();
-        int hr = c.get(Calendar.HOUR_OF_DAY);
-        int min = c.get(Calendar.MINUTE);
-        String am_pm = (hr < 12) ? "AM" : "PM";
-        return Integer.toString(hr) + ":" + Integer.toString(min) + am_pm;
+        int hr = timeEnd.getCurrentHour();
+        endHr = hr;
+        String am_pm = (timeEnd.getCurrentHour() < 12) ? "AM" : "PM";
+        if(am_pm.equals("PM")) hr -= 12;
+        if(hr == 0) hr = 12;
+        endMin = timeEnd.getCurrentMinute();
+        String minutes = (timeEnd.getCurrentMinute() < 10) ? "0" : "";
+        return hr + ":" + minutes + "" + timeEnd.getCurrentMinute() + " " + am_pm;
+    }
+
+    private boolean checkTimes(){
+            setEndTime();
+            if(endHr >= startHr) return true;
+            else return false;
     }
 
     private String getStartDate(){
         final Calendar c = Calendar.getInstance();
         c.set(dateStart.getYear(), dateStart.getMonth(), dateStart.getDayOfMonth(), 0, 0, 0);
         Date chosenDate = c.getTime();
-        DateFormat df_medium_us = DateFormat.getDateInstance(DateFormat.LONG, Locale.getDefault());
+        DateFormat df_medium_us = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.getDefault());
         String stringStartDate = df_medium_us.format(chosenDate);
         return stringStartDate;
     }
@@ -286,7 +432,7 @@ public class ServeInfoDialog extends AppCompatDialogFragment{
         final Calendar c = Calendar.getInstance();
         c.set(dateEnd.getYear(), dateEnd.getMonth(), dateEnd.getDayOfMonth(), 0, 0, 0);
         Date chosenDate = c.getTime();
-        DateFormat df_medium_us = DateFormat.getDateInstance(DateFormat.LONG, Locale.getDefault());
+        DateFormat df_medium_us = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.getDefault());
         String stringStartDate = df_medium_us.format(chosenDate);
         return stringStartDate;
     }
@@ -317,10 +463,14 @@ public class ServeInfoDialog extends AppCompatDialogFragment{
         endTimeView = myView.findViewById(R.id.endtime_view);
         backBtn = myView.findViewById(R.id.back_btn);
         finalView = myView.findViewById(R.id.last_view);
-        startTimeTitle = myView.findViewById(R.id.startinfo);
         timeStart = myView.findViewById(R.id.timestart);
         timeEnd = myView.findViewById(R.id.timeend);
         mainDialog.setBackgroundResource(colorChoices[myItem.getMyColor()]);
+        mName = myView.findViewById(R.id.eventname_text);
+        mInfo = myView.findViewById(R.id.duties_info);
+        mLoc = myView.findViewById(R.id.loc_info);
+        mHours = myView.findViewById(R.id.hoursedit_text);
+        hoursView = myView.findViewById(R.id.hours_view);
     }
 
 }

@@ -37,7 +37,7 @@ import com.example.android.recyclerviewproject.Custom_Object.ServiceItem;
 import java.util.ArrayList;
 
 public class ProgramActivity extends AppCompatActivity implements
-        DeleteProgramDialog.DeleteProgramDialogListener, EventDialog.EventDialogListener, EditProgram.EditProgramListener, EditEventDialog.EditEventListener {
+        DeleteProgramDialog.DeleteProgramDialogListener, EventDialog.EventDialogListener, EditProgram.EditProgramListener, EditEventDialog.EditEventListener, ServeInfoDialog.ServeInfoDialogListener{
 
     private ArrayList<ServiceItem> serviceList;
     private double deleteHrs;
@@ -296,4 +296,12 @@ public class ProgramActivity extends AppCompatActivity implements
             //TODO save service item after being edited
     }
 
+    @Override
+    public void saveNewService(ServiceItem item) {
+        myItem.addItem(item);
+        myItem.addHrs(item.getHours());
+        updateHrs(item.getHours());
+        initRecyclerView();
+        Toast.makeText(getApplicationContext(), "New Service Added", Toast.LENGTH_SHORT).show();
+    }
 }
