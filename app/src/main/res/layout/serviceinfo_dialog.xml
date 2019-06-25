@@ -1,92 +1,284 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_dialog"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:layout_constraintCircleRadius="20dp"
     android:scrollbars="vertical"
     android:fadeScrollbars="true"
-    android:padding="16dp">
+    android:background="@color/cardview_dark_background"
+    android:padding="1dp">
 
-       <TextView
-        android:id="@+id/servicename"
+    <!--close/cancel button (imageview)-->
+    <ImageView
+        android:id="@+id/closebtn"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_x"
+        android:padding="2dp"/>
+
+        <!--Title of Dialog-->
+        <TextView
+            android:id="@+id/servicename"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="35sp"
+            android:padding="12dp"
+            android:layout_below="@id/closebtn"
+            android:fontFamily="@font/myriadpro_light"
+            android:text="@string/adddateservice"/>
+
+        <!--Start Date View-->
+        <RelativeLayout
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            app:layout_constraintCircleRadius="20dp"
+            android:visibility="visible"
+            android:id="@+id/start_dateview"
+            android:background="@color/white"
+            android:layout_centerVertical="true"
+            android:padding="10dp"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_below="@id/servicename"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/datestart_lbl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="18dp"
+                android:textSize="25sp"
+                android:fontFamily="@font/myriadpro_light"
+                android:layout_centerHorizontal="true"
+                android:text="Date of Event "/>
+
+
+            <DatePicker
+                android:id="@+id/date_started"
+                android:datePickerMode="spinner"
+                android:calendarViewShown="false"
+                android:layout_below="@id/datestart_lbl"
+                android:layout_width="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+        <!--End Date View-->
+        <RelativeLayout
+            android:id="@+id/end_dateview"
+            android:visibility="invisible"
+            android:background="@color/white"
+            android:padding="10dp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_below="@id/servicename"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/date_endlbl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="18dp"
+                android:textSize="25sp"
+                android:fontFamily="@font/myriadpro_light"
+                android:layout_centerHorizontal="true"
+                android:text="Date of Completion "/>
+
+
+            <DatePicker
+                android:id="@+id/date_end"
+                android:datePickerMode="spinner"
+                android:calendarViewShown="false"
+                android:layout_below="@id/date_endlbl"
+                android:layout_width="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+        <!--Start Time View-->
+        <RelativeLayout
+            android:id="@+id/starttime_view"
+            android:layout_centerVertical="true"
+            android:padding="10dp"
+            android:layout_centerHorizontal="true"
+            android:background="@color/white"
+            android:layout_width="wrap_content"
+            android:visibility="invisible"
+            android:layout_below="@id/servicename"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/timestart_lbl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="18dp"
+                android:textSize="25sp"
+                android:fontFamily="@font/myriadpro_light"
+                android:layout_centerHorizontal="true"
+                android:text="Start Time"/>
+            <TimePicker
+                android:id="@+id/timestart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:timePickerMode="spinner"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/timestart_lbl"/>
+        </RelativeLayout>
+
+        <!--End Time View-->
+        <RelativeLayout
+            android:id="@+id/endtime_view"
+            android:layout_width="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@color/white"
+            android:padding="10dp"
+            android:layout_centerHorizontal="true"
+            android:visibility="invisible"
+            android:layout_below="@id/servicename"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/time_endlbl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="18dp"
+                android:textSize="25sp"
+                android:fontFamily="@font/myriadpro_light"
+                android:layout_centerHorizontal="true"
+                android:text="End Time"/>
+            <TimePicker
+                android:id="@+id/timeend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:timePickerMode="spinner"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/time_endlbl"/>
+            <TextView
+                android:id="@+id/startinfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/timeend"
+                android:textSize="20sp"
+                android:fontFamily="@font/myriadpro_light"
+                android:layout_centerHorizontal="true"
+                android:text="Start Time at hh:mm"/>
+        </RelativeLayout>
+
+        <!--Final View-->
+        <RelativeLayout
+            android:id="@+id/last_view"
+            android:visibility="invisible"
+            android:background="@color/white"
+            android:padding="18dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_below="@id/servicename"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/eventname_lbl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="15dp"
+                android:textColor="@color/cardview_dark_background"
+                android:textSize="20sp"
+                android:fontFamily="@font/myriadpro_light"
+                android:text="Name of Event"/>
+
+
+            <EditText
+                android:importantForAutofill="no"
+                android:id="@+id/eventname_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:inputType="text"
+                android:layout_below="@id/eventname_lbl"
+                android:padding="10dp"
+                android:textSize="20sp"
+                android:fontFamily="@font/myriadpro_light"
+                android:hint="Enter Here"/>
+
+            <TextView
+                android:id="@+id/duties_lbl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/eventname_text"
+                android:paddingTop="20dp"
+                android:textColor="@color/cardview_dark_background"
+                android:textSize="20sp"
+                android:fontFamily="@font/myriadpro_light"
+                android:text="Duties and Additional Information"/>
+
+            <EditText
+                android:importantForAutofill="no"
+                android:id="@+id/duties_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:maxLines="1"
+                android:textSize="20sp"
+                android:inputType="text"
+                android:fontFamily="@font/myriadpro_light"
+                android:hint="Enter Here"
+                android:layout_below="@id/duties_lbl"/>
+
+            <TextView
+                android:id="@+id/location_lbl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/duties_info"
+                android:paddingTop="20dp"
+                android:textColor="@color/cardview_dark_background"
+                android:textSize="20sp"
+                android:fontFamily="@font/myriadpro_light"
+                android:text="Location"/>
+
+            <EditText
+                android:importantForAutofill="no"
+                android:id="@+id/loc_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:maxLines="1"
+                android:inputType="text"
+                android:textSize="20sp"
+                android:fontFamily="@font/myriadpro_light"
+                android:hint="Enter Here"
+                android:layout_below="@id/location_lbl"/>
+        </RelativeLayout>
+
+    <TextView
+        android:id="@+id/continue_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-           android:gravity="center"
-        android:textSize="25sp"
-        android:padding="4dp"
+        android:text="NEXT"
+        android:textSize="22sp"
+        android:textColor="@color/white"
+        android:onClick="onClick"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/endtime_view"
+        android:padding="20dp"
         android:fontFamily="@font/myriadpro_light"
-        android:text="@string/adddateservice"/>
+        android:clickable="true"/>
 
     <TextView
-        android:id="@+id/eventname_lbl"
-        android:layout_width="match_parent"
+        android:visibility="invisible"
+        android:id="@+id/back_btn"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/servicename"
-        android:paddingTop="15dp"
-        android:textColor="@color/cardview_dark_background"
-        android:textSize="20sp"
+        android:text="BACK"
+        android:layout_alignParentLeft="true"
+        android:textSize="22sp"
+        android:textColor="@color/white"
+        android:onClick="onClick"
+        android:layout_below="@id/endtime_view"
+        android:padding="20dp"
         android:fontFamily="@font/myriadpro_light"
-        android:text="Name of Event"/>
+        android:clickable="true"/>
 
 
-    <EditText
-        android:importantForAutofill="no"
-        android:id="@+id/eventname_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/eventname_lbl"
-        android:padding="10dp"
-        android:textSize="20sp"
-        android:fontFamily="@font/myriadpro_light"
-        android:hint="Enter Here"/>
-
-    <TextView
-        android:id="@+id/duties_lbl"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/eventname_text"
-        android:paddingTop="20dp"
-        android:textColor="@color/cardview_dark_background"
-        android:textSize="20sp"
-        android:fontFamily="@font/myriadpro_light"
-        android:text="Duties and Additional Information"/>
-
-    <EditText
-        android:importantForAutofill="no"
-        android:id="@+id/duties_info"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:inputType="textMultiLine"
-        android:textSize="20sp"
-        android:fontFamily="@font/myriadpro_light"
-        android:hint="Enter Here"
-        android:layout_below="@id/duties_lbl"/>
-
-    <TextView
-        android:id="@+id/location_lbl"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/duties_info"
-        android:paddingTop="20dp"
-        android:textColor="@color/cardview_dark_background"
-        android:textSize="20sp"
-        android:fontFamily="@font/myriadpro_light"
-        android:text="Location"/>
-
-    <EditText
-        android:importantForAutofill="no"
-        android:id="@+id/loc_info"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:inputType="textMultiLine"
-        android:textSize="20sp"
-        android:fontFamily="@font/myriadpro_light"
-        android:hint="Enter Here"
-        android:layout_below="@id/location_lbl"/>
-
-    </RelativeLayout>
+</RelativeLayout>

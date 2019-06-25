@@ -36,8 +36,8 @@ import com.example.android.recyclerviewproject.Custom_Object.ServiceItem;
 
 import java.util.ArrayList;
 
-public class ProgramActivity extends AppCompatActivity implements ServeInfoDialog.ServeInfoDialogListener,
-        DeleteProgramDialog.DeleteProgramDialogListener, EventDialog.EventDialogListener, EditProgram.EditProgramListener, DateDialog.DateDialogListener, EditEventDialog.EditEventListener {
+public class ProgramActivity extends AppCompatActivity implements
+        DeleteProgramDialog.DeleteProgramDialogListener, EventDialog.EventDialogListener, EditProgram.EditProgramListener, EditEventDialog.EditEventListener {
 
     private ArrayList<ServiceItem> serviceList;
     private double deleteHrs;
@@ -171,6 +171,7 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
     private void openDialog() {
         ServeInfoDialog myDialog = new ServeInfoDialog();
         myDialog.setMyContext(ProgramActivity.this);
+        myDialog.setColors(myItem, colorChoices);
         myDialog.show(getSupportFragmentManager(), "Add New Service Dialog");
     }
 
@@ -246,16 +247,16 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
     }
     private void subtHrs(double i){deleteHrs += i;}
 
-    @Override
-    public void applyServiceText(double hours, String startDate, String endDate, String duties, String name) {
-        ServiceItem temp = new ServiceItem(hours, startDate, endDate, duties, name);
-        myItem.addItem(temp);
-        myItem.addHrs(hours);
-        updateHrs(hours);
-        initRecyclerView();
-        Toast msg = Toast.makeText(getApplicationContext(), "New Service Added", Toast.LENGTH_SHORT);
-        msg.show();
-    }
+//    @Override
+//    public void applyServiceText(double hours, String startDate, String endDate, String duties, String name) {
+//        ServiceItem temp = new ServiceItem(hours, startDate, endDate, duties, name);
+//        myItem.addItem(temp);
+//        myItem.addHrs(hours);
+//        updateHrs(hours);
+//        initRecyclerView();
+//        Toast msg = Toast.makeText(getApplicationContext(), "New Service Added", Toast.LENGTH_SHORT);
+//        msg.show();
+//    }
 
     @Override
     public void removeProgram(RecyclerView.ViewHolder temp) {
@@ -295,8 +296,4 @@ public class ProgramActivity extends AppCompatActivity implements ServeInfoDialo
             //TODO save service item after being edited
     }
 
-    @Override
-    public void passServeElements() {
-        //create
-    }
 }

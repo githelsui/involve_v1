@@ -1,10 +1,7 @@
 package com.example.android.recyclerviewproject.Dialog;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
@@ -12,30 +9,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.TextView;
-import com.example.android.recyclerviewproject.Custom_Object.ExampleItem;
+import android.widget.TimePicker;
+
 import com.example.android.recyclerviewproject.R;
-import java.util.Calendar;
-import java.util.Locale;
 
-public class DateDialog extends AppCompatDialogFragment {
+public class TimeDialog extends AppCompatDialogFragment {
 
-    private DatePicker dateStart;
     private TextView mTitle;
-    private String mDate;
-    private String mEnd;
-    private Context myContext;
-    private EditText mLoc;
-    private EditText mName;
-    private EditText mInfo;
+    private TextView dateInfo;
+    private TextView timeStartLbl;
+    private TimePicker startTime;
+    private TextView timeEndLbl;
+    private TimePicker endTime;
+    private TextView timeInfo;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        final View myView = inflater.inflate(R.layout.serviceinfo_dialog, null);
+        final View myView = inflater.inflate(R.layout.timedialog, null);
         builder.setView(myView)
                 .setNegativeButton("Cancel", null)
                 .setPositiveButton("Continue", null);
@@ -60,35 +53,21 @@ public class DateDialog extends AppCompatDialogFragment {
         return myDialog;
     }
 
-    public void setMyContext(Context cont){
-        myContext = cont;
-    }
-
-
-    public void passElements(String dateStart, String dateEnd){
-        mDate = dateStart;
-        mEnd = dateEnd;
-    }
-
     private void showNextDialog(){
         //TODO show time dialog
     }
 
+    public void passElements(String dateStart, String dateEnd, String name, String duty, String loc){
+
+    }
+
     private void setLayout(View myView){
-        mName = myView.findViewById(R.id.eventname_text);
-        mInfo = myView.findViewById(R.id.duties_info);
-        mLoc = myView.findViewById(R.id.loc_info);
-        mTitle = myView.findViewById(R.id.servicename);
-        mTitle.setText("Service for\n" + title(mDate,mEnd));
-    }
-
-    private String checkTexts(){
-        if(mName.getText().toString().equals("")) return getString(R.string.no_name);
-        else return mName.getText().toString();
-    }
-
-    private String title(String start, String end){
-        if(start.equals(end)) return start;
-        else return start + " - " + end;
+       mTitle = myView.findViewById(R.id.servicename);
+       //dateInfo = myView.findViewById(R.id.dateinfo);
+       timeStartLbl = myView.findViewById(R.id.timestart_lbl);
+       startTime = myView.findViewById(R.id.timestart);
+       timeEndLbl = myView.findViewById(R.id.time_endlbl);
+       endTime = myView.findViewById(R.id.timeend);
+       timeInfo = myView.findViewById(R.id.startinfo);
     }
 }

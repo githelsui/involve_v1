@@ -2,7 +2,7 @@
     <!--In general-->
     <string name="app_name">RecyclerView Project</string>
     <string name="n_a">N/A</string>
-    <string name="no_name">Untitled</string>
+    <string name="no_name">Untitled Event</string>
 
     <!--ACTIVITY_MAIN.XML-->
     <string name="addbtn_name">Add New Program</string>
