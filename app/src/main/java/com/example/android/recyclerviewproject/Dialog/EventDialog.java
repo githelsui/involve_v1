@@ -35,7 +35,6 @@ public class EventDialog extends AppCompatDialogFragment implements EditEventDia
     private TextView dateStart;
     private TextView duty;
     private TextView eventHour;
-    private TextView timeLbl;
     private TextView times;
     private TextView location;
     private ServiceItem myEvent;
@@ -92,6 +91,7 @@ public class EventDialog extends AppCompatDialogFragment implements EditEventDia
         }
         myEditDialog.setService(myEvent);
         myEditDialog.setColorCode(colorCode);
+        myEditDialog.setCont(myContext);
         myEditDialog.show(getFragmentManager(), "Edit Event");
     }
 

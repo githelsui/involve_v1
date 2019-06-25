@@ -6,8 +6,11 @@ import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatDialogFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -22,9 +25,12 @@ import com.example.android.recyclerviewproject.Custom_Object.RandomColor;
 import com.example.android.recyclerviewproject.Custom_Object.ServiceItem;
 import com.example.android.recyclerviewproject.R;
 
+import static android.content.ContentValues.TAG;
+
 public class EditEventDialog extends AppCompatDialogFragment {
 
     private EditEventListener listener;
+    private EventDialog mainDialog;
     private TextView mHeader;
     private RelativeLayout mLayout;
     private EditText mName;
@@ -35,6 +41,7 @@ public class EditEventDialog extends AppCompatDialogFragment {
     private ServiceItem myItem;
     private int[] colorChoices;
     private int colorCode;
+    private Context myContext;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -56,6 +63,7 @@ public class EditEventDialog extends AppCompatDialogFragment {
                     @Override
                     public void onClick(View v) {
                         myDialog.dismiss();
+                        showMainDialog();
                     }
                 });
                 Button saveBtn = myView.findViewById(R.id.save_event);
@@ -90,6 +98,21 @@ public class EditEventDialog extends AppCompatDialogFragment {
             }
         });
         return myDialog;
+    }
+
+    public void setCont(Context temp){ myContext = temp; }
+
+    private void showMainDialog(){
+        mainDialog = new EventDialog();
+        try {
+            FragmentManager fragmentManager = ((FragmentActivity) myContext).getSupportFragmentManager();
+        } catch (ClassCastException e) {
+            Log.e(TAG, "Can't get fragment manager");
+        }
+        mainDialog.setColorCode(colorCode);
+        mainDialog.setService(myItem);
+        mainDialog.setMyContext(myContext);
+        mainDialog.show(getFragmentManager(), "Service Event");
     }
 
     public void setColorCode(int i){

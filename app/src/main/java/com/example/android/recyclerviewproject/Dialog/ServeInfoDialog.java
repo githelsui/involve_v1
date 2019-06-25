@@ -25,10 +25,12 @@ import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -64,6 +66,7 @@ public class ServeInfoDialog extends AppCompatDialogFragment{
     private EditText mInfo;
     private EditText mHours;
     private double hrs;
+    private Switch dialogSwitch;
     private ServeInfoDialogListener listener;
 
     @Override
@@ -137,7 +140,7 @@ public class ServeInfoDialog extends AppCompatDialogFragment{
                 if(checkDates() == false){
                     Animation shake = AnimationUtils.loadAnimation(myView.getContext(), R.anim.shake);
                     dateEnd.startAnimation(shake);
-                    Toast.makeText(myContext, "End date cannot exist before start date", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(myContext, "End date cannot exist before start date", Toast.LENGTH_LONG).show();
                 }
                 else{
                     endDateView.setVisibility(View.INVISIBLE);
@@ -206,7 +209,7 @@ public class ServeInfoDialog extends AppCompatDialogFragment{
                 if(checkTimes() == false){
                     Animation shake = AnimationUtils.loadAnimation(myView.getContext(), R.anim.shake);
                     timeEnd.startAnimation(shake);
-                    Toast.makeText(myContext, "End time cannot exist before start time", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(myContext, "End time cannot exist before start time", Toast.LENGTH_LONG).show();
                 }
                 else{
                     endTimeView.setVisibility(View.INVISIBLE);
@@ -249,10 +252,59 @@ public class ServeInfoDialog extends AppCompatDialogFragment{
                 showEndTime(btn, myDialog, myView);
             }
         });
+        dialogSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    Toast.makeText(myContext, "Overnight Event Selected", Toast.LENGTH_SHORT).show();
+                    mHours.setHint(getOvernightHrs() + "");
+                }
+                else{
+                    Toast.makeText(myContext, "Overnight Event Unselected", Toast.LENGTH_SHORT).show();
+                    mHours.setHint(getHrs() + "");
+                }
+            }
+        });
+    }
+
+    private double getOvernightHrs(){
+        if(oneDay()) return getHrs();
+        else{
+            final Calendar c = Calendar.getInstance();
+            int fullDays = 0;
+            long startDate;
+            long endDate;
+            try{
+                SimpleDateFormat format = new SimpleDateFormat("MMMMM dd, yyyy");
+                Date date1 = format.parse(getStartDate());
+                Date date2 = format.parse(getEndDate());
+                startDate = date1.getTime();
+                endDate = date2.getTime();
+                fullDays = numDaysBetween(c, startDate, endDate)-2;
+                if(fullDays < 0) fullDays = 0;
+            }catch (ParseException e){
+                System.out.println("parse exception!");
+            }
+            double start = 24 - (startHr + (startMin/ (double) 60));
+            double end = endHr + (endMin/ (double) 60);
+            double result = (fullDays * 24) + start + end;
+            return  Math.round(result * 100.0) / 100.0;
+        }
+        //start july 1 at 6am or 6 hrs
+        //--> starting hours = 24 - startHr
+        //--> starting hours is 18
+
+        //end july 2 at 9am or 9 hrs
+        //ending hours is 9 hrs
     }
 
     private void checkHours(){
-        if(mHours.getText().toString().equals("")) hrs = getHrs();
+        if(mHours.getText().toString().equals("")) {
+            double parsedVal = Double.parseDouble(mHours.getHint().toString());
+            System.out.println("parsed val: " + parsedVal);
+            if(parsedVal == getOvernightHrs()) hrs = getOvernightHrs();
+            else if (parsedVal == getHrs()) hrs = getHrs();
+         }
         else hrs = Double.parseDouble(mHours.getText().toString());
     }
 
@@ -304,10 +356,9 @@ public class ServeInfoDialog extends AppCompatDialogFragment{
             Date date2 = format.parse(getEndDate());
             startDate = date1.getTime();
             endDate = date2.getTime();
-            System.out.println(startDate + " and " + endDate);
             numDays = numDaysBetween(c, startDate, endDate);
         }catch (ParseException e){
-            System.out.println("pase exception!");
+            System.out.println("parse exception!");
         }
         double num = (double)(numDays) * numHoursBetween();
         return Math.round(num * 100.0) / 100.0;
@@ -477,6 +528,7 @@ public class ServeInfoDialog extends AppCompatDialogFragment{
         mLoc = myView.findViewById(R.id.loc_info);
         mHours = myView.findViewById(R.id.hoursedit_text);
         hoursView = myView.findViewById(R.id.hours_view);
+        dialogSwitch = myView.findViewById(R.id.overnight_switch);
     }
 
 }

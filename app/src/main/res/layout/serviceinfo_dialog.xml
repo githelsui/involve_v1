@@ -53,8 +53,6 @@
                 android:fontFamily="@font/myriadpro_light"
                 android:layout_centerHorizontal="true"
                 android:text="Date of Event "/>
-
-
             <DatePicker
                 android:id="@+id/date_started"
                 android:datePickerMode="spinner"
@@ -166,12 +164,27 @@
         android:layout_centerVertical="true"
         android:layout_below="@id/servicename"
         android:layout_width="300dp"
-        android:layout_height="250dp">
+        android:layout_height="280dp">
+
+        <Switch
+            android:id="@+id/overnight_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/cardview_dark_background"
+            android:textSize="22sp"
+            android:layout_marginTop="25dp"
+            android:fontFamily="@font/myriadpro_light"
+            android:layout_centerHorizontal="true"
+            android:outlineSpotShadowColor="@color/colorPrimary"
+            android:switchPadding="25dp"
+            android:padding="10dp"
+            android:text="Overnight Event"/>
 
         <TextView
             android:id="@+id/hoursviewlbl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/overnight_switch"
             android:padding="20dp"
             android:textColor="@color/cardview_dark_background"
             android:textSize="25sp"
