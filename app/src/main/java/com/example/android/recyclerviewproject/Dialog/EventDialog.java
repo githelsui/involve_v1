@@ -35,6 +35,8 @@ public class EventDialog extends AppCompatDialogFragment implements EditEventDia
     private TextView dateStart;
     private TextView duty;
     private TextView eventHour;
+    private TextView timeLbl;
+    private TextView times;
     private TextView location;
     private ServiceItem myEvent;
     private EditEventDialog myEditDialog;
@@ -116,12 +118,14 @@ public class EventDialog extends AppCompatDialogFragment implements EditEventDia
         service_layout = myView.findViewById(R.id.event_color);
         service_layout.setBackgroundResource(colorChoices[colorCode]);
         eventName = myView.findViewById(R.id.event_name);
-        if(myEvent.getMyName() != null)
-            eventName.setText(myEvent.getMyName());
-        else
-            eventName.setText(getString(R.string.no_name));
+        if(myEvent.getMyName() != null) eventName.setText(myEvent.getMyName());
+        else eventName.setText(getString(R.string.no_name));
         dateStart = myView.findViewById(R.id.event_date);
-        dateStart.setText(myEvent.getStartDate());
+        if(myEvent.isOneDay()) dateStart.setText(myEvent.getStartDate());
+        else dateStart.setText(myEvent.getStartDate() + " - " + myEvent.getEndDate());
+        times = myView.findViewById(R.id.event_times);
+        if(myEvent.sameTime())times.setText(myEvent.getStartTime());
+        else times.setText(myEvent.getStartTime() + " - " + myEvent.getEndTime());
         eventHour = myView.findViewById(R.id.eventhour);
         eventHour.setText(Double.toString(myEvent.getHours()));
         duty = myView.findViewById(R.id.event_duty);

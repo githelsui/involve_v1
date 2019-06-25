@@ -12,6 +12,8 @@ public class ServiceItem implements Parcelable{
 
     private String myDateStart;
     private String myDateEnd;
+    private String startTime;
+    private String endTime;
     private String myName;
     private String location;
     private double myHrs;
@@ -73,6 +75,10 @@ public class ServiceItem implements Parcelable{
 
     public  String  getMyName(){return myName;}
 
+    public boolean sameTime(){
+        return startTime.equals(endTime);
+    }
+
     public void setName(String temp){
         myName = temp;
     }
@@ -104,6 +110,14 @@ public class ServiceItem implements Parcelable{
     public String getMyDuties(){return myDuties;}
 
     public String getLocation() {return location;}
+
+    public void setStartTime(String temp){ startTime = temp;}
+
+    public void setEndTime(String temp){ endTime = temp; }
+
+    public String getStartTime(){ return startTime; }
+
+    public String getEndTime(){ return endTime; }
 
     public Date parseToDate() throws Exception {
         SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");

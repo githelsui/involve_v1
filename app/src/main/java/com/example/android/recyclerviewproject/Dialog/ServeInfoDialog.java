@@ -273,6 +273,8 @@ public class ServeInfoDialog extends AppCompatDialogFragment{
                 finalView.setVisibility(View.INVISIBLE);
                 ServiceItem temp = new ServiceItem(hrs, getStartDate(), getEndDate(), mInfo.getText().toString(), checkTexts());
                 temp.setLoc(mLoc.getText().toString());
+                temp.setStartTime(getStartTime());
+                temp.setEndTime(getEndTime());
                 listener.saveNewService(temp);
                 myDialog.dismiss();
             }
@@ -415,7 +417,11 @@ public class ServeInfoDialog extends AppCompatDialogFragment{
 
     private boolean checkTimes(){
             setEndTime();
-            if(endHr >= startHr) return true;
+            if(endHr == startHr)
+                if(endMin > startMin) return true;
+                else if(endMin == startMin) return true;
+                else return false;
+            else if(endHr > startHr) return true;
             else return false;
     }
 
