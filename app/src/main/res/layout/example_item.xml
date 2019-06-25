@@ -86,6 +86,7 @@
             android:layout_marginTop="15dp"
             android:text="hours"
             android:padding="4dp"
+            android:textStyle="italic"
             android:textColor="@android:color/white"
             android:textSize="25sp"
             android:layout_toLeftOf="@id/arrow_img"

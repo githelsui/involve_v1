@@ -55,7 +55,7 @@ public class AddServDialog extends AppCompatDialogFragment {
                                msg.show();
                            }
                            else{
-                               String name = prgrmName.getText().toString();
+                               String name = checkTexts();
                                double hrs = checkHours();
                                String myRole = role.getText().toString();
                                RandomColor rand = new RandomColor();
@@ -69,6 +69,17 @@ public class AddServDialog extends AppCompatDialogFragment {
 
         });
         return myDialog;
+    }
+
+    private String checkTexts(){
+        int blanks = 0;
+        String name = prgrmName.getText().toString();
+        int length = name.length();
+        for(int i = 0; i < length; i++){
+            if(name.substring(i, i+1).equals(" ")) blanks++;
+        }
+        if(blanks == length) return "Untitled";
+        else return name;
     }
 
     private double checkHours(){

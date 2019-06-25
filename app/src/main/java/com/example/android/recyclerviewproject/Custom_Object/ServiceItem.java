@@ -65,6 +65,12 @@ public class ServiceItem implements Parcelable{
         return myDateStart.equals(myDateEnd);
     }
 
+    public boolean sameYear(){
+       String yr1 = myDateStart.substring(myDateStart.length() - 4);
+       String yr2 = myDateEnd.substring(myDateEnd.length() - 4);
+       return yr1.equals(yr2);
+    }
+
     public  String  getMyName(){return myName;}
 
     public void setName(String temp){

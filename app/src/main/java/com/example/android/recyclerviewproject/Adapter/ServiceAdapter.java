@@ -53,7 +53,7 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceV
         else (serviceViewHolder.mTextView1).setText(temp.getMyName());
         if(temp.isOneDay()) serviceViewHolder.mTextView2.setText(temp.getStartDate());
         else serviceViewHolder.mTextView2.setText(temp.getStartDate() + " - " + temp.getEndDate());
-        serviceViewHolder.mHour.setText(Double.toString(temp.getHours()) + " hours");
+        serviceViewHolder.mHour.setText(Double.toString(temp.getHours()) + " hrs");
 
 
         RandomColor colors = new RandomColor();
