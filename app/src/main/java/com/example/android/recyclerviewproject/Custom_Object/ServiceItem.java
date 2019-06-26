@@ -18,6 +18,7 @@ public class ServiceItem implements Parcelable{
     private String location;
     private double myHrs;
     private String myDuties;
+    private int pos;
 
     public ServiceItem(double hours, String startDate, String endDate, String duties, String name){
         myHrs = hours;
@@ -82,6 +83,9 @@ public class ServiceItem implements Parcelable{
     public void setName(String temp){
         myName = temp;
     }
+
+    public void setPos(int i){pos = i;}
+    public int getPos(){return pos;}
 
     public void setHours(double i){
         myHrs = i;

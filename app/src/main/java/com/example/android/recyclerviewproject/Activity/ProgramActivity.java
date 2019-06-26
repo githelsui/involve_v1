@@ -8,13 +8,7 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.transition.Slide;
-import android.transition.Transition;
-import android.transition.TransitionManager;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -22,12 +16,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.recyclerviewproject.Custom_Object.ExampleItem;
-import com.example.android.recyclerviewproject.Dialog.DateDialog;
 import com.example.android.recyclerviewproject.Dialog.DeleteProgramDialog;
 import com.example.android.recyclerviewproject.Dialog.EditEventDialog;
 import com.example.android.recyclerviewproject.Dialog.EditProgram;
 import com.example.android.recyclerviewproject.Dialog.EventDialog;
-import com.example.android.recyclerviewproject.Helper.RecyclerItemTouchHelper;
+import com.example.android.recyclerviewproject.Dialog.NameDialog;
 import com.example.android.recyclerviewproject.Helper.RecyclerServiceTouchHelper;
 import com.example.android.recyclerviewproject.R;
 import com.example.android.recyclerviewproject.Dialog.ServeInfoDialog;
@@ -37,7 +30,8 @@ import com.example.android.recyclerviewproject.Custom_Object.ServiceItem;
 import java.util.ArrayList;
 
 public class ProgramActivity extends AppCompatActivity implements
-        DeleteProgramDialog.DeleteProgramDialogListener, EventDialog.EventDialogListener, EditProgram.EditProgramListener, EditEventDialog.EditEventListener, ServeInfoDialog.ServeInfoDialogListener{
+        DeleteProgramDialog.DeleteProgramDialogListener, EditProgram.EditProgramListener, EditEventDialog.EditEventListener,
+        ServeInfoDialog.ServeInfoDialogListener, NameDialog.NameDialogListener {
 
     private ArrayList<ServiceItem> serviceList;
     private double deleteHrs;
@@ -229,6 +223,7 @@ public class ProgramActivity extends AppCompatActivity implements
     }
 
     private void openEventDialog(int pos){
+        myItem.setPos(pos);
         EventDialog dialog = new EventDialog();
         dialog.setColorCode(myItem.getMyColor());
         dialog.setService(myItem.getServiceList().get(pos));
@@ -277,11 +272,6 @@ public class ProgramActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void editEvent() {
-
-    }
-
-    @Override
     public void editProgram(ExampleItem passed) {
         myItem = passed;
         updateHrs(myItem.getHours());
@@ -289,7 +279,6 @@ public class ProgramActivity extends AppCompatActivity implements
         closeInfo();
         initRecyclerView();
     }
-
 
     @Override
     public void saveData(ServiceItem item) {
@@ -303,5 +292,14 @@ public class ProgramActivity extends AppCompatActivity implements
         updateHrs(item.getHours());
         initRecyclerView();
         Toast.makeText(getApplicationContext(), "New Service Added", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void saveName(String temp, int pos) {
+        ServiceItem item = myItem.getServiceList().get(pos);
+        item.setName(temp);
+        myItem.getServiceList().set(pos, item);
+        initRecyclerView();
+        Toast.makeText(getApplicationContext(), "Changes Saved", Toast.LENGTH_SHORT).show();
     }
 }

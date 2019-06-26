@@ -64,6 +64,7 @@
                     android:fontFamily="@font/myriadpro_light"
                     android:padding="18dp"
                     android:hint="@string/n_a"
+                    android:clickable="true"
                     android:textColor="@color/cardview_dark_background"
                     android:textSize="20sp" />
 

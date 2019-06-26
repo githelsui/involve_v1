@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_dialog"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:layout_constraintCircleRadius="20dp"
+    android:scrollbars="vertical"
+    android:fadeScrollbars="true"
+    android:background="@color/cardview_dark_background"
+    android:padding="1dp">
+
+    <ImageView
+        android:id="@+id/closebtn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_x"
+        android:padding="2dp"/>
+
+    <TextView
+        android:id="@+id/edit_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="35sp"
+        android:padding="14dp"
+        android:fontFamily="@font/myriadpro_light"
+        android:text="Edit Name"/>
+
+    <RelativeLayout
+        android:id="@+id/hours_view"
+        android:background="@color/white"
+        android:padding="18dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_below="@id/edit_title"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:textSize="24sp"
+            android:inputType="textMultiLine"
+            android:padding="14dp"
+            android:fontFamily="@font/myriadpro_light"
+            android:text="mName"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/savebtm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="18dp"
+        android:layout_marginBottom="18dp"
+        android:background="@color/greyhex"
+        android:layout_centerVertical="true"
+        android:textColor="@color/cardview_dark_background"
+        android:textSize="20sp"
+        android:padding="9dp"
+        android:fontFamily="@font/myriadpro_light"
+        android:text="  Save  "
+        android:layout_below="@id/hours_view"/>
+
+</RelativeLayout>

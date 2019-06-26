@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_dialog"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:layout_constraintCircleRadius="20dp"
     android:scrollbars="vertical"
     android:fadeScrollbars="true"
-    android:padding="16dp">
+    android:background="@color/cardview_dark_background"
+    android:padding="1dp">
 
     <TextView
         android:id="@+id/servicename"
@@ -14,19 +16,25 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:gravity="center"
-        android:layout_marginTop="10dp"
+        android:textColor="@color/white"
         android:textSize="35sp"
-        android:padding="4dp"
+        android:padding="14dp"
         android:fontFamily="@font/myriadpro_light"
-        android:text="@string/adddateservice"/>
+        android:text="Edit Dates"/>
 
+    <!--Start Date View-->
     <RelativeLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:layout_constraintCircleRadius="20dp"
+        android:visibility="visible"
         android:id="@+id/start_dateview"
-        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_centerVertical="true"
+        android:padding="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
         android:layout_below="@id/servicename"
-        android:layout_height="match_parent">
-
-
+        android:layout_height="wrap_content">
         <TextView
             android:id="@+id/datestart_lbl"
             android:layout_width="wrap_content"
@@ -36,8 +44,6 @@
             android:fontFamily="@font/myriadpro_light"
             android:layout_centerHorizontal="true"
             android:text="Date of Event "/>
-
-
         <DatePicker
             android:id="@+id/date_started"
             android:datePickerMode="spinner"
@@ -48,13 +54,18 @@
             android:layout_height="wrap_content" />
     </RelativeLayout>
 
-
+    <!--End Date View-->
     <RelativeLayout
         android:id="@+id/end_dateview"
         android:visibility="invisible"
-        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:padding="10dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
         android:layout_below="@id/servicename"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
+
         <TextView
             android:id="@+id/date_endlbl"
             android:layout_width="wrap_content"
@@ -68,7 +79,6 @@
 
         <DatePicker
             android:id="@+id/date_end"
-            android:visibility="invisible"
             android:datePickerMode="spinner"
             android:calendarViewShown="false"
             android:layout_below="@id/date_endlbl"

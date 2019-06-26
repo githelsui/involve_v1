@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -25,22 +26,22 @@ import com.example.android.recyclerviewproject.R;
 
 import static android.content.ContentValues.TAG;
 
-public class EventDialog extends AppCompatDialogFragment implements EditEventDialog.EditEventListener {
-    //TODO make editMode() function by dialog.setPositive to edit button
+public class EventDialog extends AppCompatDialogFragment{
 
-    private EventDialogListener listener;
     private RelativeLayout service_layout;
     private TextView eventName;
     private int[] colorChoices;
-    private TextView dateStart;
-    private TextView duty;
-    private TextView eventHour;
-    private TextView times;
-    private TextView location;
+    private EditText name;
+    private EditText dates;
+    private EditText duty;
+    private EditText eventHour;
+    private EditText times;
+    private EditText location;
     private ServiceItem myEvent;
     private EditEventDialog myEditDialog;
     private int colorCode;
     private Context myContext;
+    private View mainView;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -49,6 +50,7 @@ public class EventDialog extends AppCompatDialogFragment implements EditEventDia
         final View myView = inflater.inflate(R.layout.event_dialog, null);
         builder.setView(myView);
         initViews(myView);
+        mainView = myView;
         final Dialog myDialog = builder.create();
         myDialog.setCanceledOnTouchOutside(false);
         Window myWindow = myDialog.getWindow();
@@ -59,14 +61,55 @@ public class EventDialog extends AppCompatDialogFragment implements EditEventDia
             public void onShow(DialogInterface dialog) {
                 ImageView closeBtn = myView.findViewById(R.id.closebtn);
                 Button editBtn = myView.findViewById(R.id.edit_eventbtn);
+                name.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        myDialog.dismiss();
+                       showNameDialog();
+                    }
+                });
+                dates.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        myDialog.dismiss();
+                        showDatesDialog();
+                    }
+                });
+                times.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        myDialog.dismiss();
+                        showTimeDialog();
+                    }
+                });
+                eventHour.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        myDialog.dismiss();
+                        showHours();
+                    }
+                });
+                duty.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        myDialog.dismiss();
+                        showDuty();
+                    }
+                });
+                location.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        myDialog.dismiss();
+                        showLoc();
+                    }
+                });
                 editBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         myDialog.dismiss();
-                        showEditDialog();
+                     showNameDialog();
                     }
                 });
-
                 closeBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -82,27 +125,38 @@ public class EventDialog extends AppCompatDialogFragment implements EditEventDia
         myContext = cont;
     }
 
-    private void showEditDialog(){
-        myEditDialog = new EditEventDialog();
+    private void showNameDialog(){
+        NameDialog nameDialog = new NameDialog();
         try {
             FragmentManager fragmentManager = ((FragmentActivity) myContext).getSupportFragmentManager();
         } catch (ClassCastException e) {
             Log.e(TAG, "Can't get fragment manager");
         }
-        myEditDialog.setService(myEvent);
-        myEditDialog.setColorCode(colorCode);
-        myEditDialog.setCont(myContext);
-        myEditDialog.show(getFragmentManager(), "Edit Event");
+        nameDialog.setItem(myEvent);
+        nameDialog.setColor(colorCode);
+        nameDialog.setCont(myContext);
+        nameDialog.setCancelable(false);
+        nameDialog.show(getFragmentManager(), "Edit Name");
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        try{
-            listener = (EventDialogListener) context;
-        }catch(ClassCastException e){
-            throw new ClassCastException(context.toString() + " IMPLEMENT EVENTDIALOGLISTENER");
-        }
+    private void showDatesDialog(){
+
+    }
+
+    private void showTimeDialog(){
+
+    }
+
+    private void showHours(){
+
+    }
+
+    private void showDuty(){
+
+    }
+
+    private void showLoc(){
+
     }
 
     public void setColorCode(int i){
@@ -117,19 +171,34 @@ public class EventDialog extends AppCompatDialogFragment implements EditEventDia
     private void initViews(View myView){
         service_layout = myView.findViewById(R.id.event_color);
         service_layout.setBackgroundResource(colorChoices[colorCode]);
+
+        name = myView.findViewById(R.id.eventname);
+        if(myEvent.getMyName() != null) name.setText(myEvent.getMyName());
+        else name.setText(getString(R.string.no_name));
+
         eventName = myView.findViewById(R.id.event_name);
-        if(myEvent.getMyName() != null) eventName.setText(myEvent.getMyName());
-        else eventName.setText(getString(R.string.no_name));
-        dateStart = myView.findViewById(R.id.event_date);
-        if(myEvent.isOneDay()) dateStart.setText(myEvent.getStartDate());
-        else dateStart.setText(myEvent.getStartDate() + " - " + myEvent.getEndDate());
+        if(myEvent.getMyName() != null){
+            eventName.setText(myEvent.getMyName());
+        }
+        else{
+            eventName.setText(getString(R.string.no_name));
+            myEvent.setName("Untitled Event");
+        }
+
+        dates = myView.findViewById(R.id.event_date);
+        if(myEvent.isOneDay()) dates.setText(myEvent.getStartDate());
+        else dates.setText(myEvent.getStartDate() + " - " + myEvent.getEndDate());
+
         times = myView.findViewById(R.id.event_times);
         if(myEvent.sameTime())times.setText(myEvent.getStartTime());
         else times.setText(myEvent.getStartTime() + " - " + myEvent.getEndTime());
+
         eventHour = myView.findViewById(R.id.eventhour);
         eventHour.setText(Double.toString(myEvent.getHours()));
+
         duty = myView.findViewById(R.id.event_duty);
         duty.setText(checkNull(myEvent.getMyDuties()));
+
         location = myView.findViewById(R.id.event_location);
         location.setText(checkNull(myEvent.getLocation()));
     }
@@ -142,12 +211,4 @@ public class EventDialog extends AppCompatDialogFragment implements EditEventDia
         return "N/A";
     }
 
-    @Override
-    public void saveData(ServiceItem item) {
-        listener.editEvent();
-    }
-
-    public interface EventDialogListener{
-        void editEvent();
-    }
 }

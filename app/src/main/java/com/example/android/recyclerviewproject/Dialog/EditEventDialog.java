@@ -78,7 +78,7 @@ public class EditEventDialog extends AppCompatDialogFragment {
                             mDuty.startAnimation(shake);
                             mHour.startAnimation(shake);
                             mLoc.startAnimation(shake);
-                            Toast msg = Toast.makeText(myView.getContext(), "No changes made", Toast.LENGTH_SHORT);
+                            Toast msg = Toast.makeText(myView.getContext(), "No Changes Made", Toast.LENGTH_SHORT);
                             msg.show();
                               }
                         else
@@ -90,7 +90,7 @@ public class EditEventDialog extends AppCompatDialogFragment {
                                 if(!mLoc.getText().toString().equals("")) myItem.setLoc(mLoc.getText().toString());
                                 listener.saveData(myItem);
                                 myDialog.dismiss();
-                                Toast msg = Toast.makeText(myView.getContext(), "Changes saved", Toast.LENGTH_SHORT);
+                                Toast msg = Toast.makeText(myView.getContext(), "Changes Saved", Toast.LENGTH_SHORT);
                                 msg.show();
                             }
                         }
