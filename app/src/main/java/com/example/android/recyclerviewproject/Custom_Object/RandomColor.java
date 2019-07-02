@@ -56,16 +56,20 @@ public class RandomColor implements Parcelable {
         totalColors = myArray.length;
     }
 
-    public void setRandomColor(View layout){
-        myView = layout;
-        myView.setBackgroundResource(myArray[getRandomGradient()]);
-    }
-
     public int getRandomGradient(){
         if(totalColors != 0){
             int num = (int)(Math.random() * (totalColors)); //includes index at 0
             return num;
         }
         return -1;
+    }
+
+    public int differentGradient(int i){
+        int num = -1;
+        do{
+            num = (int)(Math.random() * (totalColors)); //includes index at 0
+        }
+        while(num == i);
+        return num;
     }
 }

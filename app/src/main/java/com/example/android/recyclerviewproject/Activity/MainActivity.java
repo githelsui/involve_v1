@@ -169,6 +169,7 @@ public class MainActivity extends AppCompatActivity implements AddServDialog.Add
     @Override
     public void applyText(String name, double hrs, String myRole, RandomColor picker) {
         ExampleItem myItem = new ExampleItem(name, hrs, myRole, picker);
+        myItem.differPrevious(myList);
         myList.add(myItem);
         addTotalHours(hrs);
         introMsg.setVisibility(View.INVISIBLE);

@@ -32,10 +32,10 @@ public class EventDialog extends AppCompatDialogFragment{
     private TextView eventName;
     private int[] colorChoices;
     private EditText name;
-    private EditText dates;
+    private TextView dates;
     private EditText duty;
-    private EditText eventHour;
-    private EditText times;
+    private TextView eventHour;
+    private TextView times;
     private EditText location;
     private ServiceItem myEvent;
     private int colorCode;
@@ -176,7 +176,7 @@ public class EventDialog extends AppCompatDialogFragment{
         else dates.setText(myEvent.getStartDate() + " - " + myEvent.getEndDate());
 
         times = myView.findViewById(R.id.event_times);
-        if(myEvent.sameTime())times.setText(myEvent.getStartTime());
+        if(myEvent.sameTime()) times.setText(myEvent.getStartTime());
         else times.setText(myEvent.getStartTime() + " - " + myEvent.getEndTime());
 
         eventHour = myView.findViewById(R.id.eventhour);

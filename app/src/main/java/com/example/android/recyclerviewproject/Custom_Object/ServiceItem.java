@@ -29,6 +29,9 @@ public class ServiceItem implements Parcelable{
         myDateEnd = in.readString();
         myDuties =in.readString();
         myName = in.readString();
+        startTime = in.readString();
+        endTime = in.readString();
+        location = in.readString();
     }
 
     public static final Creator<ServiceItem> CREATOR = new Creator<ServiceItem>(){
@@ -56,6 +59,9 @@ public class ServiceItem implements Parcelable{
         dest.writeString(myDateEnd);
         dest.writeString(myDuties);
         dest.writeString(myName);
+        dest.writeString(startTime);
+        dest.writeString(endTime);
+        dest.writeString(location);
     }
 
     public boolean isOneDay(){

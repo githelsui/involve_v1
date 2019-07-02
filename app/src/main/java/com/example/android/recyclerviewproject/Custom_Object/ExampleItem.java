@@ -29,7 +29,6 @@ public class ExampleItem implements Parcelable{
 
         //colors
         myPick = picker;
-        myColor = myPick.getRandomGradient();
     }
 
     protected ExampleItem(Parcel in) {
@@ -82,6 +81,15 @@ public class ExampleItem implements Parcelable{
         }
     }
 
+    public void differPrevious(ArrayList<ExampleItem> list){
+        int size = list.size();
+        if(size == 0)  myColor = myPick.getRandomGradient();
+        else{
+            ExampleItem ex = list.get(size-1);
+            myColor = myPick.differentGradient(ex.getMyColor());
+        }
+    }
+
     public ArrayList<ServiceItem> getServiceList(){
         return serviceList;
     }
@@ -100,12 +108,6 @@ public class ExampleItem implements Parcelable{
 
     public int getMyColor(){ return myColor;}
 
-
-    //old initial is 8
-    //new initial is 6
-
-    //if there are serviceitems present-> totalhours = serviceitems.hours + new initial-oldinitial
-    //total hours should be 8
     public void setInitialHr(double temp) {
         double oldInitial = initialHr;
         initialHr = temp;
@@ -115,6 +117,7 @@ public class ExampleItem implements Parcelable{
             else myHrs -= oldInitial-initialHr;
         }
     }
+
     public void setMyRole(String temp){ myRole = temp;}
     public void setAdvisor(String temp){myAdvisor = temp;}
     public void setProgramName(String temp){myProg = temp;}
