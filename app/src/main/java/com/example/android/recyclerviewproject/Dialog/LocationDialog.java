@@ -14,26 +14,21 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.example.android.recyclerviewproject.Custom_Object.RandomColor;
 import com.example.android.recyclerviewproject.Custom_Object.ServiceItem;
 import com.example.android.recyclerviewproject.R;
-
 import static android.content.ContentValues.TAG;
 
-public class DatesDialog extends AppCompatDialogFragment {
+public class LocationDialog  extends AppCompatDialogFragment {
 
-    private DateDialogListener listener;
+    private LocDialogListener listener;
     private EventDialog mainDialog;
     private TextView title;
-    private DatePicker startDate, endDate;
-    private RelativeLayout startView;
-    private RelativeLayout endView;
+    private EditText input;
     private RelativeLayout layout;
     private ServiceItem myItem;
     private int colorCode;
@@ -44,7 +39,7 @@ public class DatesDialog extends AppCompatDialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        final View myView = inflater.inflate(R.layout.date_dialog, null);
+        final View myView = inflater.inflate(R.layout.edit_text_dialog, null);
         builder.setView(myView);
         initViews(myView);
         final Dialog myDialog = builder.create();
@@ -57,6 +52,16 @@ public class DatesDialog extends AppCompatDialogFragment {
             @Override
             public void onShow(final DialogInterface dialog) {
                 ImageView closeBtn = myView.findViewById(R.id.closebtn);
+                TextView saveBtn = myView.findViewById(R.id.savebtm);
+                saveBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                        String name = (input.getText().toString().equals("")) ? "Untitled Event" : input.getText().toString();
+                        listener.saveLoc(name, myItem.getPos());
+                        openEventDialog();
+                    }
+                });
                 closeBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -73,14 +78,13 @@ public class DatesDialog extends AppCompatDialogFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         try{
-            listener =(DateDialogListener) context;
+            listener =(LocDialogListener) context;
         }catch(ClassCastException e){
             throw new ClassCastException(context.toString() + " IMPLEMENT EVENTDIALOGLISTENER");
         }
     }
 
     public void setItem(ServiceItem temp){ myItem = temp; }
-
 
     public void setColor(int i){
         colorCode = i;
@@ -104,16 +108,14 @@ public class DatesDialog extends AppCompatDialogFragment {
 
     private void initViews(View myView){
         title = myView.findViewById(R.id.edit_title);
-        title.setText("Edit Dates");
-        startDate = myView.findViewById(R.id.date_started);
-        endDate = myView.findViewById(R.id.date_end);
-        startView = myView.findViewById(R.id.start_dateview);
-        endView = myView.findViewById(R.id.end_dateview);
+        title.setText("Edit Location");
+        input = myView.findViewById(R.id.input);
+        input.setText(myItem.getLocation());
         layout = myView.findViewById(R.id.main_dialog);
         layout.setBackgroundResource(colorChoices[colorCode]);
     }
 
-    public interface DateDialogListener{
-        void saveDates(String temp, int pos);
+    public interface LocDialogListener{
+        void saveLoc(String temp, int pos);
     }
 }

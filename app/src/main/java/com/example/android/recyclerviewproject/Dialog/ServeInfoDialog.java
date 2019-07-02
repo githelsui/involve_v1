@@ -204,6 +204,7 @@ public class ServeInfoDialog extends AppCompatDialogFragment{
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                setEndTime();
                 if(checkTimes() == false){
                     Animation shake = AnimationUtils.loadAnimation(myView.getContext(), R.anim.shake);
                     timeEnd.startAnimation(shake);
@@ -447,6 +448,7 @@ public class ServeInfoDialog extends AppCompatDialogFragment{
     private void setEndTime(){
         endHr = timeEnd.getCurrentHour();
         endMin = timeEnd.getCurrentMinute();
+        System.out.println(endHr + ":" + endMin);
     }
 
     private void setStartTime(){
@@ -467,11 +469,14 @@ public class ServeInfoDialog extends AppCompatDialogFragment{
 
     private boolean checkTimes(){
             setEndTime();
+            setStartTime();
             if(endHr == startHr)
                 if(endMin > startMin) return true;
+                else if(endMin < startMin) return false;
                 else if(endMin == startMin) return true;
                 else return false;
             else if(endHr > startHr) return true;
+            else if(endHr < startHr) return false;
             else return false;
     }
 

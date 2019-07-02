@@ -16,10 +16,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.recyclerviewproject.Custom_Object.ExampleItem;
-import com.example.android.recyclerviewproject.Dialog.DatesDialog;
 import com.example.android.recyclerviewproject.Dialog.DeleteProgramDialog;
+import com.example.android.recyclerviewproject.Dialog.DutyDialog;
 import com.example.android.recyclerviewproject.Dialog.EditProgram;
 import com.example.android.recyclerviewproject.Dialog.EventDialog;
+import com.example.android.recyclerviewproject.Dialog.LocationDialog;
 import com.example.android.recyclerviewproject.Dialog.NameDialog;
 import com.example.android.recyclerviewproject.Helper.RecyclerServiceTouchHelper;
 import com.example.android.recyclerviewproject.R;
@@ -31,7 +32,7 @@ import java.util.ArrayList;
 
 public class ProgramActivity extends AppCompatActivity implements
         DeleteProgramDialog.DeleteProgramDialogListener, EditProgram.EditProgramListener,
-        ServeInfoDialog.ServeInfoDialogListener, NameDialog.NameDialogListener, DatesDialog.DateDialogListener {
+        ServeInfoDialog.ServeInfoDialogListener, NameDialog.NameDialogListener, DutyDialog.DutyDialogListener, LocationDialog.LocDialogListener {
 
     private ArrayList<ServiceItem> serviceList;
     private double deleteHrs;
@@ -53,10 +54,6 @@ public class ProgramActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_program);
-
-//        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
-//       sharedPreferences.edit().clear().commit();
-
         getParceables();
         setColorChoices();
         setLayouts();
@@ -242,17 +239,6 @@ public class ProgramActivity extends AppCompatActivity implements
     }
     private void subtHrs(double i){deleteHrs += i;}
 
-//    @Override
-//    public void applyServiceText(double hours, String startDate, String endDate, String duties, String name) {
-//        ServiceItem temp = new ServiceItem(hours, startDate, endDate, duties, name);
-//        myItem.addItem(temp);
-//        myItem.addHrs(hours);
-//        updateHrs(hours);
-//        initRecyclerView();
-//        Toast msg = Toast.makeText(getApplicationContext(), "New Service Added", Toast.LENGTH_SHORT);
-//        msg.show();
-//    }
-
     @Override
     public void removeProgram(RecyclerView.ViewHolder temp) {
         int position = temp.getAdapterPosition();
@@ -299,7 +285,20 @@ public class ProgramActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void saveDates(String temp, int pos) {
+    public void saveDuty(String temp, int pos) {
+        ServiceItem item = myItem.getServiceList().get(pos);
+        item.setDuty(temp);
+        myItem.getServiceList().set(pos, item);
+        initRecyclerView();
+        Toast.makeText(getApplicationContext(), "Changes Saved", Toast.LENGTH_SHORT).show();
+    }
 
+    @Override
+    public void saveLoc(String temp, int pos) {
+        ServiceItem item = myItem.getServiceList().get(pos);
+        item.setLoc(temp);
+        myItem.getServiceList().set(pos, item);
+        initRecyclerView();
+        Toast.makeText(getApplicationContext(), "Changes Saved", Toast.LENGTH_SHORT).show();
     }
 }

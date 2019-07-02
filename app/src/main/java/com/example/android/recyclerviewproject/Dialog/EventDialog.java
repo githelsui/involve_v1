@@ -67,27 +67,6 @@ public class EventDialog extends AppCompatDialogFragment{
                        showNameDialog();
                     }
                 });
-                dates.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        myDialog.dismiss();
-                        showDatesDialog();
-                    }
-                });
-                times.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        myDialog.dismiss();
-                        showTimeDialog();
-                    }
-                });
-                eventHour.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        myDialog.dismiss();
-                        showHours();
-                    }
-                });
                 duty.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -138,34 +117,32 @@ public class EventDialog extends AppCompatDialogFragment{
         nameDialog.show(getFragmentManager(), "Edit Name");
     }
 
-    private void showDatesDialog(){
-        DatesDialog datesDialog = new DatesDialog();
+    private void showDuty(){
+        DutyDialog dutyDialog = new DutyDialog();
         try {
             FragmentManager fragmentManager = ((FragmentActivity) myContext).getSupportFragmentManager();
         } catch (ClassCastException e) {
             Log.e(TAG, "Can't get fragment manager");
         }
-        datesDialog.setItem(myEvent);
-        datesDialog.setColor(colorCode);
-        datesDialog.setCont(myContext);
-        datesDialog.setCancelable(false);
-        datesDialog.show(getFragmentManager(), "Edit Dates");
-    }
-
-    private void showTimeDialog(){
-
-    }
-
-    private void showHours(){
-
-    }
-
-    private void showDuty(){
-
+        dutyDialog.setItem(myEvent);
+        dutyDialog.setColor(colorCode);
+        dutyDialog.setCont(myContext);
+        dutyDialog.setCancelable(false);
+        dutyDialog.show(getFragmentManager(), "Edit Name");
     }
 
     private void showLoc(){
-
+        LocationDialog dialog = new LocationDialog();
+        try {
+            FragmentManager fragmentManager = ((FragmentActivity) myContext).getSupportFragmentManager();
+        } catch (ClassCastException e) {
+            Log.e(TAG, "Can't get fragment manager");
+        }
+        dialog.setItem(myEvent);
+        dialog.setColor(colorCode);
+        dialog.setCont(myContext);
+        dialog.setCancelable(false);
+        dialog.show(getFragmentManager(), "Edit Name");
     }
 
     public void setColorCode(int i){
