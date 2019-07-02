@@ -26,7 +26,7 @@ Page consists of a drop down view revealing the program's additional information
 ![](programpage.png)
 ![](programlist.png)
 
-####Adding Events/Services
+<br />Adding Events/Services
 Adding an event to a program is as easy as it looks (First Image). No need to calculate your hours. Just input the dates and times of your event (Second Image). </br>
 ![](addevent.png)
 ![](calculatehrs.png)
