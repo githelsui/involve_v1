@@ -38,7 +38,6 @@ public class EventDialog extends AppCompatDialogFragment{
     private EditText times;
     private EditText location;
     private ServiceItem myEvent;
-    private EditEventDialog myEditDialog;
     private int colorCode;
     private Context myContext;
     private View mainView;
@@ -140,7 +139,17 @@ public class EventDialog extends AppCompatDialogFragment{
     }
 
     private void showDatesDialog(){
-
+        DatesDialog datesDialog = new DatesDialog();
+        try {
+            FragmentManager fragmentManager = ((FragmentActivity) myContext).getSupportFragmentManager();
+        } catch (ClassCastException e) {
+            Log.e(TAG, "Can't get fragment manager");
+        }
+        datesDialog.setItem(myEvent);
+        datesDialog.setColor(colorCode);
+        datesDialog.setCont(myContext);
+        datesDialog.setCancelable(false);
+        datesDialog.show(getFragmentManager(), "Edit Dates");
     }
 
     private void showTimeDialog(){

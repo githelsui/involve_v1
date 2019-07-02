@@ -57,10 +57,8 @@ public class ServeInfoDialog extends AppCompatDialogFragment{
     private ExampleItem myItem;
     private int[] colorChoices;
     private TimePicker timeEnd;
-    private int startHr;
-    private int endHr;
-    private int startMin;
-    private int endMin;
+    private int startHr, endHr, startMin, endMin;
+    private int startMonth, startDay, startYr, endMonth, endDay, endYr;
     private EditText mLoc;
     private EditText mName;
     private EditText mInfo;
@@ -327,6 +325,8 @@ public class ServeInfoDialog extends AppCompatDialogFragment{
                 temp.setLoc(mLoc.getText().toString());
                 temp.setStartTime(getStartTime());
                 temp.setEndTime(getEndTime());
+                temp.setStartDatesInt(startMonth, startDay, startYr);
+                temp.setEndDatesInt(endMonth, endDay, endYr);
                 listener.saveNewService(temp);
                 myDialog.dismiss();
             }
@@ -385,7 +385,6 @@ public class ServeInfoDialog extends AppCompatDialogFragment{
 
     private double numHoursBetween(){
         double totalMin = ((endHr * 60) + endMin) - ((startHr*60)+startMin);
-        //double min = (double)((endMin-startMin) / 60);
         return totalMin / (double) 60;
     }
 
@@ -480,6 +479,9 @@ public class ServeInfoDialog extends AppCompatDialogFragment{
         final Calendar c = Calendar.getInstance();
         c.set(dateStart.getYear(), dateStart.getMonth(), dateStart.getDayOfMonth(), 0, 0, 0);
         Date chosenDate = c.getTime();
+        startMonth = chosenDate.getMonth();
+        startDay = chosenDate.getDay();
+        startYr = chosenDate.getYear();
         DateFormat df_medium_us = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.getDefault());
         String stringStartDate = df_medium_us.format(chosenDate);
         return stringStartDate;
@@ -489,6 +491,9 @@ public class ServeInfoDialog extends AppCompatDialogFragment{
         final Calendar c = Calendar.getInstance();
         c.set(dateEnd.getYear(), dateEnd.getMonth(), dateEnd.getDayOfMonth(), 0, 0, 0);
         Date chosenDate = c.getTime();
+        endMonth = chosenDate.getMonth();
+        endDay = chosenDate.getDay();
+        endYr = chosenDate.getYear();
         DateFormat df_medium_us = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.getDefault());
         String stringStartDate = df_medium_us.format(chosenDate);
         return stringStartDate;

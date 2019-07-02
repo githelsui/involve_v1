@@ -16,8 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.recyclerviewproject.Custom_Object.ExampleItem;
+import com.example.android.recyclerviewproject.Dialog.DatesDialog;
 import com.example.android.recyclerviewproject.Dialog.DeleteProgramDialog;
-import com.example.android.recyclerviewproject.Dialog.EditEventDialog;
 import com.example.android.recyclerviewproject.Dialog.EditProgram;
 import com.example.android.recyclerviewproject.Dialog.EventDialog;
 import com.example.android.recyclerviewproject.Dialog.NameDialog;
@@ -30,8 +30,8 @@ import com.example.android.recyclerviewproject.Custom_Object.ServiceItem;
 import java.util.ArrayList;
 
 public class ProgramActivity extends AppCompatActivity implements
-        DeleteProgramDialog.DeleteProgramDialogListener, EditProgram.EditProgramListener, EditEventDialog.EditEventListener,
-        ServeInfoDialog.ServeInfoDialogListener, NameDialog.NameDialogListener {
+        DeleteProgramDialog.DeleteProgramDialogListener, EditProgram.EditProgramListener,
+        ServeInfoDialog.ServeInfoDialogListener, NameDialog.NameDialogListener, DatesDialog.DateDialogListener {
 
     private ArrayList<ServiceItem> serviceList;
     private double deleteHrs;
@@ -281,11 +281,6 @@ public class ProgramActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void saveData(ServiceItem item) {
-            //TODO save service item after being edited
-    }
-
-    @Override
     public void saveNewService(ServiceItem item) {
         myItem.addItem(item);
         myItem.addHrs(item.getHours());
@@ -301,5 +296,10 @@ public class ProgramActivity extends AppCompatActivity implements
         myItem.getServiceList().set(pos, item);
         initRecyclerView();
         Toast.makeText(getApplicationContext(), "Changes Saved", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void saveDates(String temp, int pos) {
+
     }
 }

@@ -10,15 +10,10 @@ import java.util.Date;
 //class for one service within a program
 public class ServiceItem implements Parcelable{
 
-    private String myDateStart;
-    private String myDateEnd;
-    private String startTime;
-    private String endTime;
-    private String myName;
-    private String location;
+    private String myDateStart, myDateEnd, startTime, endTime, myName, location, myDuties;
     private double myHrs;
-    private String myDuties;
     private int pos;
+    private int sMonth, sDay, sYear, eMonth, eDay, eYear;
 
     public ServiceItem(double hours, String startDate, String endDate, String duties, String name){
         myHrs = hours;
@@ -54,7 +49,6 @@ public class ServiceItem implements Parcelable{
     }
 
 
-    //TODO http://prasanta-paul.blogspot.com/2010/06/android-parcelable-example.html
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeDouble(myHrs);
@@ -72,6 +66,42 @@ public class ServiceItem implements Parcelable{
        String yr1 = myDateStart.substring(myDateStart.length() - 4);
        String yr2 = myDateEnd.substring(myDateEnd.length() - 4);
        return yr1.equals(yr2);
+    }
+
+    public void setStartDatesInt(int month, int day, int yr) {
+        sMonth = month;
+        sDay = day;
+        sYear = yr;
+    }
+
+    public void setEndDatesInt(int month, int day, int yr) {
+        eMonth = month;
+        eDay = day;
+        eYear = yr;
+    }
+
+    public int geteMonth() {
+        return eMonth;
+    }
+
+    public int geteDay() {
+        return eDay;
+    }
+
+    public int geteYear() {
+        return eYear;
+    }
+
+    public int getsMonth() {
+        return sMonth;
+    }
+
+    public int getsDay() {
+        return sDay;
+    }
+
+    public int getsYear() {
+        return sYear;
     }
 
     public  String  getMyName(){return myName;}
