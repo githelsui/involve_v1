@@ -78,8 +78,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="25dp"
-        android:layout_marginBottom="90dp"
-        app:cardBackgroundColor="@color/greyhex">
+        android:layout_marginBottom="90dp">
 
         <RelativeLayout
             android:id="@+id/introrelative_view"
@@ -95,9 +94,9 @@
                 android:gravity="center"
                 android:padding="10dp"
                 android:fontFamily="@font/myriadpro_light"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:textColor="@color/cardview_dark_background"
-                android:text="List is currently empty.\n\nAdd a new service down below."/>
+                android:text="You have no current programs.\n\nSelect Add New Program down below."/>
 
         </RelativeLayout>
 
@@ -174,6 +173,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/serverecycler_view"
         android:layout_below="@id/program_header"
+        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/white"
