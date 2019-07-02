@@ -25,7 +25,7 @@ The main page first launches with an empty list of programs (First Image). But a
 Page consists of a drop down view revealing the program's additional information (First Image). Adding new events creates a list view (Second Image). <br />
 ![](programpage.png)
 ![](programlist.png)
-<br />
+<br /><br/>
 **Adding Events/Services**<br />
 Adding an event to a program is as easy as it looks (First Image). No need to calculate your hours. Just input the dates and times of your event (Second Image). </br>
 ![](addevent.png)
