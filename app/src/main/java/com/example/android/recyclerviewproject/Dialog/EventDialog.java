@@ -59,7 +59,6 @@ public class EventDialog extends AppCompatDialogFragment{
             @Override
             public void onShow(DialogInterface dialog) {
                 ImageView closeBtn = myView.findViewById(R.id.closebtn);
-                Button editBtn = myView.findViewById(R.id.edit_eventbtn);
                 name.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -79,13 +78,6 @@ public class EventDialog extends AppCompatDialogFragment{
                     public void onClick(View v) {
                         myDialog.dismiss();
                         showLoc();
-                    }
-                });
-                editBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        myDialog.dismiss();
-                     showNameDialog();
                     }
                 });
                 closeBtn.setOnClickListener(new View.OnClickListener() {
