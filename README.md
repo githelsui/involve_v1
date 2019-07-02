@@ -1,15 +1,16 @@
 # Involve v1.0
 App keeps track of community service and volunteer hours. Input your hours and record the times/dates of your service while seeing your hours all rack up. Also record your duties and positions within a program.</br>
 Application utilizes google's material design.
-## Disclaimer!!!!
+## Download
 Unfortunately, NOT available on Google Play because of the $25 cost of hosting and my stinginess.</br>
 I will be making it accessible on http://slideme.org/ (because it's free!).
-But you could fork it and run the APK on Android Studio's emulators.</br></br>
+But you could fork it and run the APK on Android Studio's emulators.</br>
 
+**SDK Information**
 **min SDK: 23**</br>
 **target SDK: 28**
 
-## App Structure?
+## App Structure
 ```
 1. Main Page displays user's list of volunteering programs/activities/organizations
 2. Program's page displays its own info. & user's list of events/services associated under the organization
